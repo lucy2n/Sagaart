@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 
-from sagaart.artobjects.models import ArtObject, Category, Genre, Style
+from artobjects.models import ArtObject, Category, Genre, Style
 from .serializers import (
     ArtObjectSerialzer,
     CategorySerializer,

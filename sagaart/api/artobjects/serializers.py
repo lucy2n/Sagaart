@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from sagaart.artobjects.models import (
+from artobjects.models import (
     Category,
     Genre,
     Style,

@@ -1,11 +1,11 @@
-from rest_framework import serializers
+# from rest_framework import serializers
 
-from sagaart.auth.models import User, Subscription
-
-
-class UserSerializer(serializers.ModelSerializer):
-    pass
+# from userauth.models import User, Subscription
 
 
-class SubscriptionSerializer(serializers.ModelSerializer):
-    pass
+# class UserSerializer(serializers.ModelSerializer):
+#     pass
+
+
+# class SubscriptionSerializer(serializers.ModelSerializer):
+#     pass

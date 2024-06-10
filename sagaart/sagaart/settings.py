@@ -20,8 +20,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "artobjects.apps.ArtobjectsConfig",
-    "auth.apps.AuthConfig",
+    "userauth.apps.UserauthConfig",
     "api.apps.ApiConfig",
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -78,6 +79,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
 
 LANGUAGE_CODE = "en-us"
 
