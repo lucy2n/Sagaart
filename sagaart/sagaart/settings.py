@@ -19,6 +19,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "artobjects.apps.ArtobjectsConfig",
+    "auth.apps.AuthConfig",
+    "api.apps.ApiConfig",
 ]
 
 MIDDLEWARE = [
