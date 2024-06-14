@@ -84,7 +84,9 @@ class ObjectAuthor(models.Model):
     )
     personal_style = models.CharField(null=True, max_length=CHARFIELD_MAX_LEN)
     socials = models.CharField(null=True, max_length=CHARFIELD_MAX_LEN)
-    awards = models.ForeignKey("AuthorAward", on_delete=models.SET_NULL, null=True)
+    awards = models.ForeignKey(
+        "AuthorAward", on_delete=models.SET_NULL, null=True
+    )
 
 
 class AuthorAward(models.Model):
