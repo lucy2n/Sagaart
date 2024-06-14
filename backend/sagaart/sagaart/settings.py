@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "artobjects.apps.ArtobjectsConfig",
     "userauth.apps.UserauthConfig",
+    "analytics.apps.AnalyticsConfig",
     "api.apps.ApiConfig",
 ]
 
