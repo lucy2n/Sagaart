@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     "userauth.apps.UserauthConfig",
     "analytics.apps.AnalyticsConfig",
     "api.apps.ApiConfig",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
