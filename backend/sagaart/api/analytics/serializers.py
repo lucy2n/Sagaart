@@ -19,23 +19,32 @@ class Base64ImageField(serializers.SerializerMethodField):
 
 
 class AnalyticsRequestSerializer(serializers.Serializer):
-    order_name_author = serializers.CharField(max_length=SERIALIZER_CHAR_LEN)
-    order_age = serializers.IntegerField()
-    order_sex = serializers.ChoiceField(choices=GENDER_LIST)
-    order_city_live = serializers.CharField(max_length=SERIALIZER_CHAR_LEN)
-    order_name_product = serializers.CharField(max_length=SERIALIZER_CHAR_LEN)
-    order_images_product = Base64ImageField()
-    order_category = serializers.PrimaryKeyRelatedField()
-    order_style = serializers.PrimaryKeyRelatedField()
-    order_genre = serializers.PrimaryKeyRelatedField()
-    order_material1 = serializers.CharField(max_length=SERIALIZER_CHAR_LEN)
-    order_material2 = serializers.CharField(max_length=SERIALIZER_CHAR_LEN)
-    order_size = serializers.ChoiceField(choices=SIZE_CATEGORY_LIST)
-    order_year_create = serializers.CharField(max_length=SERIALIZER_CHAR_LEN)
-    order_city_sale = serializers.CharField(max_length=SERIALIZER_CHAR_LEN)
+    author = serializers.CharField(max_length=SERIALIZER_CHAR_LEN)
+    author_age = serializers.IntegerField()
+    author_sex = serializers.ChoiceField(choices=GENDER_LIST)
+    author_living_city = serializers.CharField(max_length=SERIALIZER_CHAR_LEN)
+    product_name = serializers.CharField(max_length=SERIALIZER_CHAR_LEN)
+    product_category = serializers.PrimaryKeyRelatedField(read_only=True)
+    product_style = serializers.PrimaryKeyRelatedField(read_only=True)
+    product_genre = serializers.PrimaryKeyRelatedField(read_only=True)
+    material = serializers.CharField(max_length=SERIALIZER_CHAR_LEN)
+    tablet_material = serializers.CharField(max_length=SERIALIZER_CHAR_LEN)
+    product_size = serializers.CharField(max_length=SERIALIZER_CHAR_LEN)
+    product_creation_year = serializers.CharField(max_length=SERIALIZER_CHAR_LEN)
+    product_city_of_sale = serializers.CharField(max_length=SERIALIZER_CHAR_LEN)
 
 
-class AnalyticCardSerializer(serializers.ModelSerializer):
+class AnalyticSerializerForWrite(serializers.ModelSerializer):
+
+    class Meta:
+        model = Analytics
+        fields = (
+            "art_object",
+            "object_author",
+            "recepient",
+        )
+
+class AnalyticSerializerForRead(serializers.ModelSerializer):
     class Meta:
         model = Analytics
         fields = (
@@ -44,6 +53,7 @@ class AnalyticCardSerializer(serializers.ModelSerializer):
             "collection",
             "media",
             "created_at",
+            "recepient",
         )
 
 
