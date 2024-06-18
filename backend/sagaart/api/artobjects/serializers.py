@@ -25,5 +25,21 @@ class ObjectAuthorSerializer(serializers.ModelSerializer):
     pass
 
 
+class ArtObjectListSerialzer(serializers.ModelSerializer):
+    class Meta:
+        model = ArtObject
+        fields = [
+            'id', 'image', 'category', 'style', 'genre', 'size',
+            'size_category', 'year', 'sale_city', 'material', 'tablet_material',
+            'cost_category', 'end_cost', 'fair_cost'
+        ]
+
+
 class ArtObjectSerialzer(serializers.ModelSerializer):
-    pass
+    class Meta:
+        model = ArtObject
+        fields = [
+            'image', 'category', 'style', 'genre', 'size',
+            'size_category', 'year', 'sale_city', 'material', 'tablet_material',
+            'cost_category', 'end_cost', 'fair_cost'
+        ]
