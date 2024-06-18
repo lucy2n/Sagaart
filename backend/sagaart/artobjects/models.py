@@ -8,21 +8,18 @@ class NameModel(models.Model):
 
 
 class Category(NameModel):
-
     class Meta:
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
 
 
 class Style(NameModel):
-
     class Meta:
         verbose_name = "Стиль"
         verbose_name_plural = "Стили"
 
 
 class Genre(NameModel):
-
     class Meta:
         verbose_name = "Жанр"
         verbose_name_plural = "Жанры"
