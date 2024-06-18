@@ -9,7 +9,7 @@ from rest_framework.views import status
 from analytics.models import Analytics, User
 from .serializers import (
     AnalyticSerializerForRead,
-    AnalyticSerializerForRead,
+    AnalyticSerializerForWrite,
     AnalyticsRequestSerializer,
     UserAnalyticsSerializer,
 )
@@ -22,15 +22,20 @@ class UserAnalyticsViewSet(
     serializer_class = UserAnalyticsSerializer
 
 
-class AnalyticsViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet):
+class AnalyticsViewSet(
+    mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet
+):
     queryset = Analytics.objects.all()
     serializer_class = AnalyticSerializerForRead
     # TODO: Заменить пермишн по готовности
     permission_classes = (permissions.AllowAny,)
 
+    def perform_create(self, serializer):
+        serializer.save(recepient=self.request.user)
+
     def get_serializer_class(self):
         if self.request.method not in permissions.SAFE_METHODS:
-            return AnalyticsRequestSerializer
+            return AnalyticSerializerForWrite
         return AnalyticSerializerForRead
 
     def get_queryset(self):
@@ -39,7 +44,7 @@ class AnalyticsViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.
 
     @action(methods=["POST"], detail=False)
     def request_analytics(self, request):
-        serializer = AnalyticsRequestSerializer(data=request.data)
+        serializer = AnalyticSerializerForWrite(data=request.data)
         serializer.is_valid(raise_exception=True)
         # payload = serializer.data
         serializer.save()

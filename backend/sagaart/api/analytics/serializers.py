@@ -2,9 +2,12 @@ import base64
 
 from rest_framework import serializers
 from django.core.files.base import ContentFile
+from django.db import transaction
 
 from analytics.models import Analytics
 from api.constants import GENDER_LIST, SIZE_CATEGORY_LIST
+from artobjects.serializers import ArtObjectSerialzer, ObjectAuthorSerializer
+from artobjects.models import ArtObject, ObjectAuthor
 
 SERIALIZER_CHAR_LEN = 100
 
@@ -30,19 +33,41 @@ class AnalyticsRequestSerializer(serializers.Serializer):
     material = serializers.CharField(max_length=SERIALIZER_CHAR_LEN)
     tablet_material = serializers.CharField(max_length=SERIALIZER_CHAR_LEN)
     product_size = serializers.CharField(max_length=SERIALIZER_CHAR_LEN)
-    product_creation_year = serializers.CharField(max_length=SERIALIZER_CHAR_LEN)
-    product_city_of_sale = serializers.CharField(max_length=SERIALIZER_CHAR_LEN)
+    product_creation_year = serializers.CharField(
+        max_length=SERIALIZER_CHAR_LEN
+    )
+    product_city_of_sale = serializers.CharField(
+        max_length=SERIALIZER_CHAR_LEN
+    )
 
 
 class AnalyticSerializerForWrite(serializers.ModelSerializer):
+    art_object = ArtObjectSerialzer()
+    object_author = ObjectAuthorSerializer()
 
     class Meta:
         model = Analytics
         fields = (
+            "calculated_price",
+            "collection",
+            "media",
+            "created_at",
             "art_object",
             "object_author",
             "recepient",
         )
+
+    @transaction.atomic
+    def create(self, validated_data):
+        object = validated_data.pop("art_object")
+        author = validated_data.pop("author")
+        object_id = ArtObject.objects.get(**object).id
+        author_id = ObjectAuthor.objects.get(**author).id
+        validated_data["art_object"] = object_id
+        validated_data["object_author"] = author_id
+        analytics = Analytics.objects.create(**validated_data)
+        return analytics
+
 
 class AnalyticSerializerForRead(serializers.ModelSerializer):
     class Meta:
