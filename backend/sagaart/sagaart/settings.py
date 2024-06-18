@@ -94,5 +94,9 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+MEDIA_URL = "media/"
+
+CSV_FILES_DIR = 'data/'
+
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
