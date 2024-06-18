@@ -15,5 +15,6 @@ jobs:
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
           source: "infra/docker-compose.yml"
           target: "sagaart"
