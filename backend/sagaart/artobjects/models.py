@@ -3,10 +3,6 @@ from django.db import models
 CHARFIELD_MAX_LEN = 50
 
 
-# class NameModel(models.Model):
-#     name = models.CharField(verbose_name="Название", max_length=CHARFIELD_MAX_LEN)
-
-
 class Category(models.Model):
     name = models.CharField(verbose_name="Название", max_length=CHARFIELD_MAX_LEN)
 
@@ -16,7 +12,6 @@ class Category(models.Model):
 
     def __str__(self):
         """Метод строкового представления модели."""
-
         return self.name
 
 
@@ -29,7 +24,6 @@ class Style(models.Model):
 
     def __str__(self):
         """Метод строкового представления модели."""
-
         return self.name
 
 
@@ -42,7 +36,6 @@ class Genre(models.Model):
 
     def __str__(self):
         """Метод строкового представления модели."""
-
         return self.name
 
 
