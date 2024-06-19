@@ -37,12 +37,12 @@ class ArtObjectViewSet(viewsets.ReadOnlyModelViewSet):
     # search_fields = ['name']
     # filterset_class = ServiceFilter
     ordering_fields = [
-        'id',
+        "id",
     ]
 
     def get_serializer_class(self):
-        if self.action == 'list':
+        if self.action == "list":
             return ArtObjectListSerialzer
-        elif self.action == 'retrieve':
+        elif self.action == "retrieve":
             return ArtObjectSerialzer
         return super().get_serializer_class()

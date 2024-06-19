@@ -1,8 +1,14 @@
 from django.contrib import admin
 
 from .models import (
-    Category, Style, Genre, ArtObject, ObjectAuthor, AuthorAward, AuthorShow
-    )
+    Category,
+    Style,
+    Genre,
+    ArtObject,
+    ObjectAuthor,
+    AuthorAward,
+    AuthorShow,
+)
 
 admin.site.empty_value_display = "Не задано"
 
@@ -30,6 +36,7 @@ class AuthorAwardAdmin(admin.ModelAdmin):
 @admin.register(AuthorShow)
 class AuthorShowAdmin(admin.ModelAdmin):
     pass
+
 
 @admin.register(ArtObject)
 class ArtObjectAdmin(admin.ModelAdmin):
