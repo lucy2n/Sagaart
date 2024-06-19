@@ -4,3 +4,4 @@ __pycache__
 pyrightconfig.json
 .ruff*
 *.sqlite3
+backend/sagaart/emails/*
