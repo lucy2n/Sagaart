@@ -9,6 +9,8 @@ SECRET_KEY = (
 
 DEBUG = True
 
+AUTH_USER_MODEL = "userauth.User"
+
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
@@ -21,6 +23,9 @@ INSTALLED_APPS = [
     "artobjects.apps.ArtobjectsConfig",
     "userauth.apps.UserauthConfig",
     "api.apps.ApiConfig",
+    'rest_framework',
+    'djoser',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -75,9 +80,42 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = "en-us"
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}
 
-TIME_ZONE = "UTC"
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'stopnek818@gmail.com'
+EMAIL_HOST_PASSWORD = 'zgoy nghr vcqd luhs'
+
+DJOSER = {
+    'PASSWORD_RESET_CONFIRM_URL': '/api/user/resetpassword/{uid}/{token}',
+    'SEND_CONFIRMATION_EMAIL': True,
+    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
+    'SET_PASSWORD_RETYPE': True,
+    'PASSWORD_RESET_CONFIRM_RETYPE': True,
+    'PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND': True,
+    'HIDE_USERS': False,
+    'SERIALIZERS': {
+        'user_create': 'api.auth.serializers.UserRegistrationSerializer',
+        'user': 'api.auth.serializers.UserSerializer',
+    },
+    'PERMISSIONS': {
+        'user': ['rest_framework.permissions.IsAuthenticatedOrReadOnly'],
+        'user_list': ['rest_framework.permissions.AllowAny'],
+    },
+}
+
+LANGUAGE_CODE = 'ru'
+
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 

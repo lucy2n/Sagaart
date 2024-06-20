@@ -1,23 +1,84 @@
+from django.utils import timezone
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, BaseUserManager
+
+MAX_LENGHT_EMAIL = 254
+MAX_LENGHT_FULL_NAME = 150
+MAX_LENGHT_TELEPHONE = 12
+
+
+class UserManager(BaseUserManager):
+    """Менеджер моделей для пользовательской модели без поля username"""
+
+    use_in_migrations = True
+
+    def _create_user(self, email, password, **extra_fields):
+        if not email:
+            raise ValueError('Укажите email')
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        UserSubscribe.objects.create(user=user)
+        return user
+
+    def create_user(self, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', False)
+        extra_fields.setdefault('is_superuser', False)
+        return self._create_user(email, password, **extra_fields)
+
+    def create_superuser(self, email, password, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError(
+                'У суперпользователя должно быть значение is_staff=True.'
+            )
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError(
+                'У суперпользователя должно быть значение is_superuser=True.'
+            )
+        return self._create_user(email, password, **extra_fields)
 
 
 class User(AbstractUser):
-    email = models.CharField(max_length=254, unique=True)
-    first_name = models.CharField('Имя', max_length=150)
-    last_name = models.CharField('Фамилия', max_length=150)
-    middle_name = models.CharField('Отчество', max_length=150)
-    username = models.CharField(max_length=254, null=True, default='Username')
+
+    objects = UserManager()
+    username = None
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    REQUIRED_FIELDS = []
+
+    email = models.CharField(max_length=MAX_LENGHT_EMAIL, unique=True)
+    first_name = models.CharField('Имя', max_length=MAX_LENGHT_FULL_NAME)
+    sur_name = models.CharField('Фамилия', max_length=MAX_LENGHT_FULL_NAME)
+    middle_name = models.CharField('Отчество', max_length=MAX_LENGHT_FULL_NAME)
+    telephone = models.CharField(
+        'Телефон', max_length=MAX_LENGHT_TELEPHONE, unique=True
+    )
 
 
-class Subscription(models.Model):
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='author')
-    following = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='subscriber')
+class UserSubscribe(models.Model):
+
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE,
+        primary_key=True, related_name='subscribe',
+    )
+    tariff = models.PositiveSmallIntegerField(
+        'Тариф', blank=True, null=True,
+    )
+    cost = models.PositiveSmallIntegerField(
+        'Цена', blank=True, null=True,
+    )
+    status = models.PositiveSmallIntegerField('Статус', default=0)
+    date_start = models.DateField(
+        'Дата начала подписки', default=timezone.now
+    )
+    date_end = models.DateField(
+        'Дата начала подписки', default=timezone.now
+    )
 
     class Meta:
-        verbose_name = 'подписчик'
-        verbose_name_plural = 'Подписчики'
+
+        verbose_name = 'подписка'
+        verbose_name_plural = 'Подписки'
