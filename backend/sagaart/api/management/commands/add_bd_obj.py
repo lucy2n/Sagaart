@@ -3,7 +3,7 @@ import csv
 from django.core.management.base import BaseCommand
 
 from sagaart.settings import CSV_FILES_DIR
-from artobjects.models import Category, Genre, Style, AuthorShow, AuthorAward, ObjectAuthor
+from artobjects.models import Category, Genre, Style, AuthorShow, AuthorAward, Author
 
 
 class Command(BaseCommand):
@@ -95,20 +95,20 @@ class Command(BaseCommand):
             reader = csv.reader(file)
             next(reader)
             author = [
-                ObjectAuthor(
+                Author(
                     name=row[0],
                     gender=row[1],
                     age=row[2],
-                    city_of_birth=row[3],
-                    city=row[4],
-                    education=row[5],
-                    professional_education=row[6],
-                    teaching_experience=row[7],
-                    personal_style=Style.objects.get(pk=row[8]),
-                    socials=row[9],
+                    year_of_birth=row[3],
+                    city_of_birth=row[4],
+                    city=row[5],
+                    education=row[6],
+                    professional_education=row[7],
+                    teaching_experience=row[8],
+                    personal_style=Style.objects.get(pk=row[9])
                 )
                 for row in reader
             ]
-            ObjectAuthor.objects.bulk_create(author)
+            Author.objects.bulk_create(author)
         print('Выставки в базу данных загружены')
-        print('ADD', ObjectAuthor.objects.count(), 'Author')
+        print('ADD', Author.objects.count(), 'Author')

@@ -4,42 +4,64 @@ from artobjects.models import (
     Category,
     Genre,
     Style,
-    ArtObject,
-    ObjectAuthor,
+    Product,
+    Author,
 )
 
 
 class CategorySerializer(serializers.ModelSerializer):
-    pass
+
+
+    class Meta:
+        model = Category
+        fields = ("id", "name")
 
 
 class GenreSerializer(serializers.ModelSerializer):
-    pass
+
+    class Meta:
+        model = Genre
+        fields = ("id", "name")
 
 
 class StyleSerializer(serializers.ModelSerializer):
-    pass
+
+    class Meta:
+        model = Style
+        fields = ("id", "name")
 
 
 class ObjectAuthorSerializer(serializers.ModelSerializer):
-    pass
+
+    class Meta:
+        model = Author
+        fields = ("__all__")
 
 
 class ArtObjectListSerialzer(serializers.ModelSerializer):
+    category = CategorySerializer(read_only=True, many=True)
+    style = GenreSerializer(many=True, read_only=True)
+    genre = StyleSerializer(many=True, read_only=True)
+    author = ObjectAuthorSerializer(read_only=True)
+
     class Meta:
-        model = ArtObject
+        model = Product
         fields = [
-            'id', 'image', 'category', 'style', 'genre', 'size',
-            'size_category', 'year', 'sale_city', 'material', 'tablet_material',
-            'cost_category', 'end_cost', 'fair_cost'
+            "id", "name", "image", "category", "style", "genre", "size",
+            "size_category", "year", "city_sale", "material", "tablet_material",
+            "cost_category", "end_cost", "fair_cost", "author"
+
         ]
 
 
 class ArtObjectSerialzer(serializers.ModelSerializer):
+    category = CategorySerializer(read_only=True)
+    genre = GenreSerializer(read_only=True)
+
     class Meta:
-        model = ArtObject
+        model = Product
         fields = [
-            'image', 'category', 'style', 'genre', 'size',
-            'size_category', 'year', 'sale_city', 'material', 'tablet_material',
-            'cost_category', 'end_cost', 'fair_cost'
+            "id", "name", "image", "category", "style", "genre", "size",
+            "size_category", "year", "city_sale", "material", "tablet_material",
+            "cost_category", "end_cost", "fair_cost"
         ]
