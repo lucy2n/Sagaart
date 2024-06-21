@@ -22,7 +22,7 @@ services:
     depends_on:
       - db
   gateway:
-    image: r4zee/sagaart_gateway
+    image: r4zeel/sagaart_gateway
     ports:
       - 8000:80
     volumes:
