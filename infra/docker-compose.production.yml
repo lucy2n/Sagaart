@@ -13,22 +13,21 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
   backend:
-    build:
-      context: ../backend
-      dockerfile: Dockerfile
+    image: r4zeel/sagaart_backend
     env_file: .env
     volumes:
       - media:/app/media
       - static:/backend_static
       - docs:/app/static/data/docs
-  nginx:
-    build:
-      context: ../gateway
-      dockerfile: Dockerfile
-    image: nginx:1.19.3
+    depends_on:
+      - db
+  gateway:
+    image: r4zee/sagaart_gateway
     ports:
       - 8000:80
     volumes:
       - static:/staticfiles
       - docs:/usr/share/nginx/html/api/docs
       - media:/media
+    depends_on:
+      - backend
