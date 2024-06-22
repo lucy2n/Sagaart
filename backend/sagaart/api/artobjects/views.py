@@ -37,11 +37,14 @@ class ArtObjectViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Product.objects.filter(is_published=True)
     serializer_class = ArtObjectSerialzer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
+    filter_backends = (
+        DjangoFilterBackend,
+        filters.SearchFilter,
+        filters.OrderingFilter,
+    )
     filterset_class = ArtObjFilter
-    search_fields = ('=name',)
+    search_fields = ("=name",)
     ordering_fields = ("id",)
-
 
     def get_serializer_class(self):
         if self.action == "list":
@@ -49,7 +52,6 @@ class ArtObjectViewSet(viewsets.ReadOnlyModelViewSet):
         elif self.action == "retrieve":
             return ArtObjectSerialzer
         return super().get_serializer_class()
-
 
     # @action(
     #         detail=True,

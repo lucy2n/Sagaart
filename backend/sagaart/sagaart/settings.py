@@ -10,7 +10,7 @@ SECRET_KEY = (
 
 DEBUG = True
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1').split(' ')
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1").split(" ")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -19,13 +19,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'rest_framework',
+    "rest_framework",
     "django_filters",
     "artobjects.apps.ArtobjectsConfig",
     "userauth.apps.UserauthConfig",
     "analytics.apps.AnalyticsConfig",
     "api.apps.ApiConfig",
-    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -59,13 +58,13 @@ TEMPLATES = [
 WSGI_APPLICATION = "sagaart.wsgi.application"
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('POSTGRES_DB'),
-        'USER': os.getenv('POSTGRES_USER'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT')
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("POSTGRES_DB"),
+        "USER": os.getenv("POSTGRES_USER"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
+        "HOST": os.getenv("DB_HOST"),
+        "PORT": os.getenv("DB_PORT"),
     }
 }
 
@@ -84,14 +83,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-<<<<<<< HEAD
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    "DEFAULT_FILTER_BACKENDS": [
+        "django_filters.rest_framework.DjangoFilterBackend"
+    ],
 }
 
-=======
->>>>>>> develop
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "UTC"
@@ -100,26 +98,15 @@ USE_I18N = True
 
 USE_TZ = True
 
-<<<<<<< HEAD
-STATICFILES_DIRS = [
-    BASE_DIR / 'static_dev',
-]
-
-=======
->>>>>>> develop
 STATIC_URL = "static/"
 
 STATIC_ROOT = os.path.join(BASE_DIR, "collected_static")
 
 MEDIA_URL = "media/"
 
-<<<<<<< HEAD
-MEDIA_ROOT = BASE_DIR / 'media'
+CSV_FILES_DIR = "data/"
 
-CSV_FILES_DIR = 'data/'
-=======
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
->>>>>>> develop
 
 CSV_FILES_DIR = "data/"
 

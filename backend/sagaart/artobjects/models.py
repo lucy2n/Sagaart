@@ -3,46 +3,34 @@ from django.db import models
 CHARFIELD_MAX_LEN = 50
 
 
-class Category(models.Model):
+class NameModel(models.Model):
     name = models.CharField(
         verbose_name="Название", max_length=CHARFIELD_MAX_LEN
     )
 
     class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.name
+
+
+class Category(NameModel):
+    class Meta(NameModel.Meta):
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
 
-    def __str__(self):
-        """Метод строкового представления модели."""
-        return self.name
 
-
-class Style(models.Model):
-    name = models.CharField(
-        verbose_name="Название", max_length=CHARFIELD_MAX_LEN
-    )
-
-    class Meta:
+class Style(NameModel):
+    class Meta(NameModel.Meta):
         verbose_name = "Стиль"
         verbose_name_plural = "Стили"
 
-    def __str__(self):
-        """Метод строкового представления модели."""
-        return self.name
 
-
-class Genre(models.Model):
-    name = models.CharField(
-        verbose_name="Название", max_length=CHARFIELD_MAX_LEN
-    )
-
-    class Meta:
+class Genre(NameModel):
+    class Meta(NameModel.Meta):
         verbose_name = "Жанр"
         verbose_name_plural = "Жанры"
-
-    def __str__(self):
-        """Метод строкового представления модели."""
-        return self.name
 
 
 class AuthorAward(models.Model):
@@ -81,46 +69,40 @@ class AuthorShow(models.Model):
 
 class Author(models.Model):
     """Автор арт объекта"""
+
     GENDER_CHOICES = (("MALE", "Male"), ("FEMALE", "Female"))
 
-    name = models.CharField(
-        max_length=CHARFIELD_MAX_LEN,
-        verbose_name="Имя"
-        )
+    name = models.CharField(max_length=CHARFIELD_MAX_LEN, verbose_name="Имя")
     gender = models.CharField(
         choices=GENDER_CHOICES,
         max_length=CHARFIELD_MAX_LEN,
         blank=True,
-        verbose_name="Пол"
-        )
+        verbose_name="Пол",
+    )
     age = models.PositiveIntegerField(null=True, verbose_name="Возраст")
     year_of_birth = models.PositiveIntegerField(
         blank=True, verbose_name="Год рождения"
-        )
+    )
     city_of_birth = models.CharField(
-        blank=True,
-        max_length=CHARFIELD_MAX_LEN,
-        verbose_name="Город рождения"
-        )
+        blank=True, max_length=CHARFIELD_MAX_LEN, verbose_name="Город рождения"
+    )
     city_live = models.CharField(
         blank=True,
         max_length=CHARFIELD_MAX_LEN,
-        verbose_name="Город проживания"
-        )
+        verbose_name="Город проживания",
+    )
     education = models.CharField(
-        blank=True,
-        max_length=CHARFIELD_MAX_LEN,
-        verbose_name="Образование"
-        )
+        blank=True, max_length=CHARFIELD_MAX_LEN, verbose_name="Образование"
+    )
     professional_education = models.CharField(
         blank=True,
         max_length=CHARFIELD_MAX_LEN,
-        verbose_name="Профессиональное образование"
-        )
+        verbose_name="Профессиональное образование",
+    )
     teaching_experience = models.CharField(
         blank=True,
         max_length=CHARFIELD_MAX_LEN,
-        verbose_name="Опыт преподования"
+        verbose_name="Опыт преподования",
     )
     personal_style = models.ForeignKey(
         Style,
@@ -128,22 +110,18 @@ class Author(models.Model):
         null=True,
         blank=True,
         verbose_name="Стиль",
-        related_name='objauthor'
-        )
+        related_name="objauthor",
+    )
     socials = models.CharField(
         blank=True,
         max_length=CHARFIELD_MAX_LEN,
-        verbose_name="Социальные сети"
-        )
+        verbose_name="Социальные сети",
+    )
     awards = models.ManyToManyField(
-        AuthorAward,
-        blank=True,
-        verbose_name="Награды автора"
-        )
+        AuthorAward, blank=True, verbose_name="Награды автора"
+    )
     show = models.ManyToManyField(
-        AuthorShow,
-        blank=True,
-        verbose_name="Выставки автора"
+        AuthorShow, blank=True, verbose_name="Выставки автора"
     )
 
     class Meta:
@@ -160,23 +138,21 @@ class Product(models.Model):
 
     SIZE_CATEGORIES = ((1, "SMALL"), (2, "MEDIUM"), (3, "LARGE"))
     PRICE_CATEGORIES = (
-        (1, "PRICE_SMALL"), (2, "PRICE_MEDIUM"), (3, "PRICE_LARGE")
+        (1, "PRICE_SMALL"),
+        (2, "PRICE_MEDIUM"),
+        (3, "PRICE_LARGE"),
     )
 
     name = models.CharField(
         verbose_name="Название", max_length=CHARFIELD_MAX_LEN
     )
     image = models.ImageField(verbose_name="Изображение")
-    additional_image = models.ImageField(blank=True, verbose_name="Изображение")
-    category = models.ManyToManyField(
-        Category, verbose_name="Категория"
+    additional_image = models.ImageField(
+        blank=True, verbose_name="Изображение"
     )
-    style = models.ManyToManyField(
-        Style, verbose_name="Стиль"
-    )
-    genre = models.ManyToManyField(
-        Genre, verbose_name="Жанр"
-        )
+    category = models.ManyToManyField(Category, verbose_name="Категория")
+    style = models.ManyToManyField(Style, verbose_name="Стиль")
+    genre = models.ManyToManyField(Genre, verbose_name="Жанр")
 
     size_category = models.IntegerField(
         choices=SIZE_CATEGORIES, verbose_name="Категория размера"
@@ -195,7 +171,9 @@ class Product(models.Model):
         blank=True, verbose_name="Материал", max_length=CHARFIELD_MAX_LEN
     )
     tablet_material = models.CharField(
-        blank=True, verbose_name="Материал планшета", max_length=CHARFIELD_MAX_LEN
+        blank=True,
+        verbose_name="Материал планшета",
+        max_length=CHARFIELD_MAX_LEN,
     )
     description = models.CharField(
         blank=True, verbose_name="Описание", max_length=CHARFIELD_MAX_LEN
@@ -209,8 +187,9 @@ class Product(models.Model):
         Author,
         on_delete=models.SET_NULL,
         null=True,
-        related_name='atrobj',
-        verbose_name="Автор")
+        related_name="atrobj",
+        verbose_name="Автор",
+    )
     is_published = models.BooleanField(
         default=False, verbose_name="опубликован"
     )

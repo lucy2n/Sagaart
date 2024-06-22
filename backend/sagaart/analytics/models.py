@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
-from artobjects.models import ArtObject, ObjectAuthor
+from artobjects.models import Product, Author
 
 CHARFIELD_LEN = 128
 
@@ -13,7 +13,7 @@ class AuthorShow(models.Model):
     date = models.PositiveIntegerField("Год выставки")
     place = models.CharField("Локация выставки", max_length=CHARFIELD_LEN)
     author = models.ForeignKey(
-        ObjectAuthor, on_delete=models.CASCADE, verbose_name="Автор"
+        Author, on_delete=models.CASCADE, verbose_name="Автор"
     )
 
 
@@ -22,8 +22,8 @@ class Analytics(models.Model):
     collection = models.CharField("Коллекция", max_length=CHARFIELD_LEN)
     media = models.CharField("СМИ", max_length=CHARFIELD_LEN)
     created_at = models.DateField("Дата аналитики", auto_now_add=True)
-    art_object = models.ForeignKey(ArtObject, on_delete=models.CASCADE)
-    object_author = models.ForeignKey(ObjectAuthor, on_delete=models.CASCADE)
+    art_object = models.ForeignKey(Product, on_delete=models.CASCADE)
+    object_author = models.ForeignKey(Author, on_delete=models.CASCADE)
     recepient = models.ForeignKey(User, on_delete=models.CASCADE)
 
 

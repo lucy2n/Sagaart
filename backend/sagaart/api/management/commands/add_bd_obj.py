@@ -4,9 +4,14 @@ from django.core.management.base import BaseCommand
 
 from sagaart.settings import CSV_FILES_DIR
 from artobjects.models import (
-    Category, Genre, Style, AuthorShow, AuthorAward, Author, Product
-    )
-
+    Category,
+    Genre,
+    Style,
+    AuthorShow,
+    AuthorAward,
+    Author,
+    Product,
+)
 
 
 class Command(BaseCommand):
@@ -76,14 +81,13 @@ class Command(BaseCommand):
                     education=row[6],
                     professional_education=row[7],
                     teaching_experience=row[8],
-                    personal_style=Style.objects.get(pk=row[9])
+                    personal_style=Style.objects.get(pk=row[9]),
                 )
                 for row in reader
             ]
             Author.objects.bulk_create(author)
-        print('Авторы в базу данных загружены')
-        print('ADD', Author.objects.count(), 'Author')
-
+        print("Авторы в базу данных загружены")
+        print("ADD", Author.objects.count(), "Author")
 
         # with open(
         #         f'{CSV_FILES_DIR}/product.csv', encoding='utf-8'

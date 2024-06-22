@@ -8,9 +8,9 @@ from analytics.models import Analytics
 from api.constants import GENDER_LIST, SIZE_CATEGORY_LIST
 from api.artobjects.serializers import (
     ArtObjectSerialzer,
-    ObjectAuthorSerializer,
+    FullAuthorInfoSerializer,
 )
-from artobjects.models import ArtObject, ObjectAuthor
+from artobjects.models import Product, Author
 
 SERIALIZER_CHAR_LEN = 100
 
@@ -46,7 +46,7 @@ class AnalyticsRequestSerializer(serializers.Serializer):
 
 class AnalyticSerializerForWrite(serializers.ModelSerializer):
     art_object = ArtObjectSerialzer()
-    object_author = ObjectAuthorSerializer()
+    object_author = FullAuthorInfoSerializer()
 
     class Meta:
         model = Analytics
@@ -64,8 +64,8 @@ class AnalyticSerializerForWrite(serializers.ModelSerializer):
     def create(self, validated_data):
         object = validated_data.pop("art_object")
         author = validated_data.pop("author")
-        object_id = ArtObject.objects.get(**object).id
-        author_id = ObjectAuthor.objects.get(**author).id
+        object_id = Product.objects.get(**object).id
+        author_id = Author.objects.get(**author).id
         validated_data["art_object"] = object_id
         validated_data["object_author"] = author_id
         analytics = Analytics.objects.create(**validated_data)
