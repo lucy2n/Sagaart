@@ -11,6 +11,7 @@ class Category(models.Model):
         verbose_name_plural = "Категории"
 
     def __str__(self):
+        """Метод строкового представления модели."""
         return self.name
 
 
@@ -22,6 +23,7 @@ class Style(models.Model):
         verbose_name_plural = "Стили"
 
     def __str__(self):
+        """Метод строкового представления модели."""
         return self.name
 
 
@@ -33,6 +35,7 @@ class Genre(models.Model):
         verbose_name_plural = "Жанры"
 
     def __str__(self):
+        """Метод строкового представления модели."""
         return self.name
 
 
