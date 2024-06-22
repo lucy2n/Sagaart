@@ -1,11 +1,11 @@
 from django.db import models
 
-CHARFIELD_MAX_LEN = 50
+from api.constants import MAX_CHAR_LEN, SIZE_CATEGORY_LIST
 
 
 class NameModel(models.Model):
     name = models.CharField(
-        verbose_name="Название", max_length=CHARFIELD_MAX_LEN
+        verbose_name="Название", max_length=MAX_CHAR_LEN
     )
 
     class Meta:
@@ -37,7 +37,7 @@ class AuthorAward(models.Model):
     """Награды автора"""
 
     name = models.CharField(
-        max_length=CHARFIELD_MAX_LEN, verbose_name="Название"
+        max_length=MAX_CHAR_LEN, verbose_name="Название"
     )
 
     class Meta:
@@ -52,30 +52,28 @@ class AuthorShow(models.Model):
     """Выставки автора"""
 
     name = models.CharField(
-        max_length=CHARFIELD_MAX_LEN, verbose_name="Название"
+        max_length=MAX_CHAR_LEN, verbose_name="Название"
     )
     year = models.PositiveIntegerField(verbose_name="Дата проведения")
     place = models.CharField(
-        max_length=CHARFIELD_MAX_LEN, verbose_name="Место"
+        max_length=MAX_CHAR_LEN, verbose_name="Место"
     )
 
     class Meta:
-        verbose_name = "Выстовка"
-        verbose_name_plural = "Выстовки"
+        verbose_name = "Выставка"
+        verbose_name_plural = "Выставки"
 
     def __str__(self):
         return self.name
 
 
 class Author(models.Model):
-    """Автор арт объекта"""
-
     GENDER_CHOICES = (("MALE", "Male"), ("FEMALE", "Female"))
 
-    name = models.CharField(max_length=CHARFIELD_MAX_LEN, verbose_name="Имя")
+    name = models.CharField(max_length=MAX_CHAR_LEN, verbose_name="Имя")
     gender = models.CharField(
         choices=GENDER_CHOICES,
-        max_length=CHARFIELD_MAX_LEN,
+        max_length=MAX_CHAR_LEN,
         blank=True,
         verbose_name="Пол",
     )
@@ -84,24 +82,24 @@ class Author(models.Model):
         blank=True, verbose_name="Год рождения"
     )
     city_of_birth = models.CharField(
-        blank=True, max_length=CHARFIELD_MAX_LEN, verbose_name="Город рождения"
+        blank=True, max_length=MAX_CHAR_LEN, verbose_name="Город рождения"
     )
     city_live = models.CharField(
         blank=True,
-        max_length=CHARFIELD_MAX_LEN,
+        max_length=MAX_CHAR_LEN,
         verbose_name="Город проживания",
     )
     education = models.CharField(
-        blank=True, max_length=CHARFIELD_MAX_LEN, verbose_name="Образование"
+        blank=True, max_length=MAX_CHAR_LEN, verbose_name="Образование"
     )
     professional_education = models.CharField(
         blank=True,
-        max_length=CHARFIELD_MAX_LEN,
+        max_length=MAX_CHAR_LEN,
         verbose_name="Профессиональное образование",
     )
     teaching_experience = models.CharField(
         blank=True,
-        max_length=CHARFIELD_MAX_LEN,
+        max_length=MAX_CHAR_LEN,
         verbose_name="Опыт преподования",
     )
     personal_style = models.ForeignKey(
@@ -114,7 +112,7 @@ class Author(models.Model):
     )
     socials = models.CharField(
         blank=True,
-        max_length=CHARFIELD_MAX_LEN,
+        max_length=MAX_CHAR_LEN,
         verbose_name="Социальные сети",
     )
     awards = models.ManyToManyField(
@@ -129,14 +127,10 @@ class Author(models.Model):
         verbose_name_plural = "Авторы"
 
     def __str__(self):
-        """Метод строкового представления модели."""
         return self.name
 
 
 class Product(models.Model):
-    """Арт объкект"""
-
-    SIZE_CATEGORIES = ((1, "SMALL"), (2, "MEDIUM"), (3, "LARGE"))
     PRICE_CATEGORIES = (
         (1, "PRICE_SMALL"),
         (2, "PRICE_MEDIUM"),
@@ -144,7 +138,7 @@ class Product(models.Model):
     )
 
     name = models.CharField(
-        verbose_name="Название", max_length=CHARFIELD_MAX_LEN
+        verbose_name="Название", max_length=MAX_CHAR_LEN
     )
     image = models.ImageField(verbose_name="Изображение")
     additional_image = models.ImageField(
@@ -155,28 +149,28 @@ class Product(models.Model):
     genre = models.ManyToManyField(Genre, verbose_name="Жанр")
 
     size_category = models.IntegerField(
-        choices=SIZE_CATEGORIES, verbose_name="Категория размера"
+        choices=SIZE_CATEGORY_LIST, verbose_name="Категория размера"
     )
     size = models.CharField(
-        blank=True, verbose_name="Размер", max_length=CHARFIELD_MAX_LEN
+        blank=True, verbose_name="Размер", max_length=MAX_CHAR_LEN
     )
     country = models.CharField(
-        blank=True, verbose_name="Город", max_length=CHARFIELD_MAX_LEN
+        blank=True, verbose_name="Город", max_length=MAX_CHAR_LEN
     )
     city_sale = models.CharField(
-        blank=True, verbose_name="Город продажи", max_length=CHARFIELD_MAX_LEN
+        blank=True, verbose_name="Город продажи", max_length=MAX_CHAR_LEN
     )
     year = models.PositiveBigIntegerField(verbose_name="Год создания")
     material = models.CharField(
-        blank=True, verbose_name="Материал", max_length=CHARFIELD_MAX_LEN
+        blank=True, verbose_name="Материал", max_length=MAX_CHAR_LEN
     )
     tablet_material = models.CharField(
         blank=True,
         verbose_name="Материал планшета",
-        max_length=CHARFIELD_MAX_LEN,
+        max_length=MAX_CHAR_LEN,
     )
     description = models.CharField(
-        blank=True, verbose_name="Описание", max_length=CHARFIELD_MAX_LEN
+        blank=True, verbose_name="Описание", max_length=MAX_CHAR_LEN
     )
     cost_category = models.IntegerField(
         choices=PRICE_CATEGORIES, verbose_name="Ценовая категория"
@@ -191,13 +185,12 @@ class Product(models.Model):
         verbose_name="Автор",
     )
     is_published = models.BooleanField(
-        default=False, verbose_name="опубликован"
+        default=False, verbose_name="Опубликован"
     )
 
     class Meta:
-        verbose_name = "Артобъект"
-        verbose_name_plural = "Артобъекты"
+        verbose_name = "Арт объект"
+        verbose_name_plural = "Арт объекты"
 
     def __str__(self):
-        """Метод строкового представления модели."""
         return self.name

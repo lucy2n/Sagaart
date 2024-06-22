@@ -104,7 +104,7 @@ class ArtObjectListSerialzer(serializers.ModelSerializer):
 class ArtObjectSerialzer(ArtObjectListSerialzer):
     author = FullAuthorInfoSerializer(read_only=True)
 
-    class Meta:
+    class Meta(ArtObjectListSerialzer.Meta):
         fields = (
             "id",
             "name",

@@ -14,18 +14,23 @@ from .models import (
 admin.site.empty_value_display = "Не задано"
 
 
+class NameFieldAdmin(admin.ModelAdmin):
+    list_display = ("name",)
+    search_fields = ("name",)
+
+
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(NameFieldAdmin):
     pass
 
 
 @admin.register(Style)
-class StyleAdmin(admin.ModelAdmin):
+class StyleAdmin(NameFieldAdmin):
     pass
 
 
 @admin.register(Genre)
-class GenreAdmin(admin.ModelAdmin):
+class GenreAdmin(NameFieldAdmin):
     pass
 
 
