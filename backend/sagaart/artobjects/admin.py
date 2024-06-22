@@ -4,6 +4,7 @@ from .models import (
     Category, Style, Genre, Product, Author, AuthorAward, AuthorShow
     )
 
+
 admin.site.empty_value_display = "Не задано"
 
 
@@ -33,7 +34,7 @@ class AuthorShowAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    pass
+
 
 
 @admin.register(Author)

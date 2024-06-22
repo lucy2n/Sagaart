@@ -42,10 +42,11 @@ class ArtObjectViewSet(viewsets.ReadOnlyModelViewSet):
     search_fields = ('=name',)
     ordering_fields = ("id",)
 
+
     def get_serializer_class(self):
-        if self.action == 'list':
+        if self.action == "list":
             return ArtObjectListSerialzer
-        elif self.action == 'retrieve':
+        elif self.action == "retrieve":
             return ArtObjectSerialzer
         return super().get_serializer_class()
 
