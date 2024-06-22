@@ -2,9 +2,9 @@ from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 
-MAX_LENGHT_EMAIL = 254
-MAX_LENGHT_FULL_NAME = 150
-MAX_LENGHT_TELEPHONE = 12
+MAX_LENGHT_EMAIL = 250
+MAX_LENGHT_FULL_NAME = 50
+MAX_LENGHT_TELEPHONE = 20
 
 
 class UserManager(BaseUserManager):
@@ -19,7 +19,6 @@ class UserManager(BaseUserManager):
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
-        UserSubscribe.objects.create(user=user)
         return user
 
     def create_user(self, email, password=None, **extra_fields):
@@ -65,10 +64,10 @@ class UserSubscribe(models.Model):
         primary_key=True, related_name='subscribe',
     )
     tariff = models.PositiveSmallIntegerField(
-        'Тариф', blank=True, null=True,
+        'Тариф', default=0
     )
     cost = models.PositiveSmallIntegerField(
-        'Цена', blank=True, null=True,
+        'Цена', default=0
     )
     status = models.PositiveSmallIntegerField('Статус', default=0)
     date_start = models.DateField(

@@ -6,8 +6,8 @@ from userauth.models import User, UserSubscribe
 class IngredientRecipeInline(admin.TabularInline):
 
     model = UserSubscribe
-    extra = 1
-    can_delete = False
+    # extra = 1
+    # can_delete = False
 
 
 class UserAdmin(admin.ModelAdmin):

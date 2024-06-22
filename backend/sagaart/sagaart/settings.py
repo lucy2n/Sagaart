@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -89,11 +90,9 @@ REST_FRAMEWORK = {
     ),
 }
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'stopnek818@gmail.com'
-EMAIL_HOST_PASSWORD = 'zgoy nghr vcqd luhs'
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+
+EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
 
 DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': '/api/user/resetpassword/{uid}/{token}',
@@ -108,7 +107,7 @@ DJOSER = {
         'user': 'api.auth.serializers.UserSerializer',
     },
     'PERMISSIONS': {
-        'user': ['rest_framework.permissions.IsAuthenticatedOrReadOnly'],
+        # 'user': ['rest_framework.permissions.IsAuthenticatedOrReadOnly'],
         'user_list': ['rest_framework.permissions.AllowAny'],
     },
 }
