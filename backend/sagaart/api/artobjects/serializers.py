@@ -37,14 +37,14 @@ class AuthorAwardSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AuthorAward
-        fields = ("__all__")
+        fields = ("id", "name")
 
 
 class AuthorShowSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AuthorShow
-        fields = ("__all__")
+        fields = ("id", "name", "year", "place")
 
 
 class FullAuthorInfoSerializer(serializers.ModelSerializer):
@@ -83,10 +83,7 @@ class ArtObjectListSerialzer(serializers.ModelSerializer):
         ]
 
 
-class ArtObjectSerialzer(serializers.ModelSerializer):
-    category = CategorySerializer(read_only=True, many=True)
-    style = GenreSerializer(many=True, read_only=True)
-    genre = StyleSerializer(many=True, read_only=True)
+class ArtObjectSerialzer(ArtObjectListSerialzer):
     author = FullAuthorInfoSerializer(read_only=True)
 
     class Meta:

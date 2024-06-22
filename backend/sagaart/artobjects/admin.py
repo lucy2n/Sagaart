@@ -9,27 +9,33 @@ admin.site.empty_value_display = "Не задано"
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name',)
+    search_fields = ('name',)
 
 
 @admin.register(Style)
 class StyleAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name',)
+    search_fields = ('name',)
 
 
 @admin.register(Genre)
 class GenreAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name',)
+    search_fields = ('name',)
 
 
 @admin.register(AuthorAward)
 class AuthorAwardAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name',)
+    search_fields = ('name',)
 
 
 @admin.register(AuthorShow)
 class AuthorShowAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name',)
+    search_fields = ('name',)
+
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
@@ -38,4 +44,5 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name',)
+    search_fields = ('name',)

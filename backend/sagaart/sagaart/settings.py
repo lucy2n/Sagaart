@@ -94,10 +94,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'static_dev',
-]
-
 STATIC_URL = "static/"
 
 MEDIA_URL = "media/"

@@ -3,10 +3,22 @@ from django.db import models
 CHARFIELD_MAX_LEN = 50
 
 
-class Category(models.Model):
-    name = models.CharField(verbose_name="Название", max_length=CHARFIELD_MAX_LEN)
+
+class NameModel(models.Model):
+    name = models.CharField(
+        verbose_name="Название", max_length=CHARFIELD_MAX_LEN
+    )
 
     class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.name
+
+
+class Category(NameModel):
+
+    class Meta(NameModel.Meta):
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
 
@@ -14,10 +26,9 @@ class Category(models.Model):
         return self.name
 
 
-class Style(models.Model):
-    name = models.CharField(verbose_name="Название", max_length=CHARFIELD_MAX_LEN)
+class Style(NameModel):
 
-    class Meta:
+    class Meta(NameModel.Meta):
         verbose_name = "Стиль"
         verbose_name_plural = "Стили"
 
@@ -25,10 +36,9 @@ class Style(models.Model):
         return self.name
 
 
-class Genre(models.Model):
-    name = models.CharField(verbose_name="Название", max_length=CHARFIELD_MAX_LEN)
+class Genre(NameModel):
 
-    class Meta:
+    class Meta(NameModel.Meta):
         verbose_name = "Жанр"
         verbose_name_plural = "Жанры"
 
@@ -37,7 +47,6 @@ class Genre(models.Model):
 
 
 class AuthorAward(models.Model):
-    """Награды автора"""
     name = models.CharField(
         max_length=CHARFIELD_MAX_LEN,
         verbose_name="Название"
@@ -52,7 +61,6 @@ class AuthorAward(models.Model):
 
 
 class AuthorShow(models.Model):
-    """Выставки автора"""
     name = models.CharField(
         max_length=CHARFIELD_MAX_LEN,
         verbose_name="Название"
@@ -73,7 +81,6 @@ class AuthorShow(models.Model):
 
 
 class Author(models.Model):
-    """Автор арт объекта"""
     GENDER_CHOICES = (("MALE", "Male"), ("FEMALE", "Female"))
 
     name = models.CharField(
@@ -144,18 +151,29 @@ class Author(models.Model):
         verbose_name_plural = "Авторы"
 
     def __str__(self):
-        """Метод строкового представления модели."""
         return self.name
 
 
 class Product(models.Model):
-    """Арт объкект"""
-    SIZE_CATEGORIES = ((1, "SMALL"), (2, "MEDIUM"), (3, "LARGE"))
+    SIZE_CATEGORIES = (
+        (1, "Любой"),
+        (2, "Small (до 40 см)"),
+        (3, "Medium (40 - 100 см)"),
+        (4, "Large (100 - 160 см)"),
+        (5, "Oversize (более 160 см)")
+    )
     PRICE_CATEGORIES = (
-        (1, "PRICE_SMALL"), (2, "PRICE_MEDIUM"), (3, "PRICE_LARGE")
+        (1, "до 20 000 руб."),
+        (2, "от 20 000 до 50 000 руб."),
+        (3, "50 000 до 100 000 руб."),
+        (4, "от 100 000 до 200 000 руб."),
+        (5, "от 200 000 до 500 000 руб.")
     )
 
-    name = models.CharField(verbose_name="Название", max_length=CHARFIELD_MAX_LEN)
+    name = models.CharField(
+        verbose_name="Название",
+        max_length=CHARFIELD_MAX_LEN
+    )
     image = models.ImageField(verbose_name="Изображение")
     additional_image = models.ImageField(blank=True, verbose_name="Изображение")
     category = models.ManyToManyField(
@@ -184,7 +202,9 @@ class Product(models.Model):
         blank=True, verbose_name="Материал", max_length=CHARFIELD_MAX_LEN
     )
     tablet_material = models.CharField(
-        blank=True, verbose_name="Материал планшета", max_length=CHARFIELD_MAX_LEN
+        blank=True,
+        verbose_name="Материал планшета",
+        max_length=CHARFIELD_MAX_LEN
     )
     description = models.CharField(
         blank=True, verbose_name="Описание", max_length=CHARFIELD_MAX_LEN
@@ -208,7 +228,5 @@ class Product(models.Model):
         verbose_name = "Артобъект"
         verbose_name_plural = "Артобъекты"
 
-
     def __str__(self):
-        """Метод строкового представления модели."""
         return self.name
