@@ -1,6 +1,6 @@
 import django_filters
 
-from artobjects.models import Product, Category, Genre, Style
+from artobjects.models import ArtObject, Category, Genre, Style
 
 
 class ArtObjFilter(django_filters.FilterSet):
@@ -39,7 +39,7 @@ class ArtObjFilter(django_filters.FilterSet):
     )
 
     class Meta:
-        model = Product
+        model = ArtObject
         fields = (
             "end_cost",
             "size_category",

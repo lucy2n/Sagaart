@@ -3,50 +3,51 @@ from django.db import models
 CHARFIELD_MAX_LEN = 50
 
 
-class Category(models.Model):
-    name = models.CharField(verbose_name="Название", max_length=CHARFIELD_MAX_LEN)
+class NameModel(models.Model):
+    name = models.CharField(
+        verbose_name="Название", max_length=CHARFIELD_MAX_LEN
+    )
 
     class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.name
+
+
+class Category(NameModel):
+
+    class Meta(NameModel.Meta):
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
 
     def __str__(self):
-        """Метод строкового представления модели."""
         return self.name
 
 
-class Style(models.Model):
-    name = models.CharField(verbose_name="Название", max_length=CHARFIELD_MAX_LEN)
+class Style(NameModel):
 
-    class Meta:
+    class Meta(NameModel.Meta):
         verbose_name = "Стиль"
         verbose_name_plural = "Стили"
 
     def __str__(self):
-        """Метод строкового представления модели."""
         return self.name
 
 
-class Genre(models.Model):
-    name = models.CharField(verbose_name="Название", max_length=CHARFIELD_MAX_LEN)
+class Genre(NameModel):
 
-    class Meta:
+    class Meta(NameModel.Meta):
         verbose_name = "Жанр"
         verbose_name_plural = "Жанры"
 
     def __str__(self):
-        """Метод строкового представления модели."""
         return self.name
 
 
-class AuthorAward(models.Model):
-    """Награды автора"""
-    name = models.CharField(
-        max_length=CHARFIELD_MAX_LEN,
-        verbose_name="Название"
-        )
+class AuthorAward(NameModel):
 
-    class Meta:
+    class Meta(NameModel.Meta):
         verbose_name = "Награда"
         verbose_name_plural = "Награды"
 
@@ -55,7 +56,6 @@ class AuthorAward(models.Model):
 
 
 class AuthorShow(models.Model):
-    """Выставки автора"""
     name = models.CharField(
         max_length=CHARFIELD_MAX_LEN,
         verbose_name="Название"
@@ -75,8 +75,7 @@ class AuthorShow(models.Model):
         return self.name
 
 
-class Author(models.Model):
-    """Автор арт объекта"""
+class ObjectAuthor(models.Model):
     GENDER_CHOICES = (("MALE", "Male"), ("FEMALE", "Female"))
 
     name = models.CharField(
@@ -151,10 +150,21 @@ class Author(models.Model):
         return self.name
 
 
-class Product(models.Model):
-    """Арт объкект"""
-    SIZE_CATEGORIES = ((1, "SMALL"), (2, "MEDIUM"), (3, "LARGE"))
-    PRICE_CATEGORIES = ()
+class ArtObject(models.Model):
+    SIZE_CATEGORIES = (
+        (1, "Любой"),
+        (2, "Small (до 40 см)"),
+        (3, "Medium (40 - 100 см)"),
+        (4, "Large (100 - 160 см)"),
+        (5, "Oversize (более 160 см)")
+    )
+    PRICE_CATEGORIES = (
+        (1, "до 20 000 руб."),
+        (2, "от 20 000 до 50 000 руб."),
+        (3, "50 000 до 100 000 руб."),
+        (4, "от 100 000 до 200 000 руб."),
+        (5, "от 200 000 до 500 000 руб.")
+    )
 
     name = models.CharField(verbose_name="Название", max_length=CHARFIELD_MAX_LEN)
     image = models.ImageField(verbose_name="Изображение")
@@ -196,7 +206,7 @@ class Product(models.Model):
     end_cost = models.IntegerField(blank=True, verbose_name="Финальная цена")
     fair_cost = models.IntegerField(blank=True, verbose_name="Оценка")
     author = models.ForeignKey(
-        Author,
+        ObjectAuthor,
         on_delete=models.SET_NULL,
         null=True,
         related_name='atrobj',
@@ -211,5 +221,4 @@ class Product(models.Model):
 
 
     def __str__(self):
-        """Метод строкового представления модели."""
         return self.name

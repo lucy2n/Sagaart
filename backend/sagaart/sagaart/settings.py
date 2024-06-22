@@ -24,7 +24,6 @@ INSTALLED_APPS = [
     "userauth.apps.UserauthConfig",
     "analytics.apps.AnalyticsConfig",
     "api.apps.ApiConfig",
-    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -89,11 +88,8 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
-<<<<<<< HEAD
-=======
 MEDIA_URL = "media/"
 
 CSV_FILES_DIR = 'data/'
 
->>>>>>> 44ef4ba57ef48144d6b369ae1c8e4ca5bf3009fe
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
