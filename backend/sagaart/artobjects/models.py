@@ -4,9 +4,7 @@ from api.constants import MAX_CHAR_LEN, SIZE_CATEGORY_LIST
 
 
 class NameModel(models.Model):
-    name = models.CharField(
-        verbose_name="Название", max_length=MAX_CHAR_LEN
-    )
+    name = models.CharField(verbose_name="Название", max_length=MAX_CHAR_LEN)
 
     class Meta:
         abstract = True
@@ -36,9 +34,7 @@ class Genre(NameModel):
 class AuthorAward(models.Model):
     """Награды автора"""
 
-    name = models.CharField(
-        max_length=MAX_CHAR_LEN, verbose_name="Название"
-    )
+    name = models.CharField(max_length=MAX_CHAR_LEN, verbose_name="Название")
 
     class Meta:
         verbose_name = "Награда"
@@ -51,13 +47,9 @@ class AuthorAward(models.Model):
 class AuthorShow(models.Model):
     """Выставки автора"""
 
-    name = models.CharField(
-        max_length=MAX_CHAR_LEN, verbose_name="Название"
-    )
+    name = models.CharField(max_length=MAX_CHAR_LEN, verbose_name="Название")
     year = models.PositiveIntegerField(verbose_name="Дата проведения")
-    place = models.CharField(
-        max_length=MAX_CHAR_LEN, verbose_name="Место"
-    )
+    place = models.CharField(max_length=MAX_CHAR_LEN, verbose_name="Место")
 
     class Meta:
         verbose_name = "Выставка"
@@ -137,9 +129,7 @@ class Product(models.Model):
         (3, "PRICE_LARGE"),
     )
 
-    name = models.CharField(
-        verbose_name="Название", max_length=MAX_CHAR_LEN
-    )
+    name = models.CharField(verbose_name="Название", max_length=MAX_CHAR_LEN)
     image = models.ImageField(verbose_name="Изображение")
     additional_image = models.ImageField(
         blank=True, verbose_name="Изображение"

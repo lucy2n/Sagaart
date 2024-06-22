@@ -6,46 +6,134 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
-        ('artobjects', '0001_initial'),
+        ("artobjects", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Analytics',
+            name="Analytics",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('calculated_price', models.IntegerField(verbose_name='Рассчитанная цена')),
-                ('collection', models.CharField(max_length=128, verbose_name='Коллекция')),
-                ('media', models.CharField(max_length=128, verbose_name='СМИ')),
-                ('created_at', models.DateField(auto_now_add=True, verbose_name='Дата аналитики')),
-                ('art_object', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='artobjects.product')),
-                ('object_author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='artobjects.author')),
-                ('recepient', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "calculated_price",
+                    models.IntegerField(verbose_name="Рассчитанная цена"),
+                ),
+                (
+                    "collection",
+                    models.CharField(max_length=128, verbose_name="Коллекция"),
+                ),
+                (
+                    "media",
+                    models.CharField(max_length=128, verbose_name="СМИ"),
+                ),
+                (
+                    "created_at",
+                    models.DateField(
+                        auto_now_add=True, verbose_name="Дата аналитики"
+                    ),
+                ),
+                (
+                    "art_object",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="artobjects.product",
+                    ),
+                ),
+                (
+                    "object_author",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="artobjects.author",
+                    ),
+                ),
+                (
+                    "recepient",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='AuthorShow',
+            name="AuthorShow",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=128, verbose_name='Название выставки')),
-                ('date', models.PositiveIntegerField(verbose_name='Год выставки')),
-                ('place', models.CharField(max_length=128, verbose_name='Локация выставки')),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='artobjects.author', verbose_name='Автор')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        max_length=128, verbose_name="Название выставки"
+                    ),
+                ),
+                (
+                    "date",
+                    models.PositiveIntegerField(verbose_name="Год выставки"),
+                ),
+                (
+                    "place",
+                    models.CharField(
+                        max_length=128, verbose_name="Локация выставки"
+                    ),
+                ),
+                (
+                    "author",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="artobjects.author",
+                        verbose_name="Автор",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='AnalyticsProductCost',
+            name="AnalyticsProductCost",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('cost', models.IntegerField(verbose_name='Цена товара')),
-                ('date', models.DateField(verbose_name='Дата цены')),
-                ('analytics_result', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='analytics.analytics')),
-                ('show', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='analytics.authorshow')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("cost", models.IntegerField(verbose_name="Цена товара")),
+                ("date", models.DateField(verbose_name="Дата цены")),
+                (
+                    "analytics_result",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="analytics.analytics",
+                    ),
+                ),
+                (
+                    "show",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="analytics.authorshow",
+                    ),
+                ),
             ],
         ),
     ]
