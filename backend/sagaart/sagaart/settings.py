@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,9 +9,8 @@ SECRET_KEY = (
 
 DEBUG = True
 
-AUTH_USER_MODEL = "userauth.User"
-
 ALLOWED_HOSTS = []
+
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -24,9 +22,7 @@ INSTALLED_APPS = [
     "artobjects.apps.ArtobjectsConfig",
     "userauth.apps.UserauthConfig",
     "api.apps.ApiConfig",
-    'rest_framework',
-    'djoser',
-    'rest_framework.authtoken',
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -59,12 +55,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "sagaart.wsgi.application"
 
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -82,44 +80,19 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
-    ],
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-    ),
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+LANGUAGE_CODE = "en-us"
 
-EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
-
-DJOSER = {
-    'PASSWORD_RESET_CONFIRM_URL': '/api/user/resetpassword/{uid}/{token}',
-    'SEND_CONFIRMATION_EMAIL': True,
-    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
-    'SET_PASSWORD_RETYPE': True,
-    'PASSWORD_RESET_CONFIRM_RETYPE': True,
-    'PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND': True,
-    'HIDE_USERS': False,
-    'SERIALIZERS': {
-        'user_create': 'api.auth.serializers.UserRegistrationSerializer',
-        'user': 'api.auth.serializers.UserSerializer',
-    },
-    'PERMISSIONS': {
-        # 'user': ['rest_framework.permissions.IsAuthenticatedOrReadOnly'],
-        'user_list': ['rest_framework.permissions.AllowAny'],
-    },
-}
-
-LANGUAGE_CODE = 'ru'
-
-TIME_ZONE = 'Europe/Moscow'
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
 USE_TZ = True
 
+
 STATIC_URL = "static/"
+
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
