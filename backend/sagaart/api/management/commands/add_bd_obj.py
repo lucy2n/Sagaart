@@ -3,7 +3,9 @@ import csv
 from django.core.management.base import BaseCommand
 
 from sagaart.settings import CSV_FILES_DIR
-from artobjects.models import Category, Genre, Style, AuthorShow, AuthorAward, Author
+from artobjects.models import (
+    Category, Genre, Style, AuthorShow, AuthorAward, Author, Product
+    )
 
 
 class Command(BaseCommand):
@@ -101,7 +103,7 @@ class Command(BaseCommand):
                     age=row[2],
                     year_of_birth=row[3],
                     city_of_birth=row[4],
-                    city=row[5],
+                    city_live=row[5],
                     education=row[6],
                     professional_education=row[7],
                     teaching_experience=row[8],
@@ -110,5 +112,38 @@ class Command(BaseCommand):
                 for row in reader
             ]
             Author.objects.bulk_create(author)
-        print('Выставки в базу данных загружены')
+        print('Авторы в базу данных загружены')
         print('ADD', Author.objects.count(), 'Author')
+
+
+        # with open(
+        #         f'{CSV_FILES_DIR}/product.csv', encoding='utf-8'
+        # ) as file:
+        #     reader = csv.reader(file)
+        #     next(reader)
+        #     product = [
+        #         Product(
+        #             name=row[0],
+        #             image=row[1],
+        #             additional_image=row[2],
+        #             category=Category.objects.get(pk=row[3]),
+        #             style=Style.objects.get(pk=row[4]),
+        #             genre=Genre.objects.get(pk=row[5]),
+        #             size_category=row[6],
+        #             size=row[7],
+        #             country=row[8],
+        #             city_sale=row[9],
+        #             year=row[10],
+        #             material=row[11],
+        #             tablet_material=row[12],
+        #             description=row[13],
+        #             cost_category=row[14],
+        #             end_cost=row[15],
+        #             fair_cost=row[16],
+        #             author=Author.objects.get(pk=row[17]),
+        #         )
+        #         for row in reader
+        #     ]
+        #     Product.objects.bulk_create(author)
+        # print('Артобъекты в базу данных загружены')
+        # print('ADD', Product.objects.count(), 'Product')

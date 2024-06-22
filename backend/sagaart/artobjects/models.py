@@ -95,7 +95,7 @@ class Author(models.Model):
         max_length=CHARFIELD_MAX_LEN,
         verbose_name="Город рождения"
         )
-    city = models.CharField(
+    city_live = models.CharField(
         blank=True,
         max_length=CHARFIELD_MAX_LEN,
         verbose_name="Город проживания"
@@ -151,7 +151,9 @@ class Author(models.Model):
 class Product(models.Model):
     """Арт объкект"""
     SIZE_CATEGORIES = ((1, "SMALL"), (2, "MEDIUM"), (3, "LARGE"))
-    PRICE_CATEGORIES = ()
+    PRICE_CATEGORIES = (
+        (1, "PRICE_SMALL"), (2, "PRICE_MEDIUM"), (3, "PRICE_LARGE")
+    )
 
     name = models.CharField(verbose_name="Название", max_length=CHARFIELD_MAX_LEN)
     image = models.ImageField(verbose_name="Изображение")
@@ -188,7 +190,7 @@ class Product(models.Model):
         blank=True, verbose_name="Описание", max_length=CHARFIELD_MAX_LEN
     )
     cost_category = models.IntegerField(
-        choices=SIZE_CATEGORIES, verbose_name="Ценовая категория"
+        choices=PRICE_CATEGORIES, verbose_name="Ценовая категория"
     )
     end_cost = models.IntegerField(blank=True, verbose_name="Финальная цена")
     fair_cost = models.IntegerField(blank=True, verbose_name="Оценка")
