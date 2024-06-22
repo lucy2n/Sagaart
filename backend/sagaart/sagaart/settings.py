@@ -11,7 +11,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -24,7 +23,6 @@ INSTALLED_APPS = [
     "artobjects.apps.ArtobjectsConfig",
     "userauth.apps.UserauthConfig",
     "api.apps.ApiConfig",
-    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -57,14 +55,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "sagaart.wsgi.application"
 
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -81,11 +77,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-REST_FRAMEWORK = {
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
-}
-
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "UTC"
@@ -94,17 +85,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'static_dev',
-]
-
 STATIC_URL = "static/"
-
-MEDIA_URL = "media/"
-
-MEDIA_ROOT = BASE_DIR / 'media'
-
-CSV_FILES_DIR = 'data/'
-
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
