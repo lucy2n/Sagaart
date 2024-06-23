@@ -7,6 +7,11 @@ from .models import (
 admin.site.empty_value_display = "Не задано"
 
 
+class NameFieldAdmin(admin.ModelAdmin):
+    list_display = ("name",)
+    search_fields = ("name",)
+
+
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ("name",)
@@ -25,6 +30,7 @@ class GenreAdmin(admin.ModelAdmin):
     search_fields = ("name",)
 
 
+
 @admin.register(AuthorAward)
 class AuthorAwardAdmin(admin.ModelAdmin):
     list_display = ("name",)
@@ -35,6 +41,7 @@ class AuthorAwardAdmin(admin.ModelAdmin):
 class AuthorShowAdmin(admin.ModelAdmin):
     list_display = ("name", "year", "place")
     search_fields = ("name",)
+
 
 
 @admin.register(ArtObject)

@@ -12,6 +12,7 @@ from api.artobjects.serializers import (
 )
 from artobjects.models import ArtObject, ObjectAuthor
 
+
 SERIALIZER_CHAR_LEN = 100
 
 
@@ -64,8 +65,8 @@ class AnalyticSerializerForWrite(serializers.ModelSerializer):
     def create(self, validated_data):
         object = validated_data.pop("art_object")
         author = validated_data.pop("author")
-        object_id = ArtObject.objects.get(**object).id
-        author_id = ObjectAuthor.objects.get(**author).id
+        object_id = Product.objects.get(**object).id
+        author_id = Author.objects.get(**author).id
         validated_data["art_object"] = object_id
         validated_data["object_author"] = author_id
         analytics = Analytics.objects.create(**validated_data)

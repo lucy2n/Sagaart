@@ -10,6 +10,7 @@ from artobjects.models import (
     ObjectAuthor,
     AuthorAward,
     AuthorShow
+
 )
 
 
@@ -24,22 +25,18 @@ class Base64ImageField(serializers.ImageField):
 
 
 class CategorySerializer(serializers.ModelSerializer):
-
-
     class Meta:
         model = Category
         fields = ("id", "name")
 
 
 class GenreSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Genre
         fields = ("id", "name")
 
 
 class StyleSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Style
         fields = ("id", "name")
@@ -124,6 +121,7 @@ class ArtObjectSerialzer(ArtObjectListSerialzer):
         genre = obj.genre.get()
         similar_works = ArtObject.objects.filter(genre__name=genre).exclude(pk=obj.id).order_by('?')[:3]
 
+
         if similar_works:
             serializer = ProductImageSerializer(
                 similar_works,
@@ -131,7 +129,6 @@ class ArtObjectSerialzer(ArtObjectListSerialzer):
                 many=True,
             )
             return serializer.data
-
         return []
 
     def get_author_works(self, obj):
@@ -144,5 +141,4 @@ class ArtObjectSerialzer(ArtObjectListSerialzer):
                 many=True,
             )
             return serializer.data
-
         return []

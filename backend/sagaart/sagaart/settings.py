@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -9,7 +10,9 @@ SECRET_KEY = (
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+AUTH_USER_MODEL = "userauth.User"
+
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1").split(" ")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -18,12 +21,18 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'rest_framework',
+    "rest_framework",
     "django_filters",
     "artobjects.apps.ArtobjectsConfig",
     "userauth.apps.UserauthConfig",
     "analytics.apps.AnalyticsConfig",
     "api.apps.ApiConfig",
+<<<<<<< HEAD
+=======
+    "djoser",
+    "rest_framework.authtoken",
+    "drf_spectacular"
+>>>>>>> develop
 ]
 
 MIDDLEWARE = [
@@ -58,8 +67,12 @@ WSGI_APPLICATION = "sagaart.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("POSTGRES_DB"),
+        "USER": os.getenv("POSTGRES_USER"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
+        "HOST": os.getenv("DB_HOST"),
+        "PORT": os.getenv("DB_PORT"),
     }
 }
 
@@ -78,9 +91,46 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+<<<<<<< HEAD
+=======
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.AllowAny",
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.TokenAuthentication",
+    ),
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_FILTER_BACKENDS": [
+        "django_filters.rest_framework.DjangoFilterBackend"
+    ],
+}
+
+>>>>>>> develop
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+
+DJOSER = {
+    "PASSWORD_RESET_CONFIRM_URL": "/api/user/resetpassword/{uid}/{token}",
+    "SEND_CONFIRMATION_EMAIL": True,
+    "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
+    "SET_PASSWORD_RETYPE": True,
+    "PASSWORD_RESET_CONFIRM_RETYPE": True,
+    "PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND": True,
+    "HIDE_USERS": False,
+    "SERIALIZERS": {
+        "user_create": "api.auth.serializers.UserRegistrationSerializer",
+        "user": "api.auth.serializers.UserSerializer",
+    },
+    "PERMISSIONS": {
+        # 'user': ['rest_framework.permissions.IsAuthenticatedOrReadOnly'],
+        "user_list": ["rest_framework.permissions.AllowAny"],
+    },
+}
+
+LANGUAGE_CODE = "ru"
+
+TIME_ZONE = "Europe/Moscow"
 
 USE_I18N = True
 
@@ -88,10 +138,18 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+STATIC_ROOT = os.path.join(BASE_DIR, "collected_static")
+
 MEDIA_URL = "media/"
 
-MEDIA_ROOT = BASE_DIR / 'media'
+CSV_FILES_DIR = "data/"
 
-CSV_FILES_DIR = 'data/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+CSV_FILES_DIR = "data/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
