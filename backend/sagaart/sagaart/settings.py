@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "api.apps.ApiConfig",
     "djoser",
     "rest_framework.authtoken",
+    "drf_spectacular"
 ]
 
 MIDDLEWARE = [
