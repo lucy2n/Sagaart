@@ -76,7 +76,7 @@ class AuthorShow(models.Model):
 
 
 class ObjectAuthor(models.Model):
-    GENDER_CHOICES = (("MALE", "Male"), ("FEMALE", "Female"))
+    GENDER_CHOICES = ((1, "MALE"), (2, "FEMALE"))
 
     name = models.CharField(
         max_length=CHARFIELD_MAX_LEN,
@@ -97,7 +97,7 @@ class ObjectAuthor(models.Model):
         max_length=CHARFIELD_MAX_LEN,
         verbose_name="Город рождения"
         )
-    city = models.CharField(
+    city_live = models.CharField(
         blank=True,
         max_length=CHARFIELD_MAX_LEN,
         verbose_name="Город проживания"
@@ -146,7 +146,6 @@ class ObjectAuthor(models.Model):
         verbose_name_plural = "Авторы"
 
     def __str__(self):
-        """Метод строкового представления модели."""
         return self.name
 
 
@@ -197,8 +196,8 @@ class ArtObject(models.Model):
     tablet_material = models.CharField(
         blank=True, verbose_name="Материал планшета", max_length=CHARFIELD_MAX_LEN
     )
-    description = models.CharField(
-        blank=True, verbose_name="Описание", max_length=CHARFIELD_MAX_LEN
+    description = models.TextField(
+        blank=True, verbose_name="Описание"
     )
     cost_category = models.IntegerField(
         choices=SIZE_CATEGORIES, verbose_name="Ценовая категория"
@@ -218,7 +217,6 @@ class ArtObject(models.Model):
     class Meta:
         verbose_name = "Артобъект"
         verbose_name_plural = "Артобъекты"
-
 
     def __str__(self):
         return self.name

@@ -62,12 +62,13 @@ class AuthorShowSerializer(serializers.ModelSerializer):
 class ObjectAuthorSerializer(serializers.ModelSerializer):
     awards = AuthorAwardSerializer(read_only=True, many=True)
     show = AuthorShowSerializer(read_only=True, many=True)
+    personal_style = serializers.ReadOnlyField(source="personal_style.name")
 
     class Meta:
         model = ObjectAuthor
         fields = (
             "id", "name", "gender", "age", "year_of_birth", "show", "awards",
-            "city_of_birth", "city", "education", "professional_education",
+            "city_of_birth", "city_live", "education", "professional_education",
             "teaching_experience", "personal_style", "socials"
         )
 
@@ -101,14 +102,14 @@ class ArtObjectListSerialzer(serializers.ModelSerializer):
         fields = (
             "id", "name", "image", "additional_image", "category", "style",
             "genre", "size_category", "size", "country", "city_sale", "year",
-            "material", "tablet_material", "cost_category", "end_cost",
-            "fair_cost", "author"
+            "cost_category", "end_cost", "author"
         )
 
 
 class ArtObjectSerialzer(ArtObjectListSerialzer):
     author = ObjectAuthorSerializer(read_only=True)
     similar_works = serializers.SerializerMethodField()
+    author_works = serializers.SerializerMethodField()
 
     class Meta:
         model = ArtObject
@@ -116,16 +117,29 @@ class ArtObjectSerialzer(ArtObjectListSerialzer):
             "id", "name", "image", "additional_image", "category", "style",
             "genre", "size_category", "size", "country", "city_sale", "year",
             "material", "tablet_material", "description", "cost_category",
-            "end_cost", "fair_cost", "author", "similar_works"
+            "end_cost", "fair_cost", "author", "similar_works", "author_works"
         )
 
     def get_similar_works(self, obj):
         genre = obj.genre.get()
-        similar_works = ArtObject.objects.filter(genre__name=genre).exclude(pk=obj.id)[:3]
+        similar_works = ArtObject.objects.filter(genre__name=genre).exclude(pk=obj.id).order_by('?')[:3]
 
         if similar_works:
             serializer = ProductImageSerializer(
                 similar_works,
+                context={'request': self.context['request']},
+                many=True,
+            )
+            return serializer.data
+
+        return []
+
+    def get_author_works(self, obj):
+        author_works = ArtObject.objects.filter(author=obj.author).exclude(pk=obj.id).order_by('?')[:6]
+
+        if author_works:
+            serializer = ProductImageSerializer(
+                author_works,
                 context={'request': self.context['request']},
                 many=True,
             )

@@ -90,6 +90,8 @@ STATIC_URL = "static/"
 
 MEDIA_URL = "media/"
 
+MEDIA_ROOT = BASE_DIR / 'media'
+
 CSV_FILES_DIR = 'data/'
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

@@ -28,14 +28,12 @@ class ArtObjFilter(django_filters.FilterSet):
         field_name="style",
         label="Стиль"
     )
-    years = django_filters.RangeFilter(
-        field_name="year",
-        label="Диапазон годов публикации"
-    )
+    min_year = django_filters.NumberFilter(field_name="year", lookup_expr='gte')
+    max_year = django_filters.NumberFilter(field_name="year", lookup_expr='lte')
     author = django_filters.CharFilter(
-        field_name='author__name',
-        lookup_expr='icontains',
-        label='Имя автора'
+        field_name="author__name",
+        lookup_expr="icontains",
+        label="Имя автора"
     )
 
     class Meta:
@@ -47,5 +45,6 @@ class ArtObjFilter(django_filters.FilterSet):
             "genre",
             "style",
             "author",
-            "years"
+            "min_year",
+            "max_year"
         )

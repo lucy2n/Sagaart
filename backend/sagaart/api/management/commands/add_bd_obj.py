@@ -108,7 +108,7 @@ class Command(BaseCommand):
                     age=row[2],
                     year_of_birth=row[3],
                     city_of_birth=row[4],
-                    city=row[5],
+                    city_live=row[5],
                     education=row[6],
                     professional_education=row[7],
                     teaching_experience=row[8],
