@@ -122,8 +122,8 @@ class ArtObjectListSerialzer(serializers.ModelSerializer):
 
 class ArtObjectSerialzer(ArtObjectListSerialzer):
     author = ObjectAuthorSerializer(read_only=True)
-    similar_works = serializers.SerializerMethodField()
-    author_works = serializers.SerializerMethodField()
+    similar_works = serializers.SerializerMethodField("get_similar_works")
+    author_works = serializers.SerializerMethodField("get_author_works")
 
     class Meta:
         model = ArtObject
