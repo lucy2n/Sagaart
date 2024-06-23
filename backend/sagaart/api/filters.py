@@ -1,6 +1,6 @@
 import django_filters
 
-from artobjects.models import Product, Category, Genre, Style
+from artobjects.models import ArtObject, Category, Genre, Style
 
 
 class ArtObjFilter(django_filters.FilterSet):
@@ -21,15 +21,17 @@ class ArtObjFilter(django_filters.FilterSet):
     style = django_filters.ModelMultipleChoiceFilter(
         queryset=Style.objects.all(), field_name="style", label="Стиль"
     )
-    years = django_filters.RangeFilter(
-        field_name="year", label="Диапазон годов публикации"
-    )
+    min_year = django_filters.NumberFilter(field_name="year", lookup_expr='gte')
+    max_year = django_filters.NumberFilter(field_name="year", lookup_expr='lte')
     author = django_filters.CharFilter(
-        field_name="author__name", lookup_expr="icontains", label="Имя автора"
+        field_name="author__name",
+        lookup_expr="icontains",
+        label="Имя автора"
+
     )
 
     class Meta:
-        model = Product
+        model = ArtObject
         fields = (
             "end_cost",
             "size_category",
@@ -37,5 +39,6 @@ class ArtObjFilter(django_filters.FilterSet):
             "genre",
             "style",
             "author",
-            "years",
+            "min_year",
+            "max_year"
         )

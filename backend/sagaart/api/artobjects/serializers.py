@@ -1,14 +1,27 @@
+import base64
+from django.core.files.base import ContentFile
 from rest_framework import serializers
 
 from artobjects.models import (
     Category,
     Genre,
     Style,
-    Product,
-    Author,
+    ArtObject,
+    ObjectAuthor,
     AuthorAward,
-    AuthorShow,
+    AuthorShow
+
 )
+
+
+
+class Base64ImageField(serializers.ImageField):
+    def to_internal_value(self, data):
+        if isinstance(data, str) and data.startswith('data:image'):
+            format, imgstr = data.split(';base64,')
+            ext = format.split('/')[-1]
+            data = ContentFile(base64.b64decode(imgstr), name='photo.' + ext)
+        return super().to_internal_value(data)
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -30,99 +43,102 @@ class StyleSerializer(serializers.ModelSerializer):
 
 
 class AuthorAwardSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = AuthorAward
-        fields = "__all__"
+        fields = ("id", "name")
 
 
 class AuthorShowSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = AuthorShow
-        fields = "__all__"
+        fields = ("id", "name", "year", "place")
 
 
-class FullAuthorInfoSerializer(serializers.ModelSerializer):
+class ObjectAuthorSerializer(serializers.ModelSerializer):
     awards = AuthorAwardSerializer(read_only=True, many=True)
     show = AuthorShowSerializer(read_only=True, many=True)
+    personal_style = serializers.ReadOnlyField(source="personal_style.name")
 
     class Meta:
-        model = Author
+        model = ObjectAuthor
         fields = (
-            "id",
-            "name",
-            "gender",
-            "age",
-            "year_of_birth",
-            "show",
-            "awards",
-            "city_of_birth",
-            "city_live",
-            "education",
-            "professional_education",
-            "teaching_experience",
-            "personal_style",
-            "socials",
+            "id", "name", "gender", "age", "year_of_birth", "show", "awards",
+            "city_of_birth", "city_live", "education", "professional_education",
+            "teaching_experience", "personal_style", "socials"
         )
 
 
 class AuthorNameSerializer(serializers.ModelSerializer):
+
     class Meta:
-        model = Author
+        model = ObjectAuthor
         fields = ("id", "name")
 
 
+class ProductImageSerializer(serializers.ModelSerializer):
+    image = Base64ImageField()
+
+    class Meta:
+        model = ArtObject
+        fields = ("id", "image")
+
+
+
 class ArtObjectListSerialzer(serializers.ModelSerializer):
+    image = Base64ImageField()
+    additional_image = Base64ImageField(required=False, allow_null=True)
     category = CategorySerializer(read_only=True, many=True)
     style = GenreSerializer(many=True, read_only=True)
     genre = StyleSerializer(many=True, read_only=True)
     author = AuthorNameSerializer(read_only=True)
 
     class Meta:
-        model = Product
+        model = ArtObject
         fields = (
-            "id",
-            "name",
-            "image",
-            "additional_image",
-            "category",
-            "style",
-            "genre",
-            "size_category",
-            "size",
-            "country",
-            "city_sale",
-            "year",
-            "material",
-            "tablet_material",
-            "cost_category",
-            "end_cost",
-            "fair_cost",
-            "author",
+            "id", "name", "image", "additional_image", "category", "style",
+            "genre", "size_category", "size", "country", "city_sale", "year",
+            "cost_category", "end_cost", "author"
         )
 
 
 class ArtObjectSerialzer(ArtObjectListSerialzer):
-    author = FullAuthorInfoSerializer(read_only=True)
+    author = ObjectAuthorSerializer(read_only=True)
+    similar_works = serializers.SerializerMethodField()
+    author_works = serializers.SerializerMethodField()
 
-    class Meta(ArtObjectListSerialzer.Meta):
+    class Meta:
+        model = ArtObject
         fields = (
-            "id",
-            "name",
-            "image",
-            "additional_image",
-            "category",
-            "style",
-            "genre",
-            "size_category",
-            "size",
-            "country",
-            "city_sale",
-            "year",
-            "material",
-            "tablet_material",
-            "description",
-            "cost_category",
-            "end_cost",
-            "fair_cost",
-            "author",
+            "id", "name", "image", "additional_image", "category", "style",
+            "genre", "size_category", "size", "country", "city_sale", "year",
+            "material", "tablet_material", "description", "cost_category",
+            "end_cost", "fair_cost", "author", "similar_works", "author_works"
         )
+
+    def get_similar_works(self, obj):
+        genre = obj.genre.get()
+        similar_works = ArtObject.objects.filter(genre__name=genre).exclude(pk=obj.id).order_by('?')[:3]
+
+
+        if similar_works:
+            serializer = ProductImageSerializer(
+                similar_works,
+                context={'request': self.context['request']},
+                many=True,
+            )
+            return serializer.data
+        return []
+
+    def get_author_works(self, obj):
+        author_works = ArtObject.objects.filter(author=obj.author).exclude(pk=obj.id).order_by('?')[:6]
+
+        if author_works:
+            serializer = ProductImageSerializer(
+                author_works,
+                context={'request': self.context['request']},
+                many=True,
+            )
+            return serializer.data
+        return []

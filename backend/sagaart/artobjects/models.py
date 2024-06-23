@@ -4,6 +4,7 @@ from api.constants import MAX_CHAR_LEN, SIZE_CATEGORY_LIST
 
 
 class NameModel(models.Model):
+
     name = models.CharField(verbose_name="Название", max_length=MAX_CHAR_LEN)
 
     class Meta:
@@ -14,9 +15,13 @@ class NameModel(models.Model):
 
 
 class Category(NameModel):
+
     class Meta(NameModel.Meta):
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
+
+    def __str__(self):
+        return self.name
 
 
 class Style(NameModel):
@@ -24,11 +29,19 @@ class Style(NameModel):
         verbose_name = "Стиль"
         verbose_name_plural = "Стили"
 
+    def __str__(self):
+        return self.name
+
+
 
 class Genre(NameModel):
     class Meta(NameModel.Meta):
         verbose_name = "Жанр"
         verbose_name_plural = "Жанры"
+
+    def __str__(self):
+        return self.name
+
 
 
 class AuthorAward(models.Model):
@@ -36,7 +49,7 @@ class AuthorAward(models.Model):
 
     name = models.CharField(max_length=MAX_CHAR_LEN, verbose_name="Название")
 
-    class Meta:
+    class Meta(NameModel.Meta):
         verbose_name = "Награда"
         verbose_name_plural = "Награды"
 
@@ -45,7 +58,6 @@ class AuthorAward(models.Model):
 
 
 class AuthorShow(models.Model):
-    """Выставки автора"""
 
     name = models.CharField(max_length=MAX_CHAR_LEN, verbose_name="Название")
     year = models.PositiveIntegerField(verbose_name="Дата проведения")
@@ -59,8 +71,8 @@ class AuthorShow(models.Model):
         return self.name
 
 
-class Author(models.Model):
-    GENDER_CHOICES = (("MALE", "Male"), ("FEMALE", "Female"))
+class ObjectAuthor(models.Model):
+    GENDER_CHOICES = ((1, "MALE"), (2, "FEMALE"))
 
     name = models.CharField(max_length=MAX_CHAR_LEN, verbose_name="Имя")
     gender = models.CharField(
@@ -122,11 +134,20 @@ class Author(models.Model):
         return self.name
 
 
-class Product(models.Model):
+class ArtObject(models.Model):
+    SIZE_CATEGORIES = (
+        (1, "Любой"),
+        (2, "Small (до 40 см)"),
+        (3, "Medium (40 - 100 см)"),
+        (4, "Large (100 - 160 см)"),
+        (5, "Oversize (более 160 см)")
+    )
     PRICE_CATEGORIES = (
-        (1, "PRICE_SMALL"),
-        (2, "PRICE_MEDIUM"),
-        (3, "PRICE_LARGE"),
+        (1, "до 20 000 руб."),
+        (2, "от 20 000 до 50 000 руб."),
+        (3, "50 000 до 100 000 руб."),
+        (4, "от 100 000 до 200 000 руб."),
+        (5, "от 200 000 до 500 000 руб.")
     )
 
     name = models.CharField(verbose_name="Название", max_length=MAX_CHAR_LEN)
@@ -159,8 +180,8 @@ class Product(models.Model):
         verbose_name="Материал планшета",
         max_length=MAX_CHAR_LEN,
     )
-    description = models.CharField(
-        blank=True, verbose_name="Описание", max_length=MAX_CHAR_LEN
+    description = models.TextField(
+        blank=True, verbose_name="Описание"
     )
     cost_category = models.IntegerField(
         choices=PRICE_CATEGORIES, verbose_name="Ценовая категория"
@@ -168,7 +189,7 @@ class Product(models.Model):
     end_cost = models.IntegerField(blank=True, verbose_name="Финальная цена")
     fair_cost = models.IntegerField(blank=True, verbose_name="Оценка")
     author = models.ForeignKey(
-        Author,
+        ObjectAuthor,
         on_delete=models.SET_NULL,
         null=True,
         related_name="atrobj",

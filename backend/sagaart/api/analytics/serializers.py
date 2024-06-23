@@ -8,9 +8,10 @@ from analytics.models import Analytics
 from api.constants import GENDER_LIST, SIZE_CATEGORY_LIST
 from api.artobjects.serializers import (
     ArtObjectSerialzer,
-    FullAuthorInfoSerializer,
+    ObjectAuthorSerializer
 )
-from artobjects.models import Product, Author
+from artobjects.models import ArtObject, ObjectAuthor
+
 
 SERIALIZER_CHAR_LEN = 100
 
@@ -46,7 +47,7 @@ class AnalyticsRequestSerializer(serializers.Serializer):
 
 class AnalyticSerializerForWrite(serializers.ModelSerializer):
     art_object = ArtObjectSerialzer()
-    object_author = FullAuthorInfoSerializer()
+    object_author = ObjectAuthorSerializer()
 
     class Meta:
         model = Analytics
