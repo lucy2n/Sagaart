@@ -27,12 +27,9 @@ INSTALLED_APPS = [
     "userauth.apps.UserauthConfig",
     "analytics.apps.AnalyticsConfig",
     "api.apps.ApiConfig",
-<<<<<<< HEAD
-=======
     "djoser",
     "rest_framework.authtoken",
-    "drf_spectacular"
->>>>>>> develop
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -91,8 +88,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-<<<<<<< HEAD
-=======
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.AllowAny",
@@ -106,9 +101,7 @@ REST_FRAMEWORK = {
     ],
 }
 
->>>>>>> develop
 LANGUAGE_CODE = "en-us"
-
 
 DJOSER = {
     "PASSWORD_RESET_CONFIRM_URL": "/api/user/resetpassword/{uid}/{token}",

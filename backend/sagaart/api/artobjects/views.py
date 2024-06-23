@@ -3,10 +3,7 @@ from rest_framework import viewsets, permissions, filters
 from rest_framework.decorators import action
 
 from artobjects.models import ArtObject
-from .serializers import (
-    ArtObjectSerialzer,
-    ArtObjectListSerialzer
-)
+from .serializers import ArtObjectSerialzer, ArtObjectListSerialzer
 from api.filters import ArtObjFilter
 
 

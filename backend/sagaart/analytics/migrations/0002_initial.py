@@ -6,34 +6,47 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
-        ('analytics', '0001_initial'),
-        ('artobjects', '0001_initial'),
+        ("analytics", "0001_initial"),
+        ("artobjects", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='analytics',
-            name='recepient',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="analytics",
+            name="recepient",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.AddField(
-            model_name='analyticsproductcost',
-            name='analytics_result',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='analytics.analytics'),
+            model_name="analyticsproductcost",
+            name="analytics_result",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="analytics.analytics",
+            ),
         ),
         migrations.AddField(
-            model_name='authorshow',
-            name='author',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='artobjects.author', verbose_name='Автор'),
+            model_name="authorshow",
+            name="author",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="artobjects.author",
+                verbose_name="Автор",
+            ),
         ),
         migrations.AddField(
-            model_name='analyticsproductcost',
-            name='show',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='analytics.authorshow'),
+            model_name="analyticsproductcost",
+            name="show",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="analytics.authorshow",
+            ),
         ),
     ]

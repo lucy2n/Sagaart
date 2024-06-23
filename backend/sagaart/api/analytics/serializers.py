@@ -8,7 +8,7 @@ from analytics.models import Analytics
 from api.constants import GENDER_LIST, SIZE_CATEGORY_LIST
 from api.artobjects.serializers import (
     ArtObjectSerialzer,
-    ObjectAuthorSerializer
+    ObjectAuthorSerializer,
 )
 from artobjects.models import ArtObject, ObjectAuthor
 

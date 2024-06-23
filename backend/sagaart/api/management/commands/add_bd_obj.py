@@ -9,8 +9,7 @@ from artobjects.models import (
     Style,
     AuthorShow,
     AuthorAward,
-    ObjectAuthor
-
+    ObjectAuthor,
 )
 
 
@@ -86,5 +85,5 @@ class Command(BaseCommand):
                 for row in reader
             ]
             ObjectAuthor.objects.bulk_create(author)
-        print('Авторы  в базу данных загружены')
-        print('ADD', ObjectAuthor.objects.count(), 'Author')
+        print("Авторы  в базу данных загружены")
+        print("ADD", ObjectAuthor.objects.count(), "Author")

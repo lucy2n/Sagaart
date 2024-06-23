@@ -21,13 +21,14 @@ class ArtObjFilter(django_filters.FilterSet):
     style = django_filters.ModelMultipleChoiceFilter(
         queryset=Style.objects.all(), field_name="style", label="Стиль"
     )
-    min_year = django_filters.NumberFilter(field_name="year", lookup_expr='gte')
-    max_year = django_filters.NumberFilter(field_name="year", lookup_expr='lte')
+    min_year = django_filters.NumberFilter(
+        field_name="year", lookup_expr="gte"
+    )
+    max_year = django_filters.NumberFilter(
+        field_name="year", lookup_expr="lte"
+    )
     author = django_filters.CharFilter(
-        field_name="author__name",
-        lookup_expr="icontains",
-        label="Имя автора"
-
+        field_name="author__name", lookup_expr="icontains", label="Имя автора"
     )
 
     class Meta:
@@ -40,5 +41,5 @@ class ArtObjFilter(django_filters.FilterSet):
             "style",
             "author",
             "min_year",
-            "max_year"
+            "max_year",
         )

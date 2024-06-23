@@ -4,7 +4,6 @@ from api.constants import MAX_CHAR_LEN, SIZE_CATEGORY_LIST
 
 
 class NameModel(models.Model):
-
     name = models.CharField(verbose_name="Название", max_length=MAX_CHAR_LEN)
 
     class Meta:
@@ -15,7 +14,6 @@ class NameModel(models.Model):
 
 
 class Category(NameModel):
-
     class Meta(NameModel.Meta):
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
@@ -33,7 +31,6 @@ class Style(NameModel):
         return self.name
 
 
-
 class Genre(NameModel):
     class Meta(NameModel.Meta):
         verbose_name = "Жанр"
@@ -41,7 +38,6 @@ class Genre(NameModel):
 
     def __str__(self):
         return self.name
-
 
 
 class AuthorAward(models.Model):
@@ -58,7 +54,6 @@ class AuthorAward(models.Model):
 
 
 class AuthorShow(models.Model):
-
     name = models.CharField(max_length=MAX_CHAR_LEN, verbose_name="Название")
     year = models.PositiveIntegerField(verbose_name="Дата проведения")
     place = models.CharField(max_length=MAX_CHAR_LEN, verbose_name="Место")
@@ -140,14 +135,14 @@ class ArtObject(models.Model):
         (2, "Small (до 40 см)"),
         (3, "Medium (40 - 100 см)"),
         (4, "Large (100 - 160 см)"),
-        (5, "Oversize (более 160 см)")
+        (5, "Oversize (более 160 см)"),
     )
     PRICE_CATEGORIES = (
         (1, "до 20 000 руб."),
         (2, "от 20 000 до 50 000 руб."),
         (3, "50 000 до 100 000 руб."),
         (4, "от 100 000 до 200 000 руб."),
-        (5, "от 200 000 до 500 000 руб.")
+        (5, "от 200 000 до 500 000 руб."),
     )
 
     name = models.CharField(verbose_name="Название", max_length=MAX_CHAR_LEN)
@@ -180,9 +175,7 @@ class ArtObject(models.Model):
         verbose_name="Материал планшета",
         max_length=MAX_CHAR_LEN,
     )
-    description = models.TextField(
-        blank=True, verbose_name="Описание"
-    )
+    description = models.TextField(blank=True, verbose_name="Описание")
     cost_category = models.IntegerField(
         choices=PRICE_CATEGORIES, verbose_name="Ценовая категория"
     )
