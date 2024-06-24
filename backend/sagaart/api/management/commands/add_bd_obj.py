@@ -93,7 +93,7 @@ class Command(BaseCommand):
                 for row in reader
             ]
             AuthorAward.objects.bulk_create(award)
-        print('Выставки в базу данных загружены')
+        print('Награды в базу данных загружены')
         print('ADD', AuthorAward.objects.count(), 'Award')
 
         with open(
