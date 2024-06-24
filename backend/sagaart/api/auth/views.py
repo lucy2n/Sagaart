@@ -13,6 +13,7 @@ class UserViewSet(DjoserUserViewSet):
         url_path="resetpassword/(?P<uid>[^/.]+)/(?P<token>[^/.]+)",
     )
     def reset_password_confirm(self, request, *args, **kwargs):
+        print(kwargs)
         request.data["uid"] = kwargs["uid"]
         request.data["token"] = kwargs["token"]
         return super().reset_password_confirm(request, *args, **kwargs)

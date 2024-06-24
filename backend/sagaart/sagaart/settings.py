@@ -115,10 +115,6 @@ DJOSER = {
         "user_create": "api.auth.serializers.UserRegistrationSerializer",
         "user": "api.auth.serializers.UserSerializer",
     },
-    "PERMISSIONS": {
-        # 'user': ['rest_framework.permissions.IsAuthenticatedOrReadOnly'],
-        "user_list": ["rest_framework.permissions.AllowAny"],
-    },
 }
 
 LANGUAGE_CODE = "ru"

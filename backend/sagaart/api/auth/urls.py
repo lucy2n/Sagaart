@@ -8,5 +8,20 @@ user_router_v1.register("user", UserViewSet, basename="user")
 
 urlpatterns = [
     path("user/", include("djoser.urls.authtoken")),
-    path("", include(user_router_v1.urls)),
+    path(
+        "user/",
+        UserViewSet.as_view({'post': 'create'})
+    ),
+    path(
+        "user/<int:id>/",
+        UserViewSet.as_view({"get": "retrieve", "patch": "partial_update"})
+    ),
+    path(
+        "user/emailpassword/",
+        UserViewSet.as_view({'post': 'reset_password'})
+    ),
+    path(
+        "user/resetpassword/<str:uid>/<str:token>/",
+        UserViewSet.as_view({'post': 'reset_password_confirm'})
+    ),
 ]
