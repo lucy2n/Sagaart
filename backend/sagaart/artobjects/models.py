@@ -120,6 +120,9 @@ class ObjectAuthor(models.Model):
     show = models.ManyToManyField(
         AuthorShow, blank=True, verbose_name="Выставки автора"
     )
+    description = models.TextField(
+        blank=True, verbose_name="Описание"
+    )
 
     class Meta:
         verbose_name = "Автор"
@@ -161,7 +164,7 @@ class ArtObject(models.Model):
         blank=True, verbose_name="Размер", max_length=MAX_CHAR_LEN
     )
     country = models.CharField(
-        blank=True, verbose_name="Город", max_length=MAX_CHAR_LEN
+        blank=True, verbose_name="Страна товара", max_length=MAX_CHAR_LEN
     )
     city_sale = models.CharField(
         blank=True, verbose_name="Город продажи", max_length=MAX_CHAR_LEN
