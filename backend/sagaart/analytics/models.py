@@ -30,4 +30,5 @@ class Analytics(models.Model):
 class AnalyticsProductCost(models.Model):
     cost = models.IntegerField("Цена товара")
     date = models.DateField("Дата цены")
+    show = models.ForeignKey(AuthorShow, on_delete=models.SET_NULL, null=True)
     analytics_result = models.ForeignKey(Analytics, on_delete=models.CASCADE)

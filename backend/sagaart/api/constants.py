@@ -1,3 +1,7 @@
+MAX_CHAR_LEN = 128
+
+FEEDBACK_EMAIL_ADRESS = "example@sagaart.com"
+
 GENDER_LIST = ((1, "Male"), (2, "Female"))
 
 SIZE_CATEGORY_LIST = (

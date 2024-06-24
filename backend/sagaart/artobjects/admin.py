@@ -1,10 +1,21 @@
 from django.contrib import admin
 
 from .models import (
-    Category, Style, Genre, ArtObject, ObjectAuthor, AuthorAward, AuthorShow
-    )
+    Category,
+    Style,
+    Genre,
+    ArtObject,
+    ObjectAuthor,
+    AuthorAward,
+    AuthorShow,
+)
 
 admin.site.empty_value_display = "Не задано"
+
+
+class NameFieldAdmin(admin.ModelAdmin):
+    list_display = ("name",)
+    search_fields = ("name",)
 
 
 @admin.register(Category)
@@ -43,6 +54,7 @@ class ArtObjectAdmin(admin.ModelAdmin):
     list_filter = ("category", "style", "genre", "size_category", "author")
     search_fields = ("name",)
     list_display_links = ("name",)
+
 
 @admin.register(ObjectAuthor)
 class ObjectAuthorAdmin(admin.ModelAdmin):
