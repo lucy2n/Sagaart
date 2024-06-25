@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
             model_name="analytics",
             name="analytics_owner",
             field=models.ForeignKey(
-                default="Test",
+                default=1,
                 on_delete=django.db.models.deletion.CASCADE,
                 to=settings.AUTH_USER_MODEL,
                 verbose_name="Заказчик аналитки",
