@@ -1,0 +1,32 @@
+.dropdown {
+    width: 850px;
+    position: relative;
+    display: inline-block;
+}
+
+.main {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #141722;
+    margin-bottom: 10px;
+}
+
+.dropdown_big {
+    width: 100%;
+}
+
+.dropdown__menu {
+    position: absolute;
+    top: 70%;
+    left: 0;
+    background-color: #EFE9E0;
+    z-index: 1;
+    width: 100%;
+}
+
+.title {
+    composes: text-style-caption from '../../../../index.css';
+    text-transform: uppercase;
+}
+  

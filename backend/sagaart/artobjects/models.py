@@ -120,9 +120,7 @@ class ObjectAuthor(models.Model):
     show = models.ManyToManyField(
         AuthorShow, blank=True, verbose_name="Выставки автора"
     )
-    description = models.TextField(
-        blank=True, verbose_name="Описание"
-    )
+    description = models.TextField(blank=True, verbose_name="Описание")
 
     class Meta:
         verbose_name = "Автор"

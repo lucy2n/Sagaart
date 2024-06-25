@@ -63,8 +63,8 @@ class Command(BaseCommand):
             next(reader)
             award = [AuthorAward(name=row[0]) for row in reader]
             AuthorAward.objects.bulk_create(award)
-        print('Награды в базу данных загружены')
-        print('ADD', AuthorAward.objects.count(), 'Award')
+        print("Награды в базу данных загружены")
+        print("ADD", AuthorAward.objects.count(), "Award")
 
         with open(f"{CSV_FILES_DIR}/authors.csv", encoding="utf-8") as file:
             reader = csv.reader(file)

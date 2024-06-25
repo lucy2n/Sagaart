@@ -1,0 +1,19 @@
+.container {
+    margin: 0 auto;
+    padding: 8px 60px 8px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 20px;
+    max-width: 1720px;
+    height: 800px;
+    box-shadow: 0 2px 52px 0 rgba(0, 0, 0, 0.14);
+    background: var(--color-background-background-block-2);
+    box-sizing: border-box;
+}
+
+.image {
+    border-radius: 16px;
+    width: 882px;
+    height: 680px;
+}

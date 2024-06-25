@@ -1,0 +1,1 @@
+export { FormChangePasswordFields } from './ui/form-change-password';

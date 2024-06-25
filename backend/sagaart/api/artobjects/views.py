@@ -12,7 +12,11 @@ class ArtObjectViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ArtObjectSerialzer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     pagination_class = ArtObjectsPagination
-    filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
+    filter_backends = (
+        DjangoFilterBackend,
+        filters.SearchFilter,
+        filters.OrderingFilter,
+    )
     filterset_class = ArtObjFilter
     search_fields = ("=name",)
     ordering_fields = ("id",)
