@@ -1,0 +1,1 @@
+import FooterColumn from './footer-column';
