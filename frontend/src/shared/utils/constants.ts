@@ -1,1 +1,1 @@
-export const base_url = 'http://localhost:3000/'; //TODO: переделать на правильный 
+export const base_url = 'https://sagaart.bounceme.net/api/';

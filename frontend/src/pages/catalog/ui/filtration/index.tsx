@@ -16,6 +16,7 @@ interface FiltersState {
   
 
 const Filters = ({ isVisible }: {isVisible : boolean}) => {
+    
     const [isOpen, setIsOpen] = useState<FiltersState>({
         price: false,
         size: false,
@@ -25,6 +26,7 @@ const Filters = ({ isVisible }: {isVisible : boolean}) => {
         year: false,
         country: false,
     });
+ 
 
   const toggleDropdown = (name: keyof FiltersState) => {
     setIsOpen((prevState) => ({ ...prevState, [name]: !prevState[name] }));

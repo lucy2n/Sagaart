@@ -7,6 +7,7 @@
 }
 
 .img {
+    object-fit: cover;
     background-size: cover;
     background-position: top;
     width: 270px;
@@ -15,19 +16,15 @@
 }
 
 .button {
+    composes: text-style-menu-tabs from '../../../../index.css';
     cursor: pointer;
     padding: 10px 0 0;
     border: none;
-    font: inherit;
     color: inherit;
     background-color: transparent;
     display: flex;
     justify-content: center;
-    font-size: 16px;
-    font-family: 'TT Commons';
     text-transform: uppercase;
-    font-weight: 500;
-    line-height: 100%;
     align-items: center;
 }
 
