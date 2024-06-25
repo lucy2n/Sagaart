@@ -21,6 +21,13 @@ services:
       - docs:/app/static/data/docs
     depends_on:
       - db
+  frontend:
+    image: r4zeel/sagaart_frontend
+    env_file: .env
+    volumes:
+      - static:/app/result_build
+    depends_on:
+      - gateway
   gateway:
     image: r4zeel/sagaart_gateway
     ports:
