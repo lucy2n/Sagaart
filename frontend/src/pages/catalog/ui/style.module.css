@@ -1,0 +1,45 @@
+.main {
+    padding: 20px;
+    width: 100vw;
+    display: flex;
+    gap: 10px;
+    background-color: #EFE9E0;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    width: 90vw;
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+    flex-direction: column;
+    border-bottom: solid #141722 1px;
+}
+
+.gallery {
+    position: relative;
+    columns: 3;
+}
+
+.button {
+    line-height: 100%;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: 'TT Commons';
+    text-transform: uppercase;
+    margin: 20px 0 30px;
+}
+
+.filters {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 1200px) {
+    .gallery {
+        position: relative;
+        columns: 2;
+    }
+}
+

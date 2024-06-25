@@ -1,0 +1,6 @@
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 21px;
+    padding-bottom: 50px;
+}

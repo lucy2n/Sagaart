@@ -1,0 +1,114 @@
+.main {
+    padding: 20px;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.navigation {
+    width: 90vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: solid 1px #EFE9E0;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.navigation:first-child {
+    border-top: none;
+}
+
+.navigation:last-child {
+    border-bottom: none;
+}
+
+.navigation__links {
+    width: 90vw;
+    display: flex;
+    gap: 20px;
+    border-bottom: solid 1px #EFE9E0;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.navigation__main {
+    display: flex;
+    gap: 10px
+}
+
+.button {
+    --g-button-text-color: #2C2E37;
+    --g-button-background-color: #EFE9E0;
+    --g-button-border-color: #EFE9E0;
+    --g-button-border-radius: 4px;
+    --g-button-text-color-hover: #EFE9E0;
+    text-transform: uppercase;
+    font-family: 'TT Commons';
+    font-weight: 500;
+    width: 186px;
+}
+
+.button:hover {
+    border: 1px solid #EFE9E0;
+}
+
+.copyright {
+    font-family: 'TT Commons';
+    font-weight: 900;
+    font-size: 18px;
+    color: #EFE9E0;
+    text-transform: uppercase;
+}
+
+.main__links {
+    width: 260px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.socials {
+    display: flex;
+    flex-direction: column;
+    width: 262px;
+    align-items: flex-start;
+	text-align: start;
+    gap: 20px;
+}
+
+.social {
+    display: flex;
+    flex-direction: column;
+    max-width: 262px;
+    width: 100%;
+}
+
+.social__title {
+    margin: 0 0 20px 0;
+    color: #EFE9E0;
+	font-family: 'TT Commons';
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.social__link {
+    display: flex;
+    gap: 10px
+}
+
+.main__link {
+    text-decoration: none;
+	color: #EFE9E0;
+	font-family: 'TT Commons';
+    font-size: 18px;
+    font-weight: 900;
+	cursor: default;
+    transition: 0.5s;
+
+	&:hover {
+        cursor: pointer;
+		opacity: 60%;
+	}
+}

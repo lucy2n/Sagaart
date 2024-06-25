@@ -1,0 +1,46 @@
+.sidebar {
+    width: 530px;
+    padding: 20px;
+    background: linear-gradient(
+        to right,          
+        rgba(239, 233, 224, 100%) 0%,   
+        rgba(239, 233, 224, 100%) 40%,
+        rgba(239, 233, 224, 70%) 100%
+    );
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 100%;
+    transition: left 0.3s ease;
+    z-index: 4;
+  }
+
+  .title {
+    font-weight: 500;
+    font-family: 'TT Commons';
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .body {
+    font-weight: 400;
+    font-family: 'TT Commons';
+    font-size: 16px;
+    margin-bottom: 20px;
+    --g-color-line-generic-accent: black;
+    --g-color-base-brand: black;
+  }
+
+  .body_inputs {
+    width: 300px;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    --g-text-input-placeholder-color: rgba(20, 23, 34, 30%);
+    --g-text-input-border-color: rgba(20, 23, 34, 30%);
+    --g-text-input-border-radius: 6px;
+  }
+
+  .input {
+    width: 288px;
+  }

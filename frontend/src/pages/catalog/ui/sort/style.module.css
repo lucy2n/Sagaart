@@ -1,0 +1,33 @@
+.dropdown {
+    width: 374px;
+    position: relative;
+    display: inline-block;
+  }
+
+  .button {
+    line-height: 100%;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: 'TT Commons';
+    text-transform: uppercase;
+    margin: 20px 0 30px;
+}
+  
+  .dropdown__menu {
+    position: absolute;
+    top: 70%;
+    left: 0;
+    background-color: #EFE9E0;
+    z-index: 1;
+    width: 100%;
+  }
+  
+  .dropdown__menu label {
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .dropdown__menu input {
+    margin-right: 10px;
+  }

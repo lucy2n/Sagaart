@@ -1,0 +1,18 @@
+.input {
+    font-family: 'TT Commons';
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.input_header {
+    --g-text-input-placeholder-color: rgba(20, 23, 34, 30%);
+    --g-text-input-border-color: rgba(20, 23, 34, 30%);
+    --g-text-input-border-radius: 6px;
+}
+
+.input_footer {
+    --g-text-input-placeholder-color: #EFE9E0;
+    --g-text-input-text-color: #EFE9E0;
+    --g-text-input-border-color: #EFE9E0;
+    --g-text-input-border-radius: 6px;
+}
