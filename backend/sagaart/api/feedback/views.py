@@ -14,7 +14,7 @@ class FeedbackView(generics.CreateAPIView):
             send_mail(
                 subject=f"Feedback from user: {self.request.user}",
                 message=(
-                    f"Message: {serializer.data["feedback_message"]}, "
+                    f"Message: {serializer.data['feedback_message']}, "
                     f"user name: {serializer.data['user_name']}, "
                     f"user phone: {serializer.data['user_phone']}"
                 ),

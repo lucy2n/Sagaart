@@ -25,7 +25,7 @@ services:
     image: r4zeel/sagaart_frontend
     env_file: .env
     volumes:
-      - static:/app/result_build
+      - static:/app
     depends_on:
       - gateway
   gateway:
