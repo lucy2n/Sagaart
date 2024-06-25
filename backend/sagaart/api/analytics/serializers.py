@@ -27,7 +27,7 @@ class AnalyticsSerializer(serializers.ModelSerializer):
             "author_name",
             "gender",
             "birth_year",
-            "birth_city",
+            "birth_country",
             "solo_show",
             "group_show",
             "calculated_price",
