@@ -1,10 +1,7 @@
 openapi: 3.0.3
 info:
-  version: "1.0.0"
+  version: ""
   title: Онлайн-галерея Sagaart
-servers:
-  - url: localhost
-
 paths:
   /api/user/registration:
     post:
