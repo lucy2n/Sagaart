@@ -1,0 +1,33 @@
+.main {
+    padding: 20px;
+    width: 100vw;
+    display: flex;
+    gap: 10px;
+    background-color: #EFE9E0;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section_products {
+    width: 90vw;
+    display: flex;
+    padding: 100px;
+    gap: 40px;
+    margin: 50px auto 0;
+}
+
+.section_products {
+    width: 90vw;
+    display: flex;
+    padding: 100px;
+    gap: 40px;
+    margin: 50px auto 0;
+    flex-direction: column;
+}
+
+.dropdowns__block {
+    display: flex;
+
+    align-items: start;
+    flex-wrap: wrap;
+}

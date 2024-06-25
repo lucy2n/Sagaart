@@ -1,5 +1,5 @@
 import { Button,  Pagination, PaginationProps } from '@gravity-ui/uikit';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from './style.module.css';
 import { cards } from '../utils/cards';
 import Card from '../../../widgets/card/card';
@@ -8,15 +8,15 @@ import Sort from './sort';
 import Filters from './filtration';
 import Categories from './categories';
 import BreadcrumbsComponent from './bread-crumbs';
+import { items, options } from '../constants';
+import { Artwork } from '../../../shared/entities/products';
+import { getProducts } from '../../../shared/api/products-api';
 
 const Catalog = (): JSX.Element => {
 
-    const options = [
-        { label: 'Рекомендуемые', value: 'option1' },
-        { label: 'Недавно добавленные', value: 'option2' },
-        { label: 'Цена по возростанию', value: 'option3' },
-        { label: 'Цена по убыванию', value: 'option4' },
-      ];
+    const [products, setProducts] = useState<Artwork[] | null>(null);
+
+    
 
     const [filters, setFilters] = useState({
         price: 'any',
@@ -28,11 +28,7 @@ const Catalog = (): JSX.Element => {
       });
     
       const [isSidebarVisible, setIsSidebarVisible] = useState(false);
-    
-      const handleFilterChange = (newFilters: any) => {
-        setFilters(newFilters);
-      };
-    
+
       const toggleSidebar = () => {
         setIsSidebarVisible(!isSidebarVisible);
       };
@@ -42,13 +38,18 @@ const Catalog = (): JSX.Element => {
     const handleUpdate: PaginationProps['onUpdate'] = (page, pageSize) =>
     setState((prevState) => ({...prevState, page, pageSize}));
 
+    useEffect(() => {
+        getProducts()
+        .then((res) => {
+            setProducts(res.results);
+        });
+    },[]);
+
 
     return (
         <section className={style.main}>
+            <BreadcrumbsComponent items={items}/>
             <div className={style.container}>
-                <div>
-                    <BreadcrumbsComponent />
-                </div>
                 <Categories />
             </div>
             <div>
@@ -61,8 +62,8 @@ const Catalog = (): JSX.Element => {
                 </div>
                 <div className={style.gallery}>
                     <Filters isVisible={isSidebarVisible} />
-                    {cards.map(card => (
-                        <Card card={card} key={card.product_id}/>
+                    {products && products.map(product => (
+                        <Card card={product} key={product.id}/>
                     ))}
                 </div>
             </div>

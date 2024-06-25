@@ -35,7 +35,7 @@ const Header = () => {
                     <NavLink to='/' className={style.link} >
                         <button className={style.button}>Главная</button>
                     </NavLink>
-                    <NavLink to='/catalog' className={style.link} >
+                    <NavLink to='/products' className={style.link} >
                         <button className={style.button}>Каталог</button>
                     </NavLink>
                     <NavLink to='/subscription' className={style.link} >

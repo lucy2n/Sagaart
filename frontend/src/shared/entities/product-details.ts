@@ -1,81 +1,66 @@
-interface ProductCategory {
-    productCategory_id: number;
-    productCategory_name: string;
-  }
-  
-  interface ProductStyle {
-    productStyle_id: number;
-    productStyle_name: string;
-  }
-  
-  interface ProductGenre {
-    productGenre_id: number;
-    productGenre_name: string;
-  }
-  
-  interface AuthorShow {
-    authorShow_id: number;
-    authorShow_name: string;
-    authorShow_year: string;
-    authorShow_place: string;
-  }
-  
-  interface AuthorAchievement {
-    authorAchievement_id: number;
-    authorAchievement_name: string;
-  }
-  
-  interface ProductAuthor {
-    productAuthor_id: number;
-    productAuthor_name: string;
-    productAuthor_sex: number;
-    productAuthor_age: string;
-    productAuthor_year: string;
-    productAuthor_show: AuthorShow;
-    productAuthor_achievement: AuthorAchievement;
-    productAuthor_city: string;
-    productAuthor_city_live: string;
-    productAuthor_education: string;
-    productAuthor_education_art: string;
-    productAuthor_teacher: string;
-    productAuthor_style: string;
-    productAuthor_social: string;
-  }
-  
-  interface AnalyticsDiagram {
-    analyticsDiagram_id: number;
-    analyticsDiagram_cost: number;
-    analyticsDiagram_date: string;
-  }
-  
-  interface ProductAnalytics {
-    productAnalytics_id: number;
-    productAnalytics_cost: string;
-    productAnalytic_collection: string;
-    productAnalytic_cm: string;
-    productAnalytic_date: string;
-    analytics_diagram: AnalyticsDiagram;
-  }
-  
-export interface IProductDetails {
-    product_id: number;
-    product_name: string;
-    product_jpeg1: string;
-    product_jpeg2: string;
-    product_category: ProductCategory;
-    product_style: ProductStyle;
-    product_genre: ProductGenre;
-    product_size_category: number;
-    product_size: string;
-    product_country: string;
-    product_city_sale: string;
-    product_year: string;
-    product_material1: string;
-    product_material2: string;
-    product_info: string;
-    product_cost_category: number;
-    product_cost_end: number;
-    product_cost_fair: number;
-    product_author: ProductAuthor;
-    product_analytics: ProductAnalytics;
-  }
+interface Category {
+  id: number;
+  name: string;
+}
+
+interface Style {
+  id: number;
+  name: string;
+}
+
+interface Genre {
+  id: number;
+  name: string;
+}
+
+interface Show {
+  id: number;
+  name: string;
+  year: number;
+  place: string;
+}
+
+interface Award {
+  id: number;
+  name: string;
+}
+
+export interface Author {
+  id: number;
+  name: string;
+  gender: number;
+  age: number;
+  year_of_birth: number;
+  show: Show;
+  awards: Award;
+  city_of_birth: string;
+  city_live: string;
+  education: string;
+  professional_education: string;
+  teaching_experience: string;
+  personal_style: string;
+  socials: string;
+}
+export interface ArtworkDetails {
+  id: number;
+  name: string;
+  image: string;
+  additional_image: string;
+  category: Category;
+  style: Style;
+  genre: Genre;
+  size_category: number;
+  size: string;
+  country: string;
+  city_sale: string;
+  year: number;
+  material: string;
+  tablet_material: string;
+  description: string;
+  cost_category: number;
+  end_cost: number;
+  fair_cost: number;
+  author: Author;
+  similar_works: string;
+  author_works: string;
+}

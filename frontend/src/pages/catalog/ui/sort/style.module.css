@@ -4,11 +4,8 @@
     display: inline-block;
   }
 
-  .button {
-    line-height: 100%;
-    font-size: 20px;
-    font-weight: 500;
-    font-family: 'TT Commons';
+.button {
+    composes: text-style-menu-tabs from '../../../../index.css';
     text-transform: uppercase;
     margin: 20px 0 30px;
 }
@@ -17,7 +14,7 @@
     position: absolute;
     top: 70%;
     left: 0;
-    background-color: #EFE9E0;
+    background-color: var(--color-background-background-page);
     z-index: 1;
     width: 100%;
   }

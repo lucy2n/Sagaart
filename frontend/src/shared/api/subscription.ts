@@ -3,7 +3,7 @@ import { base_url } from '../utils/constants';
 import { checkResponse } from './utils';
 
 export const getProduct = async (user_id : number) => {
-    const res = await fetch(`${base_url}/api/user/${user_id}/subscribe/`, {
+    const res = await fetch(`${base_url}user/${user_id}/subscribe/`, {
         method: 'POST',
         headers: {
           accept: 'application/json',

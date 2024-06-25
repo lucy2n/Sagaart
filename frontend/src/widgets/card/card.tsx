@@ -1,4 +1,4 @@
-import { IProduct } from '../../shared/entities/products';
+import { Artwork } from '../../shared/entities/products';
 import React, {FC, useState} from 'react';
 import style from './style.module.css';
 import { Button } from '@gravity-ui/uikit';
@@ -7,16 +7,19 @@ import arrowdown from '../../assets/icons/Arrow-down-outline.svg';
 import { LineChart, Line, XAxis, Tooltip } from 'recharts';
 import heart from '../../assets/icons/heart-card.svg';
 import heartNotActive from '../../assets/icons/headrt-cart-not-active.svg';
+import CustomTooltip from '../../shared/ui/chart/custom-tooltip';
+import { NavLink } from 'react-router-dom';
 
 interface Props {
-    card: IProduct;
+    card: Artwork;
     key: string | number;
   }
 
 const Card: FC<Props> = ({ card }) => {
 
     const [isLiked, setIsLiked] = useState(false);
-    const [isExpanded, setIsExpanded] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(false); 
+
     const toggleExpand = (value: boolean, setValue: (value: boolean) => void) => {
         setValue(!value);
     };
@@ -39,7 +42,9 @@ const Card: FC<Props> = ({ card }) => {
     return (
         <div className={style.main}>
             <img src={isLiked ? heart : heartNotActive} onClick={() => toggleExpand(isLiked, setIsLiked)} className={style.like} />
-            <img className={style.img} src={card.product_jpeg} alt={card.product_name}/>
+            <NavLink to={`/products/${card.id}`}>
+                <img className={style.img} src={card.image} alt={card.name} />
+            </NavLink>
             {isExpanded && (
                 <div className={style.modal}>
                     <div className={style.modal__section}>
@@ -62,13 +67,13 @@ const Card: FC<Props> = ({ card }) => {
                                 </ul>
                                 <ul className={style.ul}>
                                     <li className={`${style.li} ${style.li_desc}`}>
-                                        {card.product_size}
+                                        {card.size}
                                     </li>
                                     <li className={`${style.li} ${style.li_desc}`}>
-                                        {card.product_genre.productGenre_name}
+                                        {card.genre.name}
                                     </li>
                                     <li className={`${style.li} ${style.li_desc}`}>
-                                        {card.product_style.productStyle_name}
+                                        {card.style.name}
                                     </li>
                                 </ul>
                             </div>
@@ -76,8 +81,15 @@ const Card: FC<Props> = ({ card }) => {
                         <div>
                             <LineChart width={225} height={150} data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                                 <XAxis dataKey="year" />
-                                <Tooltip />
-                                <Line dot={false} type="bump" dataKey="price" stroke="#141722" />
+                                <Tooltip content={<CustomTooltip />} />
+                                <Line 
+                                    type="bump" 
+                                    dataKey="price" 
+                                    stroke="#979594" 
+                                    activeDot={{ r: 4, strokeWidth: 0, fill: '#141722' }}
+                                    dot={{ r: 4, strokeWidth: 0, fill: '#979594' }}
+                                    strokeWidth={2}
+                                />
                             </LineChart>
                         </div>
                     </div>
@@ -86,15 +98,15 @@ const Card: FC<Props> = ({ card }) => {
                 </div>
             )}
             <h2 className={style.author}>
-                {card.product_author.productAuthor_name}
+                {card.author.name}
             </h2>
             <div className={style.more}>
                 <div className={style.info}>
                     <h3 className={style.name}>
-                        {card.product_name}
+                        {card.name}
                     </h3>
                     <p className={style.text}> 
-                        {card.product_cost_end}
+                        {card.end_cost}
                     </p>
                 </div>
                 <img src={isExpanded ? arrowdown : arrowup} onClick={() => toggleExpand(isExpanded, setIsExpanded)} className={style.button} />

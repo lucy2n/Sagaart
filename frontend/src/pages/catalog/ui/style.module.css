@@ -3,7 +3,7 @@
     width: 100vw;
     display: flex;
     gap: 10px;
-    background-color: #EFE9E0;
+    background-color: var(--color-background-background-page);
     flex-direction: column;
     align-items: center;
 }
@@ -23,10 +23,7 @@
 }
 
 .button {
-    line-height: 100%;
-    font-size: 18px;
-    font-weight: 500;
-    font-family: 'TT Commons';
+    composes: text-style-menu-tabs from '../../../index.css';
     text-transform: uppercase;
     margin: 20px 0 30px;
 }

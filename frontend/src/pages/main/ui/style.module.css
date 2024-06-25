@@ -199,6 +199,15 @@
     columns: 3;
 }
 
+.section_gallery__button {
+    composes: text-style-button-l from '../../../index.css';
+    color: var(--color-buttton-button-dark);
+    border: 1px solid var(--color-buttton-button-dark);
+    padding-top: 10px;
+    border-radius: 4px;
+    width: 235px;
+}
+
 .section_design {
     width: 90vw;
     display: flex;

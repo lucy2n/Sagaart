@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import style from './app.module.css';
 import Header from '../widgets/header';
 import Footer from '../widgets/footer';
 import Catalog from '../pages/catalog/ui/catalog';
@@ -22,10 +21,10 @@ function App() {
         <>
             <Header />
             <Routes>
+                <Route path='/products' element={<Catalog />} />
+                <Route path='/products/:productId' element={<ProductCard />} />
                 <Route path='/' element={<Main />} />
-                <Route path='/catalog' element={<Catalog />} />
                 <Route path='/subscription' element={<Subscription />} />
-                <Route path='/product-card' element={<ProductCard />} />
                 <Route path='/signup' element={<SignUp />} />
                 <Route path='/signin' element={<SignIn />} />
                 <Route path='/profile' element={<Personal />} />
