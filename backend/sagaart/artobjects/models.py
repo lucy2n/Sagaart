@@ -5,7 +5,7 @@ CHARFIELD_MAX_LEN = 50
 
 class NameModel(models.Model):
     name = models.CharField(
-        verbose_name="Название", max_length=CHARFIELD_MAX_LEN
+        verbose_name="Название", max_length=CHARFIELD_MAX_LEN, unique=True
     )
 
     class Meta:
@@ -57,6 +57,7 @@ class AuthorAward(NameModel):
 
 class AuthorShow(models.Model):
     name = models.CharField(
+        unique=True,
         max_length=CHARFIELD_MAX_LEN,
         verbose_name="Название"
         )
@@ -76,9 +77,10 @@ class AuthorShow(models.Model):
 
 
 class ObjectAuthor(models.Model):
-    GENDER_CHOICES = ((1, "MALE"), (2, "FEMALE"))
+    GENDER_CHOICES = (("MALE", "MALE"), ("FEMALE", "FEMALE"))
 
     name = models.CharField(
+        unique=True,
         max_length=CHARFIELD_MAX_LEN,
         verbose_name="Имя"
         )
@@ -168,7 +170,11 @@ class ArtObject(models.Model):
         (5, "от 200 000 до 500 000 руб.")
     )
 
-    name = models.CharField(verbose_name="Название", max_length=CHARFIELD_MAX_LEN)
+    name = models.CharField(
+        unique=True,
+        verbose_name="Название",
+        max_length=CHARFIELD_MAX_LEN
+    )
     image = models.ImageField(verbose_name="Изображение")
     additional_image = models.ImageField(blank=True, verbose_name="Изображение")
     category = models.ManyToManyField(
