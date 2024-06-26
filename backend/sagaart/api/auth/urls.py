@@ -13,8 +13,8 @@ urlpatterns = [
         UserViewSet.as_view({'post': 'create'})
     ),
     path(
-        "user/<int:id>/",
-        UserViewSet.as_view({"get": "retrieve", "patch": "partial_update"})
+        "user/me/",
+        UserViewSet.as_view({"get": "me", "patch": "me"})
     ),
     path(
         "user/emailpassword/",

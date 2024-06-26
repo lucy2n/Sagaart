@@ -1,6 +1,7 @@
 import re
 from rest_framework import serializers
-from djoser.serializers import UserCreateSerializer
+from djoser.serializers import (UserCreateSerializer,
+                                PasswordResetConfirmRetypeSerializer)
 from userauth.models import User, UserSubscribe
 
 
@@ -15,10 +16,6 @@ class UserRegistrationSerializer(UserCreateSerializer):
         model = User
         fields = (
             "email",
-            "first_name",
-            "sur_name",
-            "middle_name",
-            "telephone",
             "password",
         )
 
@@ -26,8 +23,6 @@ class UserRegistrationSerializer(UserCreateSerializer):
         valdate_error = {}
         if not re.match(EMAIL_VALIDATE, data["email"]):
             valdate_error["email"] = "Вы ввели Email некорректно"
-        if not re.match(TELEPHONE_VALIDATE, data["telephone"]):
-            valdate_error["telephone"] = "Вы ввели телефон некорректно"
         if valdate_error:
             raise serializers.ValidationError(valdate_error)
         return data
@@ -54,8 +49,29 @@ class UserSerializer(serializers.ModelSerializer):
             return SubscriptionSerializer(obj.subscribe).data
         return None
 
+    def validate(self, data):
+        valdate_error = {}
+        if "telephone" in data and not re.match(
+            TELEPHONE_VALIDATE, data["telephone"]
+        ):
+            valdate_error["telephone"] = "Вы ввели телефон некорректно"
+        if valdate_error:
+            raise serializers.ValidationError(valdate_error)
+        return data
+
 
 class SubscriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserSubscribe
         fields = ("tariff", "cost", "status", "date_start", "date_end")
+
+
+class SetPassword(PasswordResetConfirmRetypeSerializer):
+    uid = serializers.CharField(read_only=True)
+    token = serializers.CharField(read_only=True)
+
+    class Meta:
+        fields = (
+            "new_password",
+            "re_new_password",
+        )
