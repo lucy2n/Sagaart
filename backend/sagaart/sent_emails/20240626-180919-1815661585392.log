@@ -1,0 +1,32 @@
+Content-Type: multipart/alternative;
+ boundary="===============1331822642852323525=="
+MIME-Version: 1.0
+Subject: 127.0.0.1:8000 - Your password has been successfully changed!
+From: webmaster@localhost
+To: sasd@mail.ru
+Date: Wed, 26 Jun 2024 15:09:19 -0000
+Message-ID: <171941455991.9412.11176934423116639326@Marat>
+
+--===============1331822642852323525==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+
+Your password has been changed!
+
+Спасибо, что используете наш сайт!
+
+Команда сайта 127.0.0.1:8000
+--===============1331822642852323525==
+Content-Type: text/html; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+
+<p>Your password has been changed!</p>
+
+<p>Спасибо, что используете наш сайт!</p>
+
+<p>Команда сайта 127.0.0.1:8000</p>
+--===============1331822642852323525==--
+
+-------------------------------------------------------------------------------

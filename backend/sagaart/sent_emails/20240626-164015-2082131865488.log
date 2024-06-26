@@ -1,0 +1,41 @@
+Content-Type: multipart/alternative;
+ boundary="===============4628524755916806801=="
+MIME-Version: 1.0
+Subject: 
+ =?utf-8?b?0KHQsdGA0L7RgSDQv9Cw0YDQvtC70Y8g0L3QsCAxMjcuMC4wLjE6ODAwMA==?=
+From: webmaster@localhost
+To: sasd@mail.ru
+Date: Wed, 26 Jun 2024 13:40:15 -0000
+Message-ID: <171940921513.16364.11525613326813682334@Marat>
+
+--===============4628524755916806801==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+
+Вы получили это письмо, потому что вы (или кто-то другой) запросили восстановление пароля от учётной записи на сайте 127.0.0.1:8000, которая связана с этим адресом электронной почты.
+
+Пожалуйста, перейдите на эту страницу и введите новый пароль:
+http://127.0.0.1:8000//api/user/resetpassword/Ng/c98mb3-d8a3f03899654c114b466eb00d57b4b8
+Your username, in case you've forgotten: sasd@mail.ru
+
+Спасибо, что используете наш сайт!
+
+Команда сайта 127.0.0.1:8000
+--===============4628524755916806801==
+Content-Type: text/html; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+
+<p>Вы получили это письмо, потому что вы (или кто-то другой) запросили восстановление пароля от учётной записи на сайте 127.0.0.1:8000, которая связана с этим адресом электронной почты.</p>
+
+<p>Пожалуйста, перейдите на эту страницу и введите новый пароль:</p>
+<a href="http://127.0.0.1:8000//api/user/resetpassword/Ng/c98mb3-d8a3f03899654c114b466eb00d57b4b8">http://127.0.0.1:8000//api/user/resetpassword/Ng/c98mb3-d8a3f03899654c114b466eb00d57b4b8</a>
+<p>Your username, in case you've forgotten: <b>sasd@mail.ru</b></p>
+
+<p>Спасибо, что используете наш сайт!</p>
+
+<p>Команда сайта 127.0.0.1:8000</p>
+--===============4628524755916806801==--
+
+-------------------------------------------------------------------------------
