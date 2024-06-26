@@ -1,0 +1,36 @@
+.main {
+    width: 416px;
+    height: 480px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 3px;
+}
+
+.image { 
+    width: 100%;
+    height: 340px;
+}
+
+.title {
+    color: #EFE9E0;
+    margin: 0 0 10px;
+    font-family: 'TT Commons';
+    font-weight: 900;
+    font-size: 28px;
+}
+
+.desc {
+    color: #EFE9E0;
+    margin: 0 0 20px;
+    font-family: 'TT Commons';
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.info {
+    padding: 20px;
+    background-color: #2C2E37;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}

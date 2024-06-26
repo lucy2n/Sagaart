@@ -1,0 +1,30 @@
+.dropdown {
+    width: 374px;
+    position: relative;
+    display: inline-block;
+  }
+
+.button {
+    composes: text-style-menu-tabs from '../../../../index.css';
+    text-transform: uppercase;
+    margin: 20px 0 30px;
+}
+  
+  .dropdown__menu {
+    position: absolute;
+    top: 70%;
+    left: 0;
+    background-color: var(--color-background-background-page);
+    z-index: 1;
+    width: 100%;
+  }
+  
+  .dropdown__menu label {
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .dropdown__menu input {
+    margin-right: 10px;
+  }

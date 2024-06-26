@@ -1,0 +1,38 @@
+.column {
+	padding: 0;
+	margin: 0;
+	width: 394px;
+}
+
+.title {
+	margin: 0 0 14px 0;
+	color: #EFE9E0;
+	font-family: 'TT Commons';
+    font-size: 18px;
+    font-weight: 900;
+	cursor: default;
+}
+
+.sectionLink {
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	list-style: none;
+	align-items: flex-start;
+	text-align: start;
+}
+
+.link {
+	font-family: 'TT Commons';
+    font-size: 18px;
+    font-weight: 400;
+	color: #EFE9E0;
+	text-decoration: none;
+	transition: 0.5s;
+
+	&:hover {
+		opacity: 60%;
+	}
+}

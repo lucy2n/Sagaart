@@ -1,0 +1,217 @@
+@import url('./assets/fonts/fonts.css');
+:root {
+	--color-background-background-page: rgba(239,233,224,1);
+	--color-background-background-block: rgba(151,149,148,1);
+	--color-background-background-block-2: rgba(44,46,55,1);
+	--color-background-background-gradient: linear-gradient(to bottom, rgba(239,233,224,0.937) 0%,rgba(239,233,224,0.937) 70.87%,rgba(239,233,224,0.937) 100%);
+	--color-background-background-subscription-card: rgba(0,0,0,0.600);
+	--color-background-background-icons: rgba(239,233,224,0.600);
+	--color-text-color-text-primary-heading-body-dark: rgba(20,23,34,1);
+	--color-text-color-text-primary-heading-body-light: rgba(239,233,224,1);
+	--color-text-color-text-button-light: rgba(239,233,224,1);
+	--color-text-color-text-button-dark: rgba(20,23,34,1);
+	--color-text-color-text-button-org: rgba(255,111,6,1);
+	--color-text-color-text-button-or: rgba(255,112,8,1);
+	--color-buttton-button-dark: rgba(20,23,34,1);
+	--color-buttton-button-light: rgba(239,233,224,1);
+	--color-icons-color-icons-light: rgba(239,233,224,1);
+	--color-icons-color-icons-dark: rgba(20,23,34,1);
+	--color-system-color-ghost: rgba(20,23,34,0.400);
+	--color-system-color-system-error: rgba(255,0,61,0.800);
+	--color-system-color-standard-black: rgba(15,15,15,1);
+	--color-logos-color-logo: rgba(49,49,48,1);
+	--color-logos-color-logo-google-1: rgba(52,168,83,1);
+	--color-logos-color-logo-google-2: rgba(66,133,244,1);
+	--color-logos-color-logo-google-3: rgba(234,67,53,1);
+	--color-logos-color-logo-google-4: rgba(251,188,4,1);
+	--color-graph-graph-color-1: linear-gradient(to bottom, rgba(121,131,153,0.475) 0%,rgba(121,131,153,0.475) 100%);
+	--color-graph-graph-color-2: linear-gradient(to bottom, rgba(121,131,153,0.475) 0%,rgba(121,131,153,0.475) 100%);
+	--color-graph-graph-stroke: rgba(255,255,255,1);
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'TT Commons', 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #2C2E37;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+.text-style-heading-1 {
+	font-size: 58px;
+	font-family: 'TT Commons';
+	font-weight: 700;
+	font-style: normal;
+	line-height: 110%;
+	text-decoration: none;
+	text-transform: none;
+}
+.text-style-heading-2 {
+	font-size: 42px;
+	font-family: 'TT Commons';
+	font-weight: 700;
+	font-style: normal;
+	line-height: 110%;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+.text-style-heading-3 {
+	font-size: 32px;
+	font-family: 'TT Commons';
+	font-weight: 700;
+	font-style: normal;
+	line-height: 110%;
+	text-decoration: none;
+	text-transform: none;
+}
+.text-style-heading-4 {
+	font-size: 28px;
+	font-family: 'TT Commons';
+	font-weight: 700;
+	font-style: normal;
+	line-height: 110%;
+	text-decoration: none;
+	text-transform: none;
+}
+.text-style-heading-5 {
+	font-size: 18px;
+	font-family: 'TT Commons';
+	font-weight: 700;
+	font-style: normal;
+	line-height: 120%;
+	text-decoration: none;
+	text-transform: none;
+}
+.text-style-caption {
+	font-size: 20px;
+	font-family: 'TT Commons';
+	font-weight: 700;
+	font-style: normal;
+	line-height: 120%;
+	letter-spacing: 1px;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+.text-style-menu-tabs {
+	font-size: 18px;
+	font-family: 'TT Commons';
+	font-weight: 600;
+	font-style: normal;
+	line-height: 100%;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+.text-style-body-l {
+	font-size: 18px;
+	font-family: 'TT Commons';
+	font-weight: 400;
+	font-style: normal;
+	line-height: 140%;
+	text-decoration: none;
+	text-transform: none;
+}
+.text-style-body-l-med {
+	font-size: 18px;
+	font-family: 'TT Commons';
+	font-weight: 500;
+	font-style: normal;
+	line-height: 120%;
+	text-decoration: none;
+	text-transform: none;
+}
+.text-style-main-body {
+	font-size: 24px;
+	font-family: 'TT Commons';
+	font-weight: 400;
+	font-style: normal;
+	line-height: 120%;
+	text-decoration: none;
+	text-transform: none;
+}
+.text-style-subtitle-m {
+	font-size: 16px;
+	font-family: 'TT Commons';
+	font-weight: 500;
+	font-style: normal;
+	line-height: 110%;
+	text-decoration: none;
+	text-transform: none;
+}
+.text-style-button-l {
+	font-size: 20px;
+	font-family: 'TT Commons';
+	font-weight: 600;
+	font-style: normal;
+	line-height: 120%;
+	letter-spacing: 0.5px;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+.text-style-button-m {
+	font-size: 16px;
+	font-family: 'TT Commons';
+	font-weight: 500;
+	font-style: normal;
+	line-height: 100%;
+	letter-spacing: 0.5px;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+.text-style-small {
+	font-size: 12px;
+	font-family: 'TT Commons';
+	font-weight: 500;
+	font-style: normal;
+	line-height: 140%;
+	text-decoration: none;
+	text-transform: none;
+}
+.text-style-list {
+	font-size: 18px;
+	font-family: 'TT Commons';
+	font-weight: 400;
+	font-style: normal;
+	line-height: 20px;
+	text-decoration: none;
+	text-transform: none;
+}
+.text-style-artist-name {
+	font-size: 20px;
+	font-family: 'TT Commons';
+	font-weight: 700;
+	font-style: normal;
+	line-height: 100%;
+	letter-spacing: 1px;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+.text-style-label {
+	font-size: 18px;
+	font-family: 'TT Commons';
+	font-weight: 400;
+	font-style: normal;
+	line-height: 15px;
+	text-decoration: none;
+	text-transform: none;
+}
+.text-style-оформление {
+	font-size: 10px;
+	font-family: Inter;
+	font-weight: 700;
+	font-style: normal;
+	line-height: 16px;
+	letter-spacing: 0.5px;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+.effect-style-тень {
+	box-shadow: 0px 2px 52px rgba(0,0,0,0.141);
+}
