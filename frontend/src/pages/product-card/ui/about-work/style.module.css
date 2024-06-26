@@ -1,0 +1,26 @@
+.main {
+    display: flex;
+    width: 95%;
+    flex-direction: column;
+    gap: 10px
+}
+
+.desc {
+    composes: text-style-subtitle-m from '../../../../index.css';
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.columns {
+    gap: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.column {
+    width: 270px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}

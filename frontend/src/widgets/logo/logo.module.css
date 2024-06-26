@@ -1,0 +1,16 @@
+.title {
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+    font-family: 'Inter';
+    font-size: 32px;
+    font-weight: 900;
+}
+
+.title_footer {
+ color: #EFE9E0;
+}
+
+.title_header {
+ color: #141722;
+}

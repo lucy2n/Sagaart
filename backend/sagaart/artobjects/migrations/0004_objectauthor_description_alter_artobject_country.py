@@ -4,20 +4,21 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('artobjects', '0003_delete_author_delete_product'),
+        ("artobjects", "0003_delete_author_delete_product"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='objectauthor',
-            name='description',
-            field=models.TextField(blank=True, verbose_name='Описание'),
+            model_name="objectauthor",
+            name="description",
+            field=models.TextField(blank=True, verbose_name="Описание"),
         ),
         migrations.AlterField(
-            model_name='artobject',
-            name='country',
-            field=models.CharField(blank=True, max_length=128, verbose_name='Страна товара'),
+            model_name="artobject",
+            name="country",
+            field=models.CharField(
+                blank=True, max_length=128, verbose_name="Страна товара"
+            ),
         ),
     ]
