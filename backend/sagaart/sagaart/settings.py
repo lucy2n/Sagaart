@@ -138,8 +138,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, "collected_static")
 
 MEDIA_URL = "media/"
 
-CSV_FILES_DIR = "data/"
-
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 CSV_FILES_DIR = "static/data/"

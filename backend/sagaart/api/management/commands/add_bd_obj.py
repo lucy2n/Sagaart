@@ -1,6 +1,7 @@
 import csv
 
 from django.core.management.base import BaseCommand
+import pandas as pd
 
 from sagaart.settings import CSV_FILES_DIR
 from artobjects.models import (
@@ -49,7 +50,12 @@ class Command(BaseCommand):
             reader = csv.reader(file)
             next(reader)
             show = [
-                AuthorShow(name=row[0], year=row[1], place=row[2])
+                AuthorShow(
+                    name=row[0],
+                    year=pd.to_datetime(row[1], format="ISO8601"),
+                    place=row[2],
+                    cost=row[3]
+                )
                 for row in reader
             ]
             AuthorShow.objects.bulk_create(show)
@@ -74,7 +80,7 @@ class Command(BaseCommand):
                     name=row[0],
                     gender=row[1],
                     age=row[2],
-                    year_of_birth=row[3],
+                    year_of_birth=pd.to_datetime(row[3], format="ISO8601"),
                     city_of_birth=row[4],
                     city_live=row[5],
                     education=row[6],
