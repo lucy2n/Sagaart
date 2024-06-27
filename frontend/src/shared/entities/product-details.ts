@@ -41,6 +41,7 @@ export interface Author {
   personal_style: string;
   socials: string;
 }
+
 export interface ArtworkDetails {
   id: number;
   name: string;

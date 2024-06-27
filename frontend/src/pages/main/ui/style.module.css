@@ -1,16 +1,14 @@
 .main {
     padding: 20px;
-    width: 100%;
     display: flex;
     flex-direction: column;
     background-color: #EFE9E0;
 }
 
 .section_main {
-    width: 90vw;
     display: flex;
     flex-direction: column;
-    padding: 100px;
+    padding: 80px;
     gap: 40px;
     margin: 50px auto 0;
     border-bottom: 1px solid #141722;
@@ -30,11 +28,8 @@
 }
 
 .section_main__title {
-    margin: 0 0 20px 0;
-    font-family: 'TT Commons';
-    font-weight: 900;
-    line-height: 110%;
-    font-size: 58px;
+    composes: text-style-heading-1 from '../../../index.css';
+    margin: 0 0 20px;
 }
 
 .section_main__desc {
@@ -60,12 +55,14 @@
 }
 
 .buttons {
+    composes: text-style-button-l from '../../../index.css';
     display: flex;
     align-items: center;
-    gap: 20px
+    gap: 20px;
 }
 
 .button {
+    text-decoration: none;
     cursor: pointer;
     padding: 10px 0;
     height: 44px;
@@ -75,19 +72,13 @@
     background-color: transparent;
     display: flex;
     justify-content: center;
-    font-size: 16px;
-    font-family: 'TT Commons';
-    text-transform: uppercase;
-    font-weight: 900;
-    line-height: 100%;
     align-items: center;
     --g-button-border-radius: 4px
     
 }
 
 .button_dark {
-    padding-top: 50px;
-    padding: 20px;
+    padding: 10px 20px;
     display: flex;
     gap: 10px;
     color: #EFE9E0;
@@ -102,7 +93,6 @@
 }
 
 .section_news {
-    width: 90vw;
     display: flex;
     flex-direction: column;
     padding: 100px;
@@ -152,11 +142,10 @@
 .section_news__news {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    gap: 5px;
 }
 
 .section_gallery {
-    width: 90vw;
     display: flex;
     flex-direction: column;
     gap: 40px;
@@ -203,13 +192,11 @@
     composes: text-style-button-l from '../../../index.css';
     color: var(--color-buttton-button-dark);
     border: 1px solid var(--color-buttton-button-dark);
-    padding-top: 10px;
     border-radius: 4px;
     width: 235px;
 }
 
 .section_design {
-    width: 90vw;
     display: flex;
     flex-direction: column;
     gap: 50px;
@@ -223,7 +210,6 @@
 }
 
 .section_art {
-    width: 90vw;
     display: flex;
     flex-direction: column;
     gap: 50px;
@@ -240,7 +226,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    flex-wrap: wrap;
+    gap: 50px;
 }
 
 .section__block {
@@ -269,6 +255,7 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    gap: 50px;
 }
 
 .section__title {

@@ -7,7 +7,7 @@ const AboutWork = (props : {product: ArtworkDetails}) => {
     return (
         <div className={style.main}>
             <p className={style.desc}>
-                поле: его нет
+                {props.product.description}
             </p>
             <div className={style.columns}>
                 <div className={style.column}>

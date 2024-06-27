@@ -1,6 +1,5 @@
 .main {
     padding: 20px;
-    width: 100vw;
     display: flex;
     gap: 10px;
     background-color: var(--color-background-background-page);
@@ -9,12 +8,12 @@
 }
 
 .container {
-    width: 90vw;
     display: flex;
-    margin: auto;
-    justify-content: space-between;
+    padding: 0 80px 100px;
+    gap: 40px;
+    margin: 0 auto;
     flex-direction: column;
-    border-bottom: solid #141722 1px;
+    border-bottom: 1px solid black;
 }
 
 .gallery {
@@ -24,13 +23,23 @@
 
 .button {
     composes: text-style-menu-tabs from '../../../index.css';
-    text-transform: uppercase;
+    width: 243px;
     margin: 20px 0 30px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .filters {
+    width: 100%;
     display: flex;
     justify-content: space-between;
+}
+
+@media screen and (max-width: 1200px) {
+    .gallery {
+        position: relative;
+        columns: 2;
+    }
 }
 
 @media screen and (max-width: 1200px) {
