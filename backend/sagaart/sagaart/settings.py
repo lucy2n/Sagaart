@@ -32,11 +32,13 @@ INSTALLED_APPS = [
     "djoser",
     "rest_framework.authtoken",
     "drf_spectacular",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -45,6 +47,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "sagaart.urls"
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 TEMPLATES = [
     {
@@ -115,11 +119,8 @@ DJOSER = {
     "HIDE_USERS": False,
     "SERIALIZERS": {
         "user_create": "api.auth.serializers.UserRegistrationSerializer",
-        "user": "api.auth.serializers.UserSerializer",
-    },
-    "PERMISSIONS": {
-        # 'user': ['rest_framework.permissions.IsAuthenticatedOrReadOnly'],
-        "user_list": ["rest_framework.permissions.AllowAny"],
+        "current_user": "api.auth.serializers.UserSerializer",
+        "password_reset_confirm_retype": "api.auth.serializers.SetPassword"
     },
 }
 

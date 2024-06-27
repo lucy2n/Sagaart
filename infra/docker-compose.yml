@@ -21,6 +21,12 @@ services:
       - media:/app/media
       - static:/backend_static
       - docs:/app/static/data/docs
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    volumes:
+      - static:/app
   nginx:
     build:
       context: ../gateway
