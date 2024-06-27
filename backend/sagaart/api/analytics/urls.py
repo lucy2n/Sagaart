@@ -9,6 +9,6 @@ analytics_router_v1.register(
 )
 
 urlpatterns = [
-    path("product/", include(analytics_router_v1.urls)),
+    path("", include(analytics_router_v1.urls)),
     path("user/<int:pk>/subscribe", SubscriptionView.as_view()),
 ]

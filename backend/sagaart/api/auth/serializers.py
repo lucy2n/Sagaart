@@ -1,7 +1,9 @@
 import re
 from rest_framework import serializers
-from djoser.serializers import (UserCreateSerializer,
-                                PasswordResetConfirmRetypeSerializer)
+from djoser.serializers import (
+    UserCreateSerializer,
+    PasswordResetConfirmRetypeSerializer,
+)
 from userauth.models import User, UserSubscribe
 
 
