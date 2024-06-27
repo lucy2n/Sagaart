@@ -13,10 +13,32 @@ from api.artobjects.serializers import (
 from artobjects.models import ArtObject, ObjectAuthor
 
 
-class AnalyticsSerializer(serializers.ModelSerializer):
+class AnalyticsSerializerForWrite(serializers.ModelSerializer):
     class Meta:
         model = Analytics
         fields = (
+            "product_name",
+            "category",
+            "year",
+            "height",
+            "width",
+            "material",
+            "tablet_material",
+            "author_name",
+            "gender",
+            "birth_year",
+            "birth_country",
+            "solo_show",
+            "group_show",
+        )
+
+
+class AnalyticsSerializerForRead(serializers.ModelSerializer):
+    class Meta:
+        model = Analytics
+        fields = (
+            "id",
+            "analytics_owner",
             "product_name",
             "category",
             "year",

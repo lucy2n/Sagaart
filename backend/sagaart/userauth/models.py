@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 
 MAX_LENGHT_EMAIL = 250
 MAX_LENGHT_FULL_NAME = 50
-MAX_LENGHT_TELEPHONE = 20
+MAX_LENGHT_TELEPHONE = 15
 
 
 class UserManager(BaseUserManager):
@@ -48,11 +48,21 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     email = models.CharField(max_length=MAX_LENGHT_EMAIL, unique=True)
-    first_name = models.CharField("Имя", max_length=MAX_LENGHT_FULL_NAME)
-    sur_name = models.CharField("Фамилия", max_length=MAX_LENGHT_FULL_NAME)
-    middle_name = models.CharField("Отчество", max_length=MAX_LENGHT_FULL_NAME)
+    first_name = models.CharField(
+        "Имя", max_length=MAX_LENGHT_FULL_NAME, null=True, blank=True
+    )
+    sur_name = models.CharField(
+        "Фамилия", max_length=MAX_LENGHT_FULL_NAME, null=True, blank=True
+    )
+    middle_name = models.CharField(
+        "Отчество", max_length=MAX_LENGHT_FULL_NAME, null=True, blank=True
+    )
     telephone = models.CharField(
-        "Телефон", max_length=MAX_LENGHT_TELEPHONE, unique=True
+        "Телефон",
+        max_length=MAX_LENGHT_TELEPHONE,
+        unique=True,
+        null=True,
+        blank=True,
     )
 
 

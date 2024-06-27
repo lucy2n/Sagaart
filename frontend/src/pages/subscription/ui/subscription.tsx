@@ -1,14 +1,15 @@
-import Slider from './slider';
 import React from 'react';
+import { Button } from '@gravity-ui/uikit';
+import Slider from './slider';
+import SubscriptionBlock from './subscription-block';
 import style from './style.module.css';
+
 import benefit1 from '../../../assets/images/image-82.png';
 import benefit2 from '../../../assets/images/image-79.png';
 import benefit3 from '../../../assets/images/Immage.png';
-import SubscriptionBlock from './subscription-block';
 import price1 from '../../../assets/images/price1.png';
 import price2 from '../../../assets/images/price2.png';
 import price3 from '../../../assets/images/price3.png';
-import { Button } from '@gravity-ui/uikit';
 
 
 const Subscription = (): JSX.Element => {
