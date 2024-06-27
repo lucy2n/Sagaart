@@ -70,9 +70,7 @@ class AuthorShow(models.Model):
 class ObjectAuthor(models.Model):
     GENDER_CHOICES = (("MALE", "Male"), ("FEMALE", "Female"))
 
-    name = models.CharField(
-        max_length=MAX_CHAR_LEN, verbose_name="Имя автора"
-    )
+    name = models.CharField(max_length=MAX_CHAR_LEN, verbose_name="Имя автора")
     gender = models.CharField(
         choices=GENDER_CHOICES,
         max_length=MAX_CHAR_LEN,
@@ -80,9 +78,7 @@ class ObjectAuthor(models.Model):
         verbose_name="Пол",
     )
     age = models.PositiveIntegerField(blank=True, verbose_name="Возраст")
-    year_of_birth = models.DateField(
-        blank=True, verbose_name="Дата рождения"
-    )
+    year_of_birth = models.DateField(blank=True, verbose_name="Дата рождения")
     city_of_birth = models.CharField(
         blank=True, max_length=MAX_CHAR_LEN, verbose_name="Город рождения"
     )
@@ -160,9 +156,7 @@ class ArtObject(models.Model):
     size_category = models.IntegerField(
         choices=SIZE_CATEGORY_LIST, verbose_name="Категория размера"
     )
-    size = models.CharField(
-        verbose_name="Размер", max_length=MAX_CHAR_LEN
-    )
+    size = models.CharField(verbose_name="Размер", max_length=MAX_CHAR_LEN)
     country = models.CharField(
         blank=True, verbose_name="Страна товара", max_length=MAX_CHAR_LEN
     )

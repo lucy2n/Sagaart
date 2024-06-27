@@ -54,7 +54,7 @@ class Command(BaseCommand):
                     name=row[0],
                     year=pd.to_datetime(row[1], format="ISO8601"),
                     place=row[2],
-                    cost=row[3]
+                    cost=row[3],
                 )
                 for row in reader
             ]
