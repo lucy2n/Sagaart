@@ -4,8 +4,8 @@ from artobjects.models import ArtObject, Category, Genre, Style
 
 
 class ArtObjFilter(django_filters.FilterSet):
-    end_cost = django_filters.NumberFilter(
-        field_name="end_cost", lookup_expr="exact", label="Финальная цена"
+    cost_category = django_filters.NumberFilter(
+        field_name="cost_category", lookup_expr="exact", label="Финальная цена"
     )
     size_category = django_filters.NumberFilter(
         field_name="size_category", label="Размер"
@@ -34,7 +34,7 @@ class ArtObjFilter(django_filters.FilterSet):
     class Meta:
         model = ArtObject
         fields = (
-            "end_cost",
+            "cost_category",
             "size_category",
             "category",
             "genre",
