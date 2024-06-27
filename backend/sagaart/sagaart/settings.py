@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     "djoser",
     "rest_framework.authtoken",
     "drf_spectacular",
-    "corsheaders"
+    "corsheaders",
 ]
 
 MIDDLEWARE = [

@@ -1,4 +1,4 @@
-from rest_framework import viewsets, mixins, permissions
+from rest_framework import generics, viewsets, mixins, permissions
 
 
 from analytics.models import Analytics, User
@@ -17,3 +17,7 @@ class AnalyticsViewSet(
 
     def perform_create(self, serializer):
         serializer.save(analytics_owner=self.request.user)
+
+
+class SubscriptionView(generics.CreateAPIView):
+    pass
