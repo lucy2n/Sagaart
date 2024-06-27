@@ -1,7 +1,7 @@
 import { Button, RadioGroup, RadioGroupOption } from '@gravity-ui/uikit';
 import React from 'react';
 import style from './style.module.css';
-import eye from '../../../../assets/icons/eye-alt.svg';
+import eye from '../../../../assets/icons/Eye-alt.svg';
 
 export const Product = ({product}: {product: any}) => {
 
