@@ -5,7 +5,7 @@ from django.core.files.base import ContentFile
 from django.db import transaction
 
 from analytics.models import Analytics
-from api.constants import GENDER_LIST, SIZE_CATEGORY_LIST
+from api.constants import GENDER_LIST, SIZE_CATEGORIES
 from api.artobjects.serializers import (
     ArtObjectSerialzer,
     ObjectAuthorSerializer,
