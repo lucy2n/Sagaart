@@ -22,12 +22,12 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         files = [
-            # "category.csv",
-            # "genre.csv",
-            # "style.csv",
-            # "objectauthor.csv",
-            # "authoraward.csv",
-            # "authorshow.csv",
+            "category.csv",
+            "genre.csv",
+            "style.csv",
+            "objectauthor.csv",
+            "authoraward.csv",
+            "authorshow.csv",
             "artobject.csv"
         ]
         for file in files:
