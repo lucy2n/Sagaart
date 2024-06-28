@@ -19,8 +19,8 @@ class Analytics(models.Model):
         verbose_name="Катоегория", max_length=MAX_CHAR_LEN
     )
     year = models.PositiveIntegerField(verbose_name="Год")
-    height = models.PositiveIntegerField(verbose_name="Высота")
-    width = models.PositiveIntegerField(verbose_name="Ширина")
+    height = models.FloatField(verbose_name="Высота")
+    width = models.FloatField(verbose_name="Ширина")
     material = models.CharField(
         verbose_name="Материал", max_length=MAX_CHAR_LEN
     )
