@@ -1,6 +1,11 @@
 from django.db import models
 
-from api.constants import MAX_CHAR_LEN, SIZE_CATEGORY_LIST
+from api.constants import (
+    MAX_CHAR_LEN,
+    SIZE_CATEGORIES,
+    GENDER_LIST,
+    PRICE_CATEGORIES,
+)
 
 
 class NameModel(models.Model):
@@ -68,17 +73,15 @@ class AuthorShow(models.Model):
 
 
 class ObjectAuthor(models.Model):
-    GENDER_CHOICES = (("MALE", "Male"), ("FEMALE", "Female"))
-
     name = models.CharField(max_length=MAX_CHAR_LEN, verbose_name="Имя автора")
     gender = models.CharField(
-        choices=GENDER_CHOICES,
+        choices=GENDER_LIST,
         max_length=MAX_CHAR_LEN,
         blank=True,
         verbose_name="Пол",
     )
     age = models.PositiveIntegerField(blank=True, verbose_name="Возраст")
-    year_of_birth = models.DateField(blank=True, verbose_name="Дата рождения")
+    birth_date = models.DateField(blank=True, verbose_name="Дата рождения")
     city_of_birth = models.CharField(
         blank=True, max_length=MAX_CHAR_LEN, verbose_name="Город рождения"
     )
@@ -129,21 +132,6 @@ class ObjectAuthor(models.Model):
 
 
 class ArtObject(models.Model):
-    SIZE_CATEGORIES = (
-        (1, "Любой"),
-        (2, "Small (до 40 см)"),
-        (3, "Medium (40 - 100 см)"),
-        (4, "Large (100 - 160 см)"),
-        (5, "Oversize (более 160 см)"),
-    )
-    PRICE_CATEGORIES = (
-        (1, "до 20 000 руб."),
-        (2, "от 20 000 до 50 000 руб."),
-        (3, "50 000 до 100 000 руб."),
-        (4, "от 100 000 до 200 000 руб."),
-        (5, "от 200 000 до 500 000 руб."),
-    )
-
     name = models.CharField(verbose_name="Название", max_length=MAX_CHAR_LEN)
     image = models.ImageField(verbose_name="Изображение")
     additional_image = models.ImageField(
@@ -154,7 +142,7 @@ class ArtObject(models.Model):
     genre = models.ManyToManyField(Genre, verbose_name="Жанр")
 
     size_category = models.IntegerField(
-        choices=SIZE_CATEGORY_LIST, verbose_name="Категория размера"
+        choices=SIZE_CATEGORIES, verbose_name="Категория размера"
     )
     size = models.CharField(verbose_name="Размер", max_length=MAX_CHAR_LEN)
     country = models.CharField(
