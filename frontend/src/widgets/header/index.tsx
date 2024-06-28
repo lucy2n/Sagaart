@@ -19,9 +19,11 @@ const Header = () => {
                     <button className={style.button}>
                         <img className={style.button__image} src={mail} alt='mail'/>
                     </button>
-                    <button className={style.button}>
-                        <img className={style.button__image} src={person} alt='person'/>
-                    </button>
+                    <NavLink to='/signin'>
+                        <button className={style.button}>
+                            <img className={style.button__image} src={person} alt='person'/>
+                        </button>
+                    </NavLink>
                     <button className={style.button}>
                         <img className={style.button__image} src={heart} alt='heart'/>
                     </button>

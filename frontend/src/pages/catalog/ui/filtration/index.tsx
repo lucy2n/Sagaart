@@ -27,7 +27,7 @@ export interface FiltersValues {
 }
   
 
-const Filters = ({ isVisible, updateProducts }: { isVisible : boolean, updateProducts: (filters: FiltersValues) => void }) => {
+const Filters = ({ isVisible, updateProducts }: { isVisible : boolean, updateProducts: (newFilters: FiltersValues) => void }) => {
     
     const [isOpen, setIsOpen] = useState<FiltersState>({
         price: false,
@@ -77,8 +77,6 @@ const Filters = ({ isVisible, updateProducts }: { isVisible : boolean, updatePro
         setIsOpen((prevState) => ({ ...prevState, [name]: !prevState[name] }));
     };
 
-    const [styleVal, setStyleVal] = useState();
-
     return (
         <div>
             { isVisible && (
@@ -114,7 +112,7 @@ const Filters = ({ isVisible, updateProducts }: { isVisible : boolean, updatePro
                             </div>
                             {isOpen.category && (
                                 <RadioGroup onChange={(e) => updateFilter('category', e.target.value)}
-                                value={styleVal} className={style.body} size="l" name="product_category" defaultValue={product_category[0].value} options={product_category} direction="vertical"/>
+                                className={style.body} size="l" name="product_category" defaultValue={product_category[0].value} options={product_category} direction="vertical"/>
                             )}
                         </div>
     
@@ -124,7 +122,7 @@ const Filters = ({ isVisible, updateProducts }: { isVisible : boolean, updatePro
                             </div>
                             {isOpen.genre && (
                                 <RadioGroup onChange={(e) => updateFilter('genre', e.target.value)}
-                                value={styleVal} className={style.body} size="l" name="product_genre" defaultValue={product_genre[0].value} options={product_genre} direction="vertical"/>
+                                className={style.body} size="l" name="product_genre" defaultValue={product_genre[0].value} options={product_genre} direction="vertical"/>
                             )}
                         </div>
     
@@ -134,7 +132,7 @@ const Filters = ({ isVisible, updateProducts }: { isVisible : boolean, updatePro
                             </div>
                             {isOpen.style && (
                                 <RadioGroup onChange={(e) => updateFilter('style', e.target.value)}
-                                value={styleVal} className={style.body} size="l" name="product_style" defaultValue={product_style[0].value} options={product_style} direction="vertical"/>
+                                className={style.body} size="l" name="product_style" defaultValue={product_style[0].value} options={product_style} direction="vertical"/>
                             )}
                         </div>
         
