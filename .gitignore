@@ -7,3 +7,4 @@ pyrightconfig.json
 db.sqlite3
 backend/sagaart/emails/*
 backend/sagaart/media/*
+backend/sagaart/sent_emails/*

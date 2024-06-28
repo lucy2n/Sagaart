@@ -7,27 +7,19 @@ from djoser.serializers import (
 from userauth.models import User, UserSubscribe
 
 
+MIN_NUMBER_USER_NAME = 2
 TELEPHONE_VALIDATE = "^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$"
-EMAIL_VALIDATE = (
-    "([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})"
-)
 
 
 class UserRegistrationSerializer(UserCreateSerializer):
+    email = serializers.EmailField()
+
     class Meta(UserCreateSerializer.Meta):
         model = User
         fields = (
             "email",
             "password",
         )
-
-    def validate(self, data):
-        valdate_error = {}
-        if not re.match(EMAIL_VALIDATE, data["email"]):
-            valdate_error["email"] = "Вы ввели Email некорректно"
-        if valdate_error:
-            raise serializers.ValidationError(valdate_error)
-        return data
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -38,10 +30,8 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = (
             "email",
+            "user_name",
             "telephone",
-            "first_name",
-            "sur_name",
-            "middle_name",
             "subcribe",
         )
 
@@ -52,6 +42,15 @@ class UserSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         valdate_error = {}
+        if not data:
+            raise serializers.ValidationError('Пустая форма')
+        if ("user_name" in data
+                and len(data["user_name"]) < MIN_NUMBER_USER_NAME):
+            valdate_error["user_name"] = (
+                "Введённое имя слишком короткое."
+                "Он должен содержать как минимум"
+                f" {MIN_NUMBER_USER_NAME} символов."
+            )
         if "telephone" in data and not re.match(
             TELEPHONE_VALIDATE, data["telephone"]
         ):

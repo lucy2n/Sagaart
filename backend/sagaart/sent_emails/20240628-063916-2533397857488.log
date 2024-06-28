@@ -1,0 +1,33 @@
+Content-Type: multipart/alternative;
+ boundary="===============0660231180217994045=="
+MIME-Version: 1.0
+Subject: 127.0.0.1:8000 - Your account has been successfully created and
+ activated!
+From: webmaster@localhost
+To: stopn!#$%@mail.ru
+Date: Fri, 28 Jun 2024 03:39:16 -0000
+Message-ID: <171954595664.18364.16170448005275967592@Marat>
+
+--===============0660231180217994045==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+
+Your account has been created and is ready to use!
+
+Спасибо, что используете наш сайт!
+
+Команда сайта 127.0.0.1:8000
+--===============0660231180217994045==
+Content-Type: text/html; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+
+<p>Your account has been created and is ready to use!</p>
+
+<p>Спасибо, что используете наш сайт!</p>
+
+<p>Команда сайта 127.0.0.1:8000</p>
+--===============0660231180217994045==--
+
+-------------------------------------------------------------------------------
