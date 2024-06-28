@@ -1,71 +1,27 @@
+"""
+Алгоритм, определяющий применую стоимость арт-объекта исходя из входных данных.
+Требуемые данные:
+
+category - категория(str)
+year - год(float)
+height - высота(float)
+width - ширина(float)
+work_material - материал работы(str)
+pad_material - материал планшета(str)
+count_title - кол-во продаж картины(пока np.NaN)
+count_artist - кол-во работ художника(пока np.NaN)
+country - страна(str)
+sex - пол(str, М/Ж)
+solo_shows - список индивидуальных выставок(str через ,)
+group_shows - список групповых выставок(str через ,)
+age - возраст(int)
+is_alive - жив ли(пока будет np.NaN)(в будущем int)
+"""
+
 import os
 
 import numpy as np
 from catboost import CatBoostRegressor
-
-(
-    category,
-    year,
-    height,
-    width,
-    work_material,
-    pad_material,
-    count_title,
-    count_artist,
-    country,
-    sex,
-    solo_shows,
-    group_shows,
-    age,
-    is_alive,
-) = (
-    "Печать",
-    1983,
-    60.5,
-    91.0,
-    "Цветная литография",
-    "Сотканная бумага",
-    np.NaN,
-    np.NaN,
-    "Россия",
-    "М",
-    "centre pompidou, whitney museum of american art, the metropolitan museum of art, los angeles county museum of art (lacma)",
-    "whitney museum of american art, the metropolitan museum of art, los angeles county museum of art (lacma)",
-    80,
-    np.NaN,
-)
-
-# category - категория(str)
-# year - год(float)
-# height - высота(float)
-# width - ширина(float)
-# work_material - материал работы(str)
-# pad_material - материал планшета(str)
-# count_title - кол-во продаж картины(пока np.NaN)
-# count_artist - кол-во работ художника(пока np.NaN)
-# country - страна(str)
-# sex - пол(str, М/Ж)
-# solo_shows - список индивидуальных выставок(str через ,)
-# group_shows - список групповых выставок(str через ,)
-# age - возраст(int)
-# is_alive - жив ли(пока будет np.NaN)(в будущем int)
-
-data = [
-    category,
-    year,
-    height,
-    width,
-    work_material,
-    pad_material,
-    count_title,
-    count_artist,
-    country,
-    sex,
-    solo_shows,
-    group_shows,
-    age,
-    is_alive,
-]
 
 
 def make_shows_authority_from_shows(shows: str) -> float:
@@ -195,8 +151,3 @@ def preprocess(data: list) -> np.ndarray:
         ]
         + data[-2:]
     )
-
-
-model = CatBoostRegressor()
-model.load_model("sagaart/api/analytics/catboost_v1.json", format="json")
-print(model.predict(preprocess(data)))

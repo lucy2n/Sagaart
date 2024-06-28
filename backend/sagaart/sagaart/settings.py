@@ -109,6 +109,14 @@ REST_FRAMEWORK = {
 
 LANGUAGE_CODE = "en-us"
 
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
 DJOSER = {
     "PASSWORD_RESET_CONFIRM_URL": "/api/user/resetpassword/{uid}/{token}",
     "SEND_CONFIRMATION_EMAIL": True,
@@ -120,7 +128,7 @@ DJOSER = {
     "SERIALIZERS": {
         "user_create": "api.auth.serializers.UserRegistrationSerializer",
         "current_user": "api.auth.serializers.UserSerializer",
-        "password_reset_confirm_retype": "api.auth.serializers.SetPassword"
+        "password_reset_confirm_retype": "api.auth.serializers.SetPassword",
     },
 }
 
@@ -138,14 +146,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "collected_static")
 
 MEDIA_URL = "media/"
 
-CSV_FILES_DIR = "data/"
-
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-CSV_FILES_DIR = "data/"
+CSV_FILES_DIR = "static/data/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-
-EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
