@@ -5,16 +5,19 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('analytics', '0002_initial'),
+        ("analytics", "0002_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='analytics',
-            name='analytics_date',
-            field=models.DateField(auto_now_add=True, default=datetime.datetime(2024, 6, 28, 12, 32, 59, 821077), verbose_name='Дата аналитики'),
+            model_name="analytics",
+            name="analytics_date",
+            field=models.DateField(
+                auto_now_add=True,
+                default=datetime.datetime(2024, 6, 28, 12, 32, 59, 821077),
+                verbose_name="Дата аналитики",
+            ),
             preserve_default=False,
         ),
     ]

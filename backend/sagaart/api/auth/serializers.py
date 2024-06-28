@@ -43,9 +43,11 @@ class UserSerializer(serializers.ModelSerializer):
     def validate(self, data):
         valdate_error = {}
         if not data:
-            raise serializers.ValidationError('Пустая форма')
-        if ("user_name" in data
-                and len(data["user_name"]) < MIN_NUMBER_USER_NAME):
+            raise serializers.ValidationError("Пустая форма")
+        if (
+            "user_name" in data
+            and len(data["user_name"]) < MIN_NUMBER_USER_NAME
+        ):
             valdate_error["user_name"] = (
                 "Введённое имя слишком короткое."
                 "Он должен содержать как минимум"
