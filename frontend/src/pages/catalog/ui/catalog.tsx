@@ -1,7 +1,6 @@
 import { Button,  Icon,  Pagination, PaginationProps } from '@gravity-ui/uikit';
 import React, { useEffect, useState } from 'react';
 import style from './style.module.css';
-import { cards } from '../utils/cards';
 import Card from '../../../widgets/card/card';
 import {Funnel} from '@gravity-ui/icons';
 import {ChevronLeft} from '@gravity-ui/icons';
@@ -19,22 +18,24 @@ const Catalog = (): JSX.Element => {
 
     const [products, setProducts] = useState<Artwork[] | null>(null);
 
-    const [filters, setFilters] = useState({
-        price: 'any',
-        size: 'any',
-        category: 'any',
-        style: 'any',
-        year: 'any',
-        country: 'any',
+    const [filters, setFilters] = useState<FiltersValues>({
+        price: '',
+        size: '',
+        category: '',
+        genre: '',
+        style: '',
+        minYear: '',
+        maxYear: '',
+        country: ''
       });
     
-      const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+    const [isSidebarVisible, setIsSidebarVisible] = useState(false);
 
-      const toggleSidebar = () => {
-        setIsSidebarVisible(!isSidebarVisible);
-      };
+    const toggleSidebar = () => {
+    setIsSidebarVisible(!isSidebarVisible);
+    };
 
-    const [state, setState] = useState({page: 1, pageSize: cards.length});
+    const [state, setState] = useState({page: 1, pageSize: products?.length});
     const [emptyState, setEmptyState] = useState<boolean>(false);
 
     const handleUpdate: PaginationProps['onUpdate'] = (page, pageSize) =>
@@ -42,17 +43,10 @@ const Catalog = (): JSX.Element => {
 
     useEffect(() => {
         fetchProducts();
-    }, []);
+    }, [filters, state.page]);
 
     const fetchProducts = () => {
-        getProducts()
-        .then((res) => {
-            setProducts(res.results);
-        });
-    };
-
-    const updateProducts = (filters: FiltersValues) => {
-        getProductsWithFilters(filters)
+        getProductsWithFilters(filters, state.page)
         .then((res) => {
             if (res.results.length == 0) {
                 setEmptyState(true);
@@ -62,6 +56,11 @@ const Catalog = (): JSX.Element => {
             }
         });
     };
+
+    const updateProducts = (newFilters: FiltersValues) => {
+        setFilters(newFilters);
+        setState((prevState) => ({ ...prevState, page: 1 }));
+      };
 
     return (
         <section className={style.main}>
@@ -86,8 +85,9 @@ const Catalog = (): JSX.Element => {
                     ))}
                 </div>
             </div>
-            <Pagination page={1} pageSize={5} total={cards.length/12} onUpdate={handleUpdate} />
+            <Pagination page={state.page} pageSize={12} onUpdate={handleUpdate} />
         </section>
     );
 };
+
 export default Catalog;

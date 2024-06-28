@@ -1,5 +1,3 @@
-'use client';
-
 import React, { FC } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormProvider, useForm } from 'react-hook-form';

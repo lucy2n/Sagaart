@@ -1,6 +1,5 @@
 .main {
     padding: 20px;
-    width: 100vw;
     display: flex;
     gap: 10px;
     background-color: #EFE9E0;
@@ -80,7 +79,6 @@
 .section_subscription {
     border-radius: 4px;
     background-color: #2C2E37;
-    width: 94vw;
     display: flex;
     flex-direction: column;
     gap: 40px;
@@ -89,7 +87,8 @@
 
 .section_subscription__subsc {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 20px;
     flex-wrap: wrap;
 }
 

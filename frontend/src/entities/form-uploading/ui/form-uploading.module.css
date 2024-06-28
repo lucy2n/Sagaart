@@ -1,0 +1,122 @@
+.section {
+    background: var(--color-background-background-page);
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 1000px;
+    gap: 24px;
+}
+
+.title {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: var(--color-text-color-text-primary-heading-body-dark);
+}
+
+.container {
+    padding: 0;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.input_list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.popup_list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-background-background-page-2);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: 'TT Commons';
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 111%;
+    color: var(--color-text-color-text-primary-heading-body-dark-2);
+}
+
+.input_sublist {
+    width: 100%;
+    display: flex;
+    gap: 24px;
+}
+
+.server_error {
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 714px;
+    font-family: 'TT Commons';
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 140%;
+    color: var(--color-system-color-system-error);
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    text-transform: uppercase;
+    font-family: 'TT Commons';
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 120%;
+    letter-spacing: 0.03em;
+    --g-button-background-color: var(--color-text-color-text-primary-heading-body-dark);
+    --g-button-text-color: var(--color-background-background-page);
+    --g-button-border-color: var(--color-text-color-text-primary-heading-body-dark);
+    --g-button-border-radius: 4px;
+    --g-button-border-style: solid;
+    --g-button-border-width: 1px;
+    transition: opacity 0.5s ease;
+}
+
+.button:disabled {
+    opacity: 0.3;
+    --g-button-text-color: var(--color-background-background-page);
+    --g-button-background-color: var(--color-text-color-text-primary-heading-body-dark);
+}
+
+.dropzone {
+    width: 1000px;
+    height: 360px;
+}
+
+.dropzone 
+
+.input {
+    width: 100%;
+    height: 44px;
+    display: block;
+    padding: 4px 0 4px 3px;
+    margin: 0;
+    border-radius: 4px;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    font-style: normal;
+    position: relative;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: 'TT Commons';
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 111%;
+    color: var(--color-text-color-text-primary-heading-body-dark);
+}
