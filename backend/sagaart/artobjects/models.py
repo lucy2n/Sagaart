@@ -151,7 +151,7 @@ class ArtObject(models.Model):
     city_sale = models.CharField(
         verbose_name="Город продажи", max_length=MAX_CHAR_LEN
     )
-    year = models.PositiveBigIntegerField(verbose_name="Год создания")
+    year = models.PositiveIntegerField(verbose_name="Год создания")
     material = models.CharField(
         blank=True, verbose_name="Материал работы", max_length=MAX_CHAR_LEN
     )
@@ -166,8 +166,8 @@ class ArtObject(models.Model):
     cost_category = models.IntegerField(
         choices=PRICE_CATEGORIES, verbose_name="Категория цены"
     )
-    end_cost = models.PositiveBigIntegerField(verbose_name="Итоговая цена")
-    fair_cost = models.PositiveBigIntegerField(
+    end_cost = models.PositiveIntegerField(verbose_name="Итоговая цена")
+    fair_cost = models.PositiveIntegerField(
         blank=True, verbose_name="Желаемая цена"
     )
     author = models.ForeignKey(
