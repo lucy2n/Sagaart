@@ -28,6 +28,7 @@ const Slider = () => {
     setCount(action === 'next' ? count + 1 : count - 1);
   };
 
+  
   const currentSlide = slides[count];
 
   return (
@@ -47,7 +48,7 @@ const Slider = () => {
               </Button>
           </div>
           <div className={style.image_block}>
-              <img src={currentSlide.img} className={count === 1 ? style.image : ''} />
+              <img src={currentSlide.img} className={count === 0 ? style.image : style.image_2} />
               {count === 1 && (
                   <Button size='xl' className={style.button_image}>получить аналитику</Button>
               )}

@@ -26,18 +26,12 @@ export const Input: FC<InputProps> = ({
 		await trigger(name);
 	};
 
-	console.log(error,clsx({
-		[styles.input]: true,
-		[styles.input_typeSucces]: Boolean(error) === false,
-		[styles.input_typeError]: Boolean(error) === true,
-	}));
-
 	return (
     <label className={clsx(className, styles.label)}>
         {labelName}
         <div className={styles.inputContainer}>
             <input
-					{...register(`${name}`, { shouldUnregister: true })}
+					{...register(name, { shouldUnregister: true })}
 					type={type === 'password' ? (visible ? 'text' : 'password') : type}
 					className={clsx({
 						[styles.input]: true,

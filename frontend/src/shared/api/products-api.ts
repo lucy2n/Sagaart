@@ -15,8 +15,8 @@ export const getProducts = async () => {
 	return checkResponse<ArtworksResponse>(res);
 };
 
-export const getProductsWithFilters = async (filters: FiltersValues) => {
-  const url = generateUrlWithQueryParams(`${base_url}product`, filters);
+export const getProductsWithFilters = async (filters: FiltersValues, page: number) => {
+  const url = generateUrlWithQueryParams(`${base_url}product`, filters, page);
   console.log(url);
   const res = await fetch(url, {
     method: 'GET',
@@ -28,7 +28,7 @@ export const getProductsWithFilters = async (filters: FiltersValues) => {
   return checkResponse<ArtworksResponse>(res);
 };
 
-const generateUrlWithQueryParams = (originUrl: string, filters: FiltersValues): string => {
+const generateUrlWithQueryParams = (originUrl: string, filters: FiltersValues, page: number): string => {
   const queryParams = new URLSearchParams();
 
   if (filters.price) queryParams.append('cost_category', filters.price);
@@ -39,6 +39,7 @@ const generateUrlWithQueryParams = (originUrl: string, filters: FiltersValues): 
   if (filters.minYear) queryParams.append('min_year', filters.minYear);
   if (filters.maxYear) queryParams.append('max_year', filters.maxYear);
   if (filters.country) queryParams.append('country', filters.country);
+  queryParams.append('page', page + '');
   console.log(originUrl);
 
   return `${originUrl}?${queryParams.toString()}`;

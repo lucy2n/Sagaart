@@ -10,8 +10,8 @@ export const FormSignupFeature: FC = () => {
 	const [serverErrorText, setServerErrorText] = useState('');
 	const [serverEmailError, setServerEmailError] = useState('');
 	const [serverPasswordError, setServerPasswordError] = useState('');
-	const handleSubmit = () => {
-		console.log('createUser');
+	const handleSubmit = (data:any) => {
+		console.log(data);
 	};
 
 	return (

@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import InfoPoint from '../info-point';
 import { ArtworkDetails } from '../../../../shared/entities/product-details';
 import style from './style.module.css';
 
 const AboutWork = (props : {product: ArtworkDetails}) => {
+    useEffect(() => {
+        console.log(props);
+    }, []);
     return (
         <div className={style.main}>
             <p className={style.desc}>
@@ -16,9 +19,9 @@ const AboutWork = (props : {product: ArtworkDetails}) => {
                     <InfoPoint title='Материалы' desc={props.product.material}/>
                 </div>
                 <div className={style.column}>
-                    <InfoPoint title='Категория' desc={props.product.category.name}/>
-                    <InfoPoint title='Жанр' desc={props.product.genre.name}/>
-                    <InfoPoint title='Стиль' desc={props.product.style.name}/>
+                    <InfoPoint title='Категория' desc={props.product.category[0].name}/>
+                    <InfoPoint title='Жанр' desc={props.product.genre[0].name}/>
+                    <InfoPoint title='Стиль' desc={props.product.style[0].name}/>
                 </div>
                 <div className={style.column}>
                     <InfoPoint title='Желаемая стоимость работы' desc={props.product.fair_cost + ''}/>
