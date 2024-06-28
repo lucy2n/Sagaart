@@ -5,6 +5,7 @@ from analytics.models import Analytics, User
 from .serializers import (
     AnalyticsSerializerForRead,
     AnalyticsSerializerForWrite,
+    AnalyticsListSerializer,
 )
 from .Paintings_v2 import CatBoostRegressor, preprocess
 
@@ -20,11 +21,16 @@ class AnalyticsViewSet(
 ):
     queryset = Analytics.objects.all()
     serializer_class = AnalyticsSerializerForRead
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get_queryset(self):
+        queryset = Analytics.objects.filter(analytics_owner=self.request.user)
 
     def get_serializer_class(self):
         if self.request.method not in permissions.SAFE_METHODS:
             return AnalyticsSerializerForWrite
+        if self.action == "list":
+            return AnalyticsListSerializer
         return AnalyticsSerializerForRead
 
     def perform_create(self, serializer):
@@ -48,7 +54,3 @@ class AnalyticsViewSet(
             analytics_owner=User.objects.get(id=1),
             calculated_price=model.predict(preprocess(data)),
         )
-
-
-class SubscriptionView(generics.CreateAPIView):
-    pass

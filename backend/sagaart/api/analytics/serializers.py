@@ -33,6 +33,12 @@ class AnalyticsSerializerForWrite(serializers.ModelSerializer):
         )
 
 
+class AnalyticsListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Analytics
+        fields = ("id", "product_name", "author_name", "analytics_date")
+
+
 class AnalyticsSerializerForRead(serializers.ModelSerializer):
     class Meta:
         model = Analytics
