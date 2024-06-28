@@ -5,6 +5,7 @@ from django.core.management.base import BaseCommand
 from django.apps import apps
 from django.db.utils import IntegrityError
 
+from artobjects.models import Category
 from sagaart.settings import CSV_FILES_DIR
 from api.constants import ARTOBJECTS_APP_LABEL
 
@@ -28,7 +29,7 @@ class Command(BaseCommand):
             "objectauthor.csv",
             "authoraward.csv",
             "authorshow.csv",
-            "artobject.csv"
+            "artobject.csv",
         ]
         for file in files:
             model_name = Path(file).stem
@@ -38,7 +39,16 @@ class Command(BaseCommand):
                     dataframe = csv.DictReader(f)
                     for row in dataframe:
                         try:
-                            model_class.objects.create(**row)
+                            if file == "artobject.csv":
+                                category = row.pop("category")
+                                style = row.pop("style")
+                                genre = row.pop("genre")
+                                result = model_class.objects.create(**row)
+                                result.category.set(category)
+                                result.style.set(style)
+                                result.genre.set(genre)
+                            else:
+                                model_class.objects.create(**row)
                         except IntegrityError:
                             self.stdout.write(
                                 f'Object {model_name} ID:'
