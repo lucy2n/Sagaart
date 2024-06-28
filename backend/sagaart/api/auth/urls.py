@@ -9,10 +9,7 @@ user_router_v1.register("user", UserViewSet, basename="user")
 urlpatterns = [
     path("user/", include("djoser.urls.authtoken")),
     path("user/", UserViewSet.as_view({"post": "create"})),
-    path(
-        "user/me/",
-        UserViewSet.as_view({"get": "me", "patch": "me"})
-    ),
+    path("user/me/", UserViewSet.as_view({"get": "me", "patch": "me"})),
     path(
         "user/emailpassword/", UserViewSet.as_view({"post": "reset_password"})
     ),

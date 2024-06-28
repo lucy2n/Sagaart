@@ -106,7 +106,7 @@ const Card: FC<Props> = ({ card }) => {
                         {card.name}
                     </h3>
                     <p className={style.text}> 
-                        {card.end_cost}
+                        {card.end_cost} ₽
                     </p>
                 </div>
                 <img src={isExpanded ? arrowdown : arrowup} onClick={() => toggleExpand(isExpanded, setIsExpanded)} className={style.button} />

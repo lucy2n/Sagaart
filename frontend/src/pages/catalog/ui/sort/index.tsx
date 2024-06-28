@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import style from './style.module.css';
-import { Button } from '@gravity-ui/uikit';
-import img from '../../../../assets/icons/swap-vertical-outline.svg';
+import { Button, Icon } from '@gravity-ui/uikit';
+import {ArrowUpArrowDown} from '@gravity-ui/icons';
 
 interface Option {
   label: string;
@@ -26,7 +26,7 @@ const Sort: React.FC<DropdownMenuProps> = ({ options }) => {
   return (
       <div className={style.dropdown}>
           <Button onClick={() => setIsOpen(!isOpen)} size='s' className={style.button}>
-              <img src={img} alt='Arrows' />
+              <Icon data={ArrowUpArrowDown} size={18} />
               Сортировать по: {selectedLabel}
           </Button>
           {isOpen && (

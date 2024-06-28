@@ -128,7 +128,7 @@ DJOSER = {
     "SERIALIZERS": {
         "user_create": "api.auth.serializers.UserRegistrationSerializer",
         "current_user": "api.auth.serializers.UserSerializer",
-        "password_reset_confirm_retype": "api.auth.serializers.SetPassword"
+        "password_reset_confirm_retype": "api.auth.serializers.SetPassword",
     },
 }
 
@@ -146,10 +146,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "collected_static")
 
 MEDIA_URL = "media/"
 
-CSV_FILES_DIR = "data/"
-
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-CSV_FILES_DIR = "data/"
+CSV_FILES_DIR = "static/data/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

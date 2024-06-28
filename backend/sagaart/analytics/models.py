@@ -44,3 +44,6 @@ class Analytics(models.Model):
         verbose_name="Групповые выставки", max_length=MAX_CHAR_LEN
     )
     calculated_price = models.IntegerField(null=True)
+    analytics_date = models.DateField(
+        verbose_name="Дата аналитики", auto_now_add=True
+    )

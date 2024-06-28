@@ -52,8 +52,11 @@ class User(AbstractUser):
         "ФИО", max_length=MAX_LENGHT_USER_NAME, null=True, blank=True
     )
     telephone = models.CharField(
-        "Телефон", max_length=MAX_LENGHT_TELEPHONE,
-        unique=True, null=True, blank=True
+        "Телефон",
+        max_length=MAX_LENGHT_TELEPHONE,
+        unique=True,
+        null=True,
+        blank=True,
     )
 
 

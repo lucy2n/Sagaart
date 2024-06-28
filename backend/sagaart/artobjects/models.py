@@ -55,8 +55,9 @@ class AuthorAward(models.Model):
 
 class AuthorShow(models.Model):
     name = models.CharField(max_length=MAX_CHAR_LEN, verbose_name="Название")
-    year = models.PositiveIntegerField(verbose_name="Дата проведения")
     place = models.CharField(max_length=MAX_CHAR_LEN, verbose_name="Место")
+    cost = models.PositiveIntegerField(verbose_name="Цена товара")
+    year = models.DateField(verbose_name="Дата проведения")
 
     class Meta:
         verbose_name = "Выставка"
@@ -67,19 +68,17 @@ class AuthorShow(models.Model):
 
 
 class ObjectAuthor(models.Model):
-    GENDER_CHOICES = ((1, "MALE"), (2, "FEMALE"))
+    GENDER_CHOICES = (("MALE", "Male"), ("FEMALE", "Female"))
 
-    name = models.CharField(max_length=MAX_CHAR_LEN, verbose_name="Имя")
+    name = models.CharField(max_length=MAX_CHAR_LEN, verbose_name="Имя автора")
     gender = models.CharField(
         choices=GENDER_CHOICES,
         max_length=MAX_CHAR_LEN,
         blank=True,
         verbose_name="Пол",
     )
-    age = models.PositiveIntegerField(null=True, verbose_name="Возраст")
-    year_of_birth = models.PositiveIntegerField(
-        blank=True, verbose_name="Год рождения"
-    )
+    age = models.PositiveIntegerField(blank=True, verbose_name="Возраст")
+    year_of_birth = models.DateField(blank=True, verbose_name="Дата рождения")
     city_of_birth = models.CharField(
         blank=True, max_length=MAX_CHAR_LEN, verbose_name="Город рождения"
     )
@@ -88,13 +87,14 @@ class ObjectAuthor(models.Model):
         max_length=MAX_CHAR_LEN,
         verbose_name="Город проживания",
     )
+    description = models.TextField(blank=True, verbose_name="Биография")
     education = models.CharField(
         blank=True, max_length=MAX_CHAR_LEN, verbose_name="Образование"
     )
     professional_education = models.CharField(
         blank=True,
         max_length=MAX_CHAR_LEN,
-        verbose_name="Профессиональное образование",
+        verbose_name="Художественное образование",
     )
     teaching_experience = models.CharField(
         blank=True,
@@ -105,8 +105,7 @@ class ObjectAuthor(models.Model):
         Style,
         on_delete=models.SET_NULL,
         null=True,
-        blank=True,
-        verbose_name="Стиль",
+        verbose_name="Персональный стиль",
         related_name="objauthor",
     )
     socials = models.CharField(
@@ -120,7 +119,6 @@ class ObjectAuthor(models.Model):
     show = models.ManyToManyField(
         AuthorShow, blank=True, verbose_name="Выставки автора"
     )
-    description = models.TextField(blank=True, verbose_name="Описание")
 
     class Meta:
         verbose_name = "Автор"
@@ -149,7 +147,7 @@ class ArtObject(models.Model):
     name = models.CharField(verbose_name="Название", max_length=MAX_CHAR_LEN)
     image = models.ImageField(verbose_name="Изображение")
     additional_image = models.ImageField(
-        blank=True, verbose_name="Изображение"
+        blank=True, verbose_name="Дополнительное изображение"
     )
     category = models.ManyToManyField(Category, verbose_name="Категория")
     style = models.ManyToManyField(Style, verbose_name="Стиль")
@@ -158,30 +156,32 @@ class ArtObject(models.Model):
     size_category = models.IntegerField(
         choices=SIZE_CATEGORY_LIST, verbose_name="Категория размера"
     )
-    size = models.CharField(
-        blank=True, verbose_name="Размер", max_length=MAX_CHAR_LEN
-    )
+    size = models.CharField(verbose_name="Размер", max_length=MAX_CHAR_LEN)
     country = models.CharField(
         blank=True, verbose_name="Страна товара", max_length=MAX_CHAR_LEN
     )
     city_sale = models.CharField(
-        blank=True, verbose_name="Город продажи", max_length=MAX_CHAR_LEN
+        verbose_name="Город продажи", max_length=MAX_CHAR_LEN
     )
     year = models.PositiveBigIntegerField(verbose_name="Год создания")
     material = models.CharField(
-        blank=True, verbose_name="Материал", max_length=MAX_CHAR_LEN
+        blank=True, verbose_name="Материал работы", max_length=MAX_CHAR_LEN
     )
     tablet_material = models.CharField(
         blank=True,
         verbose_name="Материал планшета",
         max_length=MAX_CHAR_LEN,
     )
+    collection = models.TextField(blank=True, verbose_name="Коллекция")
+    media = models.TextField(blank=True, verbose_name="СМИ")
     description = models.TextField(blank=True, verbose_name="Описание")
     cost_category = models.IntegerField(
-        choices=PRICE_CATEGORIES, verbose_name="Ценовая категория"
+        choices=PRICE_CATEGORIES, verbose_name="Категория цены"
     )
-    end_cost = models.IntegerField(blank=True, verbose_name="Финальная цена")
-    fair_cost = models.IntegerField(blank=True, verbose_name="Оценка")
+    end_cost = models.PositiveBigIntegerField(verbose_name="Итоговая цена")
+    fair_cost = models.PositiveBigIntegerField(
+        blank=True, verbose_name="Желаемая цена"
+    )
     author = models.ForeignKey(
         ObjectAuthor,
         on_delete=models.SET_NULL,

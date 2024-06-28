@@ -1,11 +1,11 @@
 .dropdown {
-    width: 850px;
+    width: 845px;
     position: relative;
     display: inline-block;
 }
 
 .main {
-    width: 95%;
+    width: 98%;
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #141722;
