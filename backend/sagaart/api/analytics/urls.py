@@ -8,4 +8,6 @@ analytics_router_v1.register(
     "analytics", AnalyticsViewSet, basename="analytics"
 )
 
-urlpatterns = [path("", include(analytics_router_v1.urls))]
+urlpatterns = [
+    path("", include(analytics_router_v1.urls)),
+]

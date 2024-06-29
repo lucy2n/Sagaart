@@ -1,57 +1,56 @@
-import requests
-from django.http import request
-from rest_framework import viewsets, mixins, permissions
-from rest_framework.decorators import action
-from rest_framework.response import Response
-from rest_framework.views import status
-
+from rest_framework import generics, viewsets, mixins, permissions
+import numpy as np
 
 from analytics.models import Analytics, User
 from .serializers import (
-    AnalyticSerializerForRead,
-    AnalyticSerializerForWrite,
-    AnalyticsRequestSerializer,
-    UserAnalyticsSerializer,
+    AnalyticsSerializerForRead,
+    AnalyticsSerializerForWrite,
+    AnalyticsListSerializer,
 )
+from .Paintings_v2 import CatBoostRegressor, preprocess
 
-
-class UserAnalyticsViewSet(
-    mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet
-):
-    queryset = User.objects.all()
-    serializer_class = UserAnalyticsSerializer
+model = CatBoostRegressor()
+model.load_model("api/analytics/catboost_v1.json", format="json")
 
 
 class AnalyticsViewSet(
-    mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.CreateModelMixin,
+    viewsets.GenericViewSet,
 ):
     queryset = Analytics.objects.all()
-    serializer_class = AnalyticSerializerForRead
-    # TODO: Заменить пермишн по готовности
-    permission_classes = (permissions.AllowAny,)
+    serializer_class = AnalyticsSerializerForRead
+    permission_classes = (permissions.IsAuthenticated,)
 
-    def perform_create(self, serializer):
-        serializer.save(recepient=self.request.user)
+    def get_queryset(self):
+        queryset = Analytics.objects.filter(analytics_owner=self.request.user)
 
     def get_serializer_class(self):
         if self.request.method not in permissions.SAFE_METHODS:
-            return AnalyticSerializerForWrite
-        return AnalyticSerializerForRead
+            return AnalyticsSerializerForWrite
+        if self.action == "list":
+            return AnalyticsListSerializer
+        return AnalyticsSerializerForRead
 
-    def get_queryset(self):
-        queryset = Analytics.objects.filter(recepient=self.request.user.id)
-        return queryset
-
-    @action(methods=["POST"], detail=False)
-    def request_analytics(self, request):
-        serializer = AnalyticSerializerForWrite(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        # payload = serializer.data
-        serializer.save()
-        # analysis_result = requests.post("https://<algorithm-url>", data=payload)
-        # data = analysis_result.json()
-        # data["recepient"] = self.request.user
-        # serialized_analysis = AnalyticSerializerForWrite(data=data)
-        # serialized_analysis.is_valid(raise_exception=True)
-        # serialized_analysis.save()
-        return Response(serializer.data, status=status.HTTP_200_OK)
+    def perform_create(self, serializer):
+        data = [
+            serializer.validated_data["category"],
+            serializer.validated_data["year"],
+            serializer.validated_data["height"],
+            serializer.validated_data["width"],
+            serializer.validated_data["material"],
+            serializer.validated_data["tablet_material"],
+            np.NaN,
+            np.NaN,
+            serializer.validated_data["birth_country"],
+            serializer.validated_data["gender"],
+            serializer.validated_data["solo_show"],
+            serializer.validated_data["group_show"],
+            serializer.validated_data["birth_year"],
+            np.NaN,
+        ]
+        serializer.save(
+            analytics_owner=User.objects.get(id=1),
+            calculated_price=model.predict(preprocess(data)),
+        )

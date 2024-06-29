@@ -1,0 +1,34 @@
+@font-face {
+	font-family: 'TT Commons';
+	font-style: normal;
+	font-weight: 700;
+    font-display: swap;
+	src:
+		url('/src/assets/fonts/TT-Commons-Bold.otf') format('opentype'),
+}
+
+@font-face {
+	font-family: 'TT Commons';
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src:
+		url('/src/assets/fonts/TT-Commons-Medium.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'TT Commons';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src:
+		url('/src/assets/fonts/TT-Commons-Regular.otf') format('opentype'),
+}
+
+@font-face {
+	font-family: 'Inter';
+	font-weight: 900;
+	src:
+		url('/src/assets/fonts/Inter-Black.ttf') format("truetype"),
+}
+

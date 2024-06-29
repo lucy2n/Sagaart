@@ -1,14 +1,18 @@
-# from rest_framework import viewsets
-
-# from userauth.models import User, Subscription
-# from .serializers import SubscriptionSerializer, UserSerializer
+from djoser.views import UserViewSet as DjoserUserViewSet
+from rest_framework.decorators import action
 
 
-# class UserViewSet(viewsets.ModelViewSet):
-#     model = User
-#     serializer_class = UserSerializer
+class UserViewSet(DjoserUserViewSet):
+    @action(methods=["POST"], detail=False, url_path="emailpassword")
+    def reset_password(self, request, *args, **kwargs):
+        return super().reset_password(request, *args, **kwargs)
 
-
-# class SubscriptionViewSet(viewsets.ModelViewSet):
-#     model = Subscription
-#     serializer_class = SubscriptionSerializer
+    @action(
+        ["POST"],
+        detail=False,
+        url_path="resetpassword/(?P<uid>[^/.]+)/(?P<token>[^/.]+)",
+    )
+    def reset_password_confirm(self, request, *args, **kwargs):
+        request.data["uid"] = kwargs["uid"]
+        request.data["token"] = kwargs["token"]
+        return super().reset_password_confirm(request, *args, **kwargs)

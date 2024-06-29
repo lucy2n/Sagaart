@@ -5,4 +5,6 @@ pyrightconfig.json
 .ruff*
 *.sqlite3
 db.sqlite3
-migrations
+backend/sagaart/emails/*
+backend/sagaart/media/*
+backend/sagaart/sent_emails/*

@@ -1,0 +1,37 @@
+.sidebar {
+    width: 530px;
+    padding: 20px;
+    background: var(--color-background-background-gradient);
+    position: absolute;
+    top: -50px;
+    left: 0;
+    min-height: 100%;
+    transition: left 0.3s ease;
+    z-index: 4;
+  }
+
+  .title {
+    composes: text-style-menu-tabs from '../../../../index.css';
+    margin-bottom: 20px;
+  }
+
+  .body {
+    composes: text-style-body-l from '../../../../index.css';
+    margin-bottom: 20px;
+    --g-color-line-generic-accent: black;
+    --g-color-base-brand: black;
+  }
+
+  .body_inputs {
+    width: 300px;
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    --g-text-input-placeholder-color: var(--color-system-color-ghost);
+    --g-text-input-border-color: var(--color-system-color-ghost);
+    --g-text-input-border-radius: 6px;
+  }
+
+  .input {
+    width: 288px;
+  }
