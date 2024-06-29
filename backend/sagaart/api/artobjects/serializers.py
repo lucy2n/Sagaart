@@ -64,7 +64,7 @@ class ObjectAuthorSerializer(serializers.ModelSerializer):
             "name",
             "gender",
             "age",
-            "year_of_birth",
+            "birth_date",
             "show",
             "awards",
             "city_of_birth",
