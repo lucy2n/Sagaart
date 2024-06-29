@@ -27,20 +27,12 @@ paths:
                $ref: '#/components/schemas/UserPostResult'
         '400':
           description: Сервер не понимает запрос из-за неверного синтаксиса.
-  /api/user/{id}/:
+  /api/user/me/:
     get:
       tags: [Личный кабинет]
       summary: Получение данных личного кабинета пользователя.
       description: Получение информации по личному кабинету пользователя.
       operationId: user_retrieve
-      parameters:
-        - name: id
-          in: path
-          description: Уникальный идентификационный номер пользователя.
-          required: true
-          schema:
-            type: string
-            format: int64
       responses:
         '200':
           description: Запрос клиента успешно обработан.
@@ -60,14 +52,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UserPatch'
-      parameters:
-        - name: id
-          in: path
-          description: Уникальный идентификационный номер пользователя.
-          required: true
-          schema:
-            type: string
-            format: int64
       responses:
         '200':
           description: Запрос клиента успешно обработан.
@@ -110,7 +94,7 @@ paths:
           description: Уникальный идентификационный номер пользователя.
           required: true
           schema:
-            type: string
+            type: integer
             format: int64
         - name: token
           in: path
@@ -128,7 +112,7 @@ paths:
           content:
             application/json:
               schema:
-               $ref: '#/components/schemas/UserPostPassword'
+               $ref: '#/components/schemas/UserPostPasswordResult'
         '400':
           description: Сервер не понимает запрос из-за неверного синтаксиса.
         '404':
@@ -212,11 +196,6 @@ paths:
           in: query
           schema:
             type: integer
-        - name: offset
-          required: false
-          in: query
-          schema:
-            type: integer
         - name: category
           in: query
           required: false
@@ -258,7 +237,6 @@ paths:
           description: Пользователь устанавливает диапазон годов создания товаров искусств, чтобы найти в этом промежутке, учитывая введеные года, нужные товары искусства. Первый год.
           schema:
             type: integer
-            format: date
             description: Год создания товара
             example: 2001
         - name: max_year
@@ -267,7 +245,6 @@ paths:
           description: Пользователь устанавливает диапазон годов создания товаров искусств, чтобы найти в этом промежутке, учитывая введеные года, нужные товары искусства. Второй год.
           schema:
             type: integer
-            format: date
             description: Год создания товара
             example: 2003
         - name: cost_category
@@ -284,6 +261,9 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - count
+                  - results
                 properties:
                   count:
                     type: integer
@@ -327,39 +307,10 @@ paths:
         '404':
           description: Запрашиваемый ресурс не найден.  
   
-  /api/user/{id}/subscribe/:
+  /api/analytics/:
     post:
       tags: [Аналитика товаров искусств]
-      summary: Приобретение подписки сайта пользователем. (заглушка)
-      description: Процесс предоставления информации оплаты и перенаправление пользователя на сторонний сервис для оплаты подписки сайта. Написан с целью заглушки, так как в рамках Хакатона интегрирование API сервиса оплаты не предусматривается.
-      operationId: posttusersubsctribe
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserSubscribeBuy'
-      parameters:
-        - name: id
-          in: path
-          description: Уникальный идентификационный номер пользователя.
-          required: true
-          schema:
-            type: string
-            format: int64
-      responses:
-        '200':
-          description: Запрос клиента успешно обработан.
-          content:
-            application/json:
-              schema:
-               $ref: '#/components/schemas/UserSubscribeBuy'
-        '401':
-          description: Выполните вход в личный кабинет.
-  /api/product/analytics/:
-    post:
-      tags: [Аналитика товаров искусств]
-      summary: Создание заказа на аналитику/оценку товара искусства.
-      description: Создание заказа на аналитику/оценку товара искусства с целью получения дополнительной информации о данном товаре. В результате с помощью данного алгоритма оценки заказчика будет предоставлена информация справедливая цена товара, выставки в которых участвовал автор, график изменения цены товара искусства, в каких коллекциях находится товар, упоминания товара в СМИ. 
+      summary: Создание заказа на аналитику товара искусства.
       operationId: postanalytics
       requestBody:
         content:
@@ -368,250 +319,189 @@ paths:
               $ref: '#/components/schemas/ProductAnalyticsOrder'
       responses:
         '200':
-          description: Успешно отправлен товар искусства на аналитику.
+          description: Запрос клиента успешно обработан.
           content:
             application/json:
               schema:
                $ref: '#/components/schemas/ProductAnalyticsOrder'
         '400':
-          description: Указаны невалидные данные для заказа аналитики товара.
+          description: Сервер не понимает запрос из-за неверного синтаксиса.
         '401':
-          description: Выполните вход в личный кабинет.
-  /api/user/{id}/analytics/:
+          description: Для получения запрашиваемого ответа нужна аутентификация.
     get:
       tags: [Аналитика товаров искусств]
       summary: История заказов аналитики товаров искусств.
-      description: Получение истории заказов аналитики/оценки товара искусств в личном кабинете пользователя.
       operationId: getuseranalyticsarray
-      parameters:
-        - name: id
-          in: path
-          description: Уникальный идентификационный номер пользователя.
-          required: true
-          schema:
-            type: string
-            format: int64
       responses:
         '200':
-          description: Успешная загрузка списка заказов аналитики товаров искусств.
+          description: Запрос клиента успешно обработан.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ProductAnalyticsListArray"
         '401':
-          description: Выполните вход в личный кабинет.
-  /api/user/{id}/analytics/{productanalytics_id}/:
+          description: Для получения запрашиваемого ответа нужна аутентификация.
+  /api/analytics/{id}/:
     get:
       tags: [Аналитика товаров искусств]
       summary: Заказанная аналитика товара искусства.
-      description: Получение всей информации об заказанной аналитике/оценке товара искусства.
       operationId: getuseranalytics
       parameters:
         - name: id
           in: path
-          description: Уникальный идентификационный номер пользователя.
           required: true
           schema:
-            type: string
-            format: int64
-        - name: productanalytics_id
-          in: path
-          description: Уникальный идентификационный номер пользователя.
-          required: true
-          schema:
-            type: string
-            format: int64
+            type: integer
       responses:
         '200':
-          description: Информация карточки товара искусств успешно отображена.
+          description: Запрос клиента успешно обработан.
           content:
             application/json:
               schema:
-               $ref: '#/components/schemas/ProductAnalyticsUser'
+               $ref: '#/components/schemas/ProductAnalytics'
         '401':
-          description: Выполните вход в личный кабинет.
+          description: Для получения запрашиваемого ответа нужна аутентификация.
         '404':
-          description: Информация по товару искусств не найдена.    
-
+          description: Запрашиваемый ресурс не найден.   
 
 components:
   schemas:
-    UserInfo: #Схема для информации личного кабинета/пользователя.
-      type: object
-      required:
-        - id
-        - email
-        - password
-        - first_name
-        - sur_name
-        - middle_name
-        - telephone
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-        email:
-          type: string
-          description: Длина в 250 символов, обязательное присутствие символа @. Специальные символы . - 
-          example: example@yandex.ru
-        first_name:
-          type: string
-          description: Длина в 50 символов, язык RUS, ENG.
-          example: Иван
-        sur_name:
-          type: string
-          description: Длина в 50 символов, язык RUS, ENG.
-          example: Иванов
-        middle_name:
-          type: string
-          description: Длина в 50 символов, язык RUS, ENG.
-          example: Иванович
-        telephone:
-          type: string
-          description: Длина 11 - 15 символов. Формат номера телефона +7
-          example: +79012325312
-        subcribe:
-          $ref: '#/components/schemas/UserSubscribe'
-    UserPost: #Схема для создания личного кабинета/пользователя.
+    UserInfo:
       type: object
       required:
         - email
-        - first_name
-        - sur_name
-        - middle_name
-        - telephone
-        - password
-      properties:
-        email:
-          type: string
-          description: Длина в 250 символов, обязательное присутствие символа @.Специальные символы . - 
-          example: example@yandex.ru
-        first_name:
-          type: string
-          description: Длина в 50 символов, язык RUS, ENG.
-          example: Иван
-        sur_name:
-          type: string
-          description: Длина в 50 символов, язык RUS, ENG.
-          example: Иванов
-        middle_name:
-          type: string
-          description: Длина в 50 символов, язык RUS, ENG.
-          example: Иванович
-        telephone:
-          type: string
-          description: Длина 11 - 15 символов. Формат номера телефона +7
-          example: +79012325312
-        password:
-          type: string
-          description: Возможная длина пароля 8-25 символов, язык ENG, заглавные и прописные буквы A-Z, цифры 0-9, а также знак тире “-” и спец. символы.
-          example: qwert12345
-    UserPostResult: #Схема для создания личного кабинета/пользователя.
-      type: object
-      required:
-        - email
-        - first_name
-        - sur_name
-        - middle_name
-        - telephone
-      properties:
-        email:
-          type: string
-          description: Длина в 250 символов, обязательное присутствие символа @.Специальные символы . - 
-          example: example@yandex.ru
-        first_name:
-          type: string
-          description: Длина в 50 символов, язык RUS, ENG.
-          example: Иван
-        sur_name:
-          type: string
-          description: Длина в 50 символов, язык RUS, ENG.
-          example: Иванов
-        middle_name:
-          type: string
-          description: Длина в 50 символов, язык RUS, ENG.
-          example: Иванович
-        telephone:
-          type: string
-          description: Длина 11 - 15 символов. Формат номера телефона +7
-          example: +79012325312
-    UserPatch: #Схема для редактирования личного кабинета/пользователя.
-      type: object
-      required:
-        - first_name
-        - sur_name
-        - middle_name
-        - telephone
-      properties:
-        first_name:
-          type: string
-          description: Длина в 50 символов, язык RUS, ENG.
-          example: Иван
-        sur_name:
-          type: string
-          description: Длина в 50 символов, язык RUS, ENG.
-          example: Иванов
-        middle_name:
-          type: string
-          description: Длина в 50 символов, язык RUS, ENG.
-          example: Иванович
-        telephone:
-          type: string
-          description: Длина 11 - 15 символов. Формат номера телефона +7
-          example: +79012325312
-    UserPatchResult: #Схема для редактирования личного кабинета/пользователя.
-      type: object
-      required:
-        - email
-        - first_name
-        - sur_name
-        - middle_name
-        - telephone
         - subcribe
       properties:
-        user_id:
-          type: integer
-          format: int64
-          example: 1
         email:
           type: string
-          description: Длина в 250 символов, обязательное присутствие символа @.Специальные символы . - 
+          format: email
+          minLength: 8
+          maxLength: 250
+          description: Длина в 250 символов, обязательное присутствие символа @. Специальные символы ! # $ % & ' * +  / =? ^  ` { | } ~.
           example: example@yandex.ru
-        first_name:
+        user_name:
           type: string
-          description: Длина в 50 символов, язык RUS, ENG.
-          example: Иван
-        sur_name:
-          type: string
-          description: Длина в 50 символов, язык RUS, ENG.
-          example: Иванов
-        middle_name:
-          type: string
-          description: Длина в 50 символов, язык RUS, ENG.
-          example: Иванович
+          minLength: 2
+          maxLength: 150
+          description: Длина в 2 - 150 символов, язык RUS, ENG.
+          example: Иванов Иван Иванович
         telephone:
           type: string
-          description: Длина 11 - 15 символов. Формат номера телефона +7
+          minLength: 11
+          maxLength: 15
+          description: Длина 11 - 15 символов. Формат номера телефона + (E.164)
           example: +79012325312
-        subcribe:
-          $ref: '#/components/schemas/UserSubscribe'
-    UserEmailPWD: #Схема для отправки письма с целью восстановления пароля от личного кабинета.
+    UserPost:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          minLength: 8
+          maxLength: 250
+          description: Длина в 250 символов, обязательное присутствие символа @. Специальные символы ! # $ % & ' * +  / =? ^  ` { | } ~.
+          example: example@yandex.ru
+        password:
+          type: string
+          format: password
+          minLength: 8
+          maxLength: 25
+          description: Возможная длина пароля 8 - 25 символов, язык ENG, заглавные и прописные буквы A-Z, цифры 0-9, а также знак тире “-” и спец. символы.
+          example: qwert12345
+    UserPostResult:
       type: object
       required:
         - email
       properties:
         email:
           type: string
-          description: Длина в 250 символов, обязательное присутствие символа @.Специальные символы . - 
+          format: email
+          minLength: 8
+          maxLength: 250
+          description: Длина в 250 символов, обязательное присутствие символа @. Специальные символы ! # $ % & ' * +  / =? ^  ` { | } ~.
           example: example@yandex.ru
-    UserPostPassword: #Схема для изменения пароля личного кабинета пользователя.
+    UserPatch:
+      type: object
+      properties:
+        user_name:
+          type: string
+          minLength: 2
+          maxLength: 150
+          description: Длина в 2 - 150 символов, язык RUS, ENG.
+          example: Иванов Иван Иванович
+        telephone:
+          type: string
+          minLength: 11
+          maxLength: 15
+          description: Длина 11 - 15 символов. Формат номера телефона + (E.164)
+          example: +79012325312
+    UserPatchResult:
+      type: object
+      required:
+        - email
+        - subcribe
+      properties:
+        email:
+          type: string
+          format: email
+          minLength: 8
+          maxLength: 250
+          description: Длина в 250 символов, обязательное присутствие символа @. Специальные символы ! # $ % & ' * +  / =? ^  ` { | } ~.
+          example: example@yandex.ru
+        user_name:
+          type: string
+          minLength: 2
+          maxLength: 150
+          description: Длина в 2 - 150 символов, язык RUS, ENG.
+          example: Иванов Иван Иванович
+        telephone:
+          type: string
+          minLength: 11
+          maxLength: 15
+          description: Длина 11 - 15 символов. Формат номера телефона + (E.164)
+          example: +79012325312
+    UserEmailPWD:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          format: email
+          minLength: 8
+          maxLength: 250
+          description: Длина в 250 символов, обязательное присутствие символа @. Специальные символы ! # $ % & ' * +  / =? ^  ` { | } ~.
+          example: example@yandex.ru
+    UserPostPassword:
+      type: object
+      required:
+        - new_password
+        - re_new_password
+      properties:
+        new_password:
+          type: string
+          format: password
+          minLength: 8
+          maxLength: 25
+          description: Возможная длина пароля 8 - 25 символов, язык ENG, заглавные и прописные буквы A-Z, цифры 0-9, а также знак тире “-” и спец. символы.
+          example: qwert12345
+        re_new_password:
+          type: string
+          format: password
+          minLength: 8
+          maxLength: 25
+          description: Возможная длина пароля 8 - 25 символов, язык ENG, заглавные и прописные буквы A-Z, цифры 0-9, а также знак тире “-” и спец. символы.
+          example: qwert12345
+    UserPostPasswordResult:
       type: object
       required:
         - uid
         - token
         - new_password
-        - re_new_passwrod
+        - re_new_password
       properties:
         uid:
           type: integer
@@ -621,13 +511,19 @@ components:
           type: string  
         new_password:
           type: string
-          description: Возможная длина пароля 8-25 символов, язык ENG, заглавные и прописные буквы A-Z, цифры 0-9, а также знак тире “-” и спец. символы.
+          format: password
+          minLength: 8
+          maxLength: 25
+          description: Возможная длина пароля 8 - 25 символов, язык ENG, заглавные и прописные буквы A-Z, цифры 0-9, а также знак тире “-” и спец. символы.
           example: qwert12345
         re_new_password:
           type: string
-          description: Возможная длина пароля 8-25 символов, язык ENG, заглавные и прописные буквы A-Z, цифры 0-9, а также знак тире “-” и спец. символы.
-          example: qwert12345э
-    UserAuthTokenCreate: #Схема создания токена авторизации.
+          format: password
+          minLength: 8
+          maxLength: 25
+          description: Возможная длина пароля 8 - 25 символов, язык ENG, заглавные и прописные буквы A-Z, цифры 0-9, а также знак тире “-” и спец. символы.
+          example: qwert12345
+    UserAuthTokenCreate:
       type: object
       required:
         - email
@@ -635,122 +531,56 @@ components:
       properties:
         email:
           type: string
-          description: Длина в 250 символов, обязательное присутствие символа @.Специальные символы . - 
+          format: email
+          minLength: 8
+          maxLength: 250
+          description: Длина в 250 символов, обязательное присутствие символа @. Специальные символы ! # $ % & ' * +  / =? ^  ` { | } ~.
           example: example@yandex.ru
         password:
           type: string
-          description: Возможная длина пароля 8-25 символов, язык ENG, заглавные и прописные буквы A-Z, цифры 0-9, а также знак тире “-” и спец. символы.
+          format: password
+          minLength: 8
+          maxLength: 25
+          description: Возможная длина пароля 8 - 25 символов, язык ENG, заглавные и прописные буквы A-Z, цифры 0-9, а также знак тире “-” и спец. символы.
           example: qwert12345
-    UserAuthTokenGetResponse: #Схема чтения токена авторизации.
+    UserAuthTokenGetResponse:
       type: object
       required:
         - token
       properties:
         token:
           type: string
-    UserSubscribe: #Базования схема по сущности "Подписка".
-      type: object
-      required:
-        - tariff
-        - cost
-        - status
-        - date_start
-        - date_end
-      properties:
-         tariff:
-          type: integer
-          description: 1 - Тариф "Freelancer", 2 - Тариф "Professional", 3 - Тариф "Agency"
-          enum:
-            - 1
-            - 2
-            - 3
-         cost:
-          type: integer
-          description: 1000 - Стоимость тарифа "Freelancer", 2000 - Стоимость тарифа "Professional", 3000 - Стоимость тарифа "Agency"
-          enum:
-            - 1000
-            - 2000
-            - 3000
-         status:
-          type: integer
-          description: 0 - подписка отсутствует. 1 - подписка активна.
-          enum:
-            - 0
-            - 1
-         date_start:
-          type: string
-          format: date
-          description: Дата начала подписки. При регистрации личного кабинета значение соответствует дате установленной на ПК.
-          example: 01.01.2024
-         date_end:
-          type: string
-          format: date
-          description: Дата окончания подписки. При регистрации личного кабинета значение соответствует дате установленной на ПК.
-          example: 01.01.2025
-    UserSubscribeShort: #Вспомогательная схема краткой информации о подписке.
-      type: object
-      required:
-        - tariff
-        - cost
-      properties:
-         tariff:
-          type: integer
-          description: 1 - Тариф "Freelancer", 2 - Тариф "Professional", 3 - Тариф "Agency"
-          enum:
-            - 1
-            - 2
-            - 3
-         cost:
-          type: integer
-          description: 1000 - Стоимость тарифа "Freelancer", 2000 - Стоимость тарифа "Professional", 3000 - Стоимость тарифа "Agency"
-          enum:
-            - 1000
-            - 2000
-            - 3000
-    UserSubscribeBuy: #Схема для отправки информации в сторонний сервис оплаты подписки.
-      type: object
-      required:
-        - user_id
-        - subscribe
-        - url_home
-        - url_pay
-      properties:
-         user_id:
-          type: integer
-          format: int64
-          example: 1
-         subscribe:
-          $ref: '#/components/schemas/UserSubscribeShort'
-         url_home:
-          type: string
-          example: URL страницы на которую вернется пользователь после оплаты подписки на стороннем сервисе.
-         url_pay:
-          type: string
-          example: URL страницы стороннего сервиса для оплаты подписки.
-    Feedback: #Схема для формы обратной связи.
+    Feedback:
       type: object
       required:
         - user_mail
-        - user_name
-        - user_phone
         - feedback_message
       properties:
         user_mail:
           type: string
-          description: Длина в 250 символов, обязательное присутствие символа @.Специальные символы . - 
+          format: email
+          minLength: 8
+          maxLength: 250
+          description: Длина в 250 символов, обязательное присутствие символа @. Специальные символы ! # $ % & ' * +  / =? ^  ` { | } ~.
           example: example@yandex.ru
         user_name:
           type: string
-          description: Длина в 150 символов, язык RUS, ENG. 
+          minLength: 2
+          maxLength: 150
+          description: Длина в 2 - 150 символов, язык RUS, ENG.
           example: Иванов Иван Иванович
         user_phone:
           type: string
-          description: Длина 11 - 15 символов. Формат номера телефона +7
+          minLength: 11
+          maxLength: 15
+          description: Длина 11 - 15 символов. Формат номера телефона + (E.164)
           example: +79012325312
         feedback_message:
           type: string
-          description: Описание вопроса/проблемы пользователя. Длина в 3000 символов.
-    Product: #Базовая схема по сущности "Товар".
+          minLength: 5
+          maxLength: 3000
+          description: Описание вопроса/проблемы пользователя. Длина 20 - 3000 символов.
+    Product: 
       type: object
       required:
         - id
@@ -760,10 +590,15 @@ components:
         - style
         - genre
         - size_category
+        - size
+        - city_sale
         - year
         - cost_category
+        - end_cost
         - author
         - is_published
+        - similar_works
+        - author_works
       properties:
          id:
           type: integer
@@ -804,10 +639,9 @@ components:
           description: Город продажи товара искусства.
           example: Москва
          year:
-          type: string
-          format: date
+          type: integer
           description: Год создания товара
-          example: 01.01.2001
+          example: 2001
          material:
           type: string
           example: Акриловые краски
@@ -841,11 +675,6 @@ components:
           type: string
           description: Желаемая цена товара, которая будет отображена в описании карточки товара.
           example: 1000 - 2000
-         is_published:
-          type: integer
-          enum: 
-            - 0
-            - 1
          author:
           $ref: '#/components/schemas/ProductAuthor'
          similar_works:
@@ -856,7 +685,7 @@ components:
       type: object
       required:
         - id
-        - name
+        - image
       properties:
          id:
           type: integer
@@ -865,7 +694,7 @@ components:
          image:
           type: string
           example: Reference/URL подгруженного изображения товара искусств.
-    SimilarProductArray: #Схема для отображения всех товаров искусств в каталоге.
+    SimilarProductArray: #
       type: array
       items: 
           $ref: '#/components/schemas/SimilarProduct'
@@ -873,7 +702,7 @@ components:
       type: object
       required:
         - id
-        - name
+        - image
       properties:
          id:
           type: integer
@@ -882,11 +711,11 @@ components:
          image:
           type: string
           example: Reference/URL подгруженного изображения товара искусств.
-    AuthorProductArray: #Схема для отображения всех товаров искусств в каталоге.
+    AuthorProductArray:
       type: array
       items: 
           $ref: '#/components/schemas/AuthorProduct'
-    ProductAuthor: #Базовая схема по сущности "Автор".
+    ProductAuthor:
       type: object
       required:
         - id
@@ -917,7 +746,7 @@ components:
           type: string
           format: date
           description: Год рождения
-          example: 01.01.1452
+          example: 01.01.2001
          show:
           $ref: '#/components/schemas/ProductAuthorShow'
          awards:
@@ -949,12 +778,13 @@ components:
          social:
           type: string
           description: Социальные сети автора товара искусства
-    ProductAuthorShow: #Базовая схема по сущности "Выставки автора".
+    ProductAuthorShow:
       type: object
       required:
         - id
         - name
         - year
+        - cost
         - place
       properties:
         id:
@@ -972,8 +802,9 @@ components:
           example: 1000
         year:
           type: string
-          example: 2001
-    ProductAuthorAchievement: #Базовая схема по сущности "Награды автора".
+          format: date    
+          example: 01.01.2001
+    ProductAuthorAchievement:
       type: object
       required:
         - id
@@ -986,7 +817,7 @@ components:
         name:
           type: string
           example: Лауреат Московской арт премии.
-    ProductCategory: #Базовая схема по сущности "Категория".
+    ProductCategory:
       type: object
       required:
         - id
@@ -1004,7 +835,7 @@ components:
         name:
           type: string
           example: Живопись
-    ProductStyle: #Базовая схема по сущности "Стиль".
+    ProductStyle:
       type: object
       required:
         - id
@@ -1026,7 +857,7 @@ components:
         name:
           type: string
           example: Абстракция
-    ProductGenre: #Базовая схема по сущности "Жанр".
+    ProductGenre:
       type: object
       required:
         - id
@@ -1047,7 +878,7 @@ components:
         name:
           type: string
           example: Анималистикаа
-    ProductSearch: #Схема для поиска товаров искусств. Данная схема учитывает фильтрацию товаров искусств.
+    ProductSearch:
       type: object
       required:
         - id
@@ -1057,10 +888,12 @@ components:
         - style
         - genre
         - size_category
+        - size
         - year
         - cost_category
+        - end_cost
         - author
-        - analytics
+        - is_published
       properties:
          id:
           type: integer
@@ -1101,10 +934,9 @@ components:
           description: Город продажи товара искусства.
           example: Москва
          year:
-          type: string
-          format: date
+          type: integer
           description: Год создания товара
-          example: 01.01.2001
+          example: 2001
          cost_category:
           type: integer
           description: Выбор категории цен товара искусства 1 - до 20 000 руб., 2 - от 20 000 до 50 000 руб., 3 - от 50 000 до 100 000 руб., 4 - от 100 000 до 200 000 руб., 5 - от 200 000 до 500 000 руб.
@@ -1117,18 +949,13 @@ components:
          end_cost:
           type: integer
           example: 2000
-         is_published:
-          type: integer
-          enum: 
-            - 0
-            - 1
          author:
           $ref: '#/components/schemas/ProductAuthorShort'
-    ProductSearchArray: #Схема для отображения всех товаров искусств в каталоге.
+    ProductSearchArray:
       type: array
       items: 
           $ref: '#/components/schemas/ProductSearch'
-    ProductAuthorShort: #Схема для вывода краткой информации по автору товара искусства.
+    ProductAuthorShort:
       type: object
       required:
         - id
@@ -1141,252 +968,240 @@ components:
          name:
           type: string
           example: Леонардо да Винчи
-    ProductAnalyticsDiagram: #Базовая схема по сущности "Цены товара".
+    ProductAnalyticsOrder:
       type: object
       required:
-        - id
-        - name
-        - cost
+        - product_name
+        - category
         - year
+        - height
+        - width
+        - material
+        - tablet_material
+        - author_name
+        - gender
+        - birth_year
+        - birth_country
+        - solo_show
+        - group_show
       properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-        name:
+         product_name:
           type: string
-          example: Галерея Артемида, совместная выставка.
-        cost:
-          type: integer
-          example: 1000
-        year:
+          minLength: 1
+          maxLength: 150
+          description: Длина в 1 - 150 символов, язык RUS, ENG. Возможно использование специальных символов и числовых значений.
+          example: Мона Лиза
+         category:
           type: string
+          minLength: 2
+          maxLength: 150
+          description: Длина в 2 - 150 символов, язык RUS, ENG.
+          example: Живопись
+         year:
+          type: integer
+          pattern: "YYYY"
+          description: Год создания товара искусства.
+          example: 2024
+         height:
+          type: number
+          format: float
+          minLength: 1
+          maxLength: 1000
+          description: Высота товара искусства. Принимает числовые значения с плавающей с десятичной запятой.
+          example: 40.6
+         width:
+          type: number
+          minLength: 1
+          maxLength: 1000
+          format: float
+          description: Ширина товара искусства. Принимает числовые значения с плавающей с десятичной запятой. 
+          example: 60.1
+         material:
+          type: string
+          minLength: 2
+          maxLength: 150
+          description: Длина 2 - 150 символов, язык RUS, ENG.
+          example: Акриловые краски
+         tablet_material:
+          type: string
+          minLength: 2
+          maxLength: 150
+          description: Длина 2 - 150 символов, язык RUS, ENG. 
+          example: Холст         
+         author_name:
+          type: string
+          minLength: 2
+          maxLength: 150
+          description: Длина 2 - 150 символов, язык RUS, ENG. Возможно использование специальных символов и числовых значений.
+          example: Ван Гог      
+         gender:
+          type: integer
+          description: Выбор пола автора. 1 - Мужской, 2 - Женский.
+          enum:
+            - 1
+            - 2          
+         birth_year:
+          type: integer
+          pattern: "YYYY"
+          description: Год рождения автора товара искусства.
           example: 2001
-
-
-
-
-
-
-
-    ProductAnalytics: #Схема для отображения информации аналитики на карточке товара.
+         birth_country:
+          type: string
+          minLength: 2
+          maxLength: 150
+          description: Страна рождения автора товара искусства.
+          example: Италия
+         solo_show:
+          type: string
+          minLength: 2
+          maxLength: 3000
+          description: Персональные выставки автора товара искусства. Длина 2 - 3000 символов. Язык RUS, ENG. Специальные символы , 
+          example: Лувр
+         group_show:
+          type: string
+          minLength: 2
+          maxLength: 3000
+          description: Групповые выставки автора товара искусства. Длина 2 - 3000 символов. Язык RUS, ENG. Специальные символы , 
+          example: Третьяковская галерея
+    ProductAnalytics:
       type: object
       required:
         - id
-        - cost
-        - collection
-        - cm
+        - analytics_owner
+        - product_name
+        - category
+        - year
+        - height
+        - width
+        - material
+        - tablet_material
+        - author_name
+        - gender
+        - birth_year
+        - birth_country
+        - solo_show
+        - group_show
       properties:
          id:
           type: integer
           format: int64
           example: 1
-         cost:
-          type: string
-          description: Рассчитанная цена товара искусства алгоритмом заказчика (может быть диапозоном).
-          example: 29000 - 31000
-
-         date:
-          type: string
-          format: date
-          description: Дата заказанной аналитики.
-          example: 20.01.2001
-         diagram:
-          $ref: '#/components/schemas/ProductAnalyticsDiagram'
-    ProductAnalyticsOrder: #Схема для создания заказа аналитики товара искусства.
-      type: object
-      required:
-        - productAuthor_name
-        - productAuthor_sex
-        - productAuthor_age
-        - productAuthor_city_live
-        - product_name
-        - product_jpeg
-        - product_category
-        - product_style
-        - product_genre
-        - product_size
-        - product_material1
-        - product_material2
-        - product_year
-        - product_city_sale
-      properties:
-         productAuthor_name:
-          type: string
-          description: Имя/псевдоним автора товара искусств.
-          example: Винсент Ван Гог
-         productAuthor_sex:
-          type: integer
-          description: Выбор пола автора. 1 - Мужской, 2 - Женский.
-          enum:
-            - 1
-            - 2 
-         productAuthor_age:
-          type: string
-          description: Возраст автора товара искусства.
-          example: 18 лет
-         productAuthor_city_live:
-          type: string
-          description: Город проживания автора товара искусства.
-          example: Зюндерт
-         product_name:
-          type: string
-          description: Наименование товара искусства.
-          example: Подсолнухи
-         product_jpeg:
-          type: string
-          example: Reference/URL подгруженного изображения товара искусств.
-         product_category:
-          $ref: '#/components/schemas/ProductCategory'
-         product_style:
-          $ref: '#/components/schemas/ProductStyle'
-         product_genre:
-          $ref: '#/components/schemas/ProductGenre'
-         product_size:
-          type: string
-          example: 40.6 × 40.6 см
-         product_material1:
-          type: string
-          example: Акриловые краски
-         product_material2:
-          type: string
-          example: Холст
-         product_year:
-          type: string
-          description: Год создания товара искусства.
-          example: 2010
-         product_city_sale:
-          type: string
-          description: Город продажи товара искусства.
-          example: Москва
-    ProductAnalyticsInfo: #Схема для отображения информации по товару искусства в карточке заказанной аналитики.
-      type: object
-      required:
-        - product_name
-        - product_category
-        - product_style
-        - product_genre
-        - product_size
-        - product_material1
-        - product_material2
-        - product_year
-        - product_city_sale
-      properties:
-         product_name:
-          type: string
-          description: Наименование товара искусства.
-          example: Подсолнухи
-         product_category:
-          $ref: '#/components/schemas/ProductCategory'
-         product_style:
-          $ref: '#/components/schemas/ProductStyle'
-         product_genre:
-          $ref: '#/components/schemas/ProductGenre'
-         product_size:
-          type: string
-          example: 40.6 × 40.6 см
-         product_material1:
-          type: string
-          example: Акриловые краски
-         product_material2:
-          type: string
-          example: Холст
-         product_year:
-          type: string
-          description: Год создания товара искусства.
-          example: 2010
-         product_city_sale:
-          type: string
-          description: Город продажи товара искусства.
-          example: Москва
-    ProductAnalyticsAuthor: # Схема краткой информации об авторе товара искусства для списка заказов аналитики.
-      type: object
-      required:
-        - productAuthor_name
-        - productAuthor_sex
-        - productAuthor_age
-        - productAuthor_city_live
-      properties:
-         productAuthor_name:
-          type: string
-          description: Имя/псевдоним автора товара искусств.
-          example: Винсент Ван Гог
-         productAuthor_sex:
-          type: integer
-          description: Выбор пола автора. 1 - Мужской, 2 - Женский.
-          enum:
-            - 1
-            - 2 
-         productAuthor_age:
-          type: string
-          description: Возраст автора товара искусства.
-          example: 18 лет
-         productAuthor_city_live:
-          type: string
-          description: Город проживания автора товара искусства.
-          example: Зюндерт
-         productAuthor_show:
-          $ref: '#/components/schemas/ProductAuthorShow'   
-    ProductAnalyticsShort: # Схема краткой информации о полученной аналитике товара искусства.
-      type: object
-      required:
-        - productAnalytics_id
-        - productAnalytic_date
-      properties:
-         productAnalytics_id:
+         analytics_owner:
           type: integer
           format: int64
           example: 1
-         productAnalytic_date:
+         product_name:
           type: string
-          format: date
-          description: Дата заказанной аналитики.
+          minLength: 1
+          maxLength: 150
+          description: Длина в 1 - 150 символов, язык RUS, ENG. Возможно использование специальных символов и числовых значений.
+          example: Мона Лиза
+         category:
+          type: string
+          minLength: 2
+          maxLength: 150
+          description: Длина в 2 - 150 символов, язык RUS, ENG.
+          example: Живопись
+         year:
+          type: integer
+          pattern: "YYYY"
+          description: Год создания товара искусства.
+          example: 2024
+         height:
+          type: number
+          format: float
+          minLength: 1
+          maxLength: 1000
+          description: Высота товара искусства. Принимает числовые значения с плавающей с десятичной запятой.
+          example: 40.6
+         width:
+          type: number
+          minLength: 1
+          maxLength: 1000
+          format: float
+          description: Ширина товара искусства. Принимает числовые значения с плавающей с десятичной запятой. 
+          example: 60.1
+         material:
+          type: string
+          minLength: 2
+          maxLength: 150
+          description: Длина 2 - 150 символов, язык RUS, ENG.
+          example: Акриловые краски
+         tablet_material:
+          type: string
+          minLength: 2
+          maxLength: 150
+          description: Длина 2 - 150 символов, язык RUS, ENG. 
+          example: Холст         
+         author_name:
+          type: string
+          minLength: 2
+          maxLength: 150
+          description: Длина 2 - 150 символов, язык RUS, ENG. Возможно использование специальных символов и числовых значений.
+          example: Ван Гог      
+         gender:
+          type: integer
+          description: Выбор пола автора. 1 - Мужской, 2 - Женский.
+          enum:
+            - 1
+            - 2          
+         birth_year:
+          type: integer
+          pattern: "YYYY"
+          description: Год рождения автора товара искусства.
           example: 2001
-    ProductShort: #Схема краткой информации о товаре искусства для истории аналитики.
+         birth_country:
+          type: string
+          minLength: 2
+          maxLength: 150
+          description: Страна рождения автора товара искусства.
+          example: Италия
+         solo_show:
+          type: string
+          minLength: 2
+          maxLength: 3000
+          description: Персональные выставки автора товара искусства. Длина 2 - 3000 символов. Язык RUS, ENG. Специальные символы , 
+          example: Лувр
+         group_show:
+          type: string
+          minLength: 2
+          maxLength: 3000
+          description: Групповые выставки автора товара искусства. Длина 2 - 3000 символов. Язык RUS, ENG. Специальные символы , 
+          example: Третьяковская галерея
+         calculated_price:
+          type: integer
+          maxLength: 10
+          description: Рассчитанная цена с помощью алгоритма для товара искусства. Целое число.
+          example: 10000
+    ProductAnalyticsList:
       type: object
       required:
-        - product_id
+        - id
+        - analytics_owner
         - product_name
+        - author_name
       properties:
-         product_id:
+         id:
+          type: integer
+          format: int64
+          example: 1
+         analytics_owner:
           type: integer
           format: int64
           example: 1
          product_name:
           type: string
-          description: Наименование товара искусства.
-          example: Подсолнухи
-    ProductAnalyticsList: #Схема для отображения заказов аналитики товаров в личном кабинете.
-      type: object
-      required:
-        - user_id
-        - productAnalytic
-        - productAuthor
-      properties:
-         user_id:
-          type: integer
-          format: int64
-          example: 1
-         productAnalytics:
-          $ref: '#/components/schemas/ProductShort'
-         productAuthor:
-          $ref: '#/components/schemas/ProductAuthorShort'
-    ProductAnalyticsListArray: #Схема для списка заказов аналитики товаров искусств в личном кабинете.
+          minLength: 1
+          maxLength: 150
+          description: Длина в 1 - 150 символов, язык RUS, ENG. Возможно использование специальных символов и числовых значений.
+          example: Мона Лиза
+         author_name:
+          type: string
+          minLength: 2
+          maxLength: 150
+          description: Длина 2 - 150 символов, язык RUS, ENG. Возможно использование специальных символов и числовых значений.
+          example: Ван Гог       
+    ProductAnalyticsListArray:
       type: array
       items: 
           $ref: '#/components/schemas/ProductAnalyticsList'
-    ProductAnalyticsUser: #Схема результата аналитики товаров искусства в личном кабинете.
-      type: object
-      required:
-        - user_id
-      properties:
-         user_id:
-          type: integer
-          format: int64
-          example: 1
-         product:
-          $ref: '#/components/schemas/ProductAnalyticsInfo'
-         product_author:
-          $ref: '#/components/schemas/ProductAnalyticsAuthor'
-         product_analytics:
-          $ref: '#/components/schemas/ProductAnalytics'

@@ -120,17 +120,13 @@ SERVER_EMAIL = os.getenv("EMAIL_HOST_USER")
 DEFAULT_FROM_EMAIL = os.getenv("EMAIL_HOST_USER")
 
 DJOSER = {
-    "PASSWORD_RESET_CONFIRM_URL": "/api/user/resetpassword/{uid}/{token}",
+    "PASSWORD_RESET_CONFIRM_URL": "api/user/reset_password_confirm/{uid}/{token}/",
     "SEND_CONFIRMATION_EMAIL": True,
-    "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
     "SET_PASSWORD_RETYPE": True,
-    "PASSWORD_RESET_CONFIRM_RETYPE": True,
-    "PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND": True,
     "HIDE_USERS": False,
     "SERIALIZERS": {
         "user_create": "api.auth.serializers.UserRegistrationSerializer",
         "current_user": "api.auth.serializers.UserSerializer",
-        "password_reset_confirm_retype": "api.auth.serializers.SetPassword",
     },
 }
 
