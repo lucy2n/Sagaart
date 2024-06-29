@@ -110,12 +110,14 @@ REST_FRAMEWORK = {
 LANGUAGE_CODE = "en-us"
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+EMAIL_PORT = 2525
+SERVER_EMAIL = os.getenv("EMAIL_HOST_USER")
+DEFAULT_FROM_EMAIL = os.getenv("EMAIL_HOST_USER")
 
 DJOSER = {
     "PASSWORD_RESET_CONFIRM_URL": "/api/user/resetpassword/{uid}/{token}",
