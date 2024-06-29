@@ -1,11 +1,16 @@
 
 import React, { useState, useEffect, FC } from 'react';
 import type { FormUploadingProps } from './types';
-import { Input, InputDropzone, InputM } from '../../../shared/ui';
+import { Input, InputM } from '../../../shared/ui';
 import styles from './form-uploading.module.css';
 import { useFormContext } from 'react-hook-form';
 import { Button, Icon } from '@gravity-ui/uikit';
 import { Select } from '../../../shared/ui/';
+import { clsx } from 'clsx';
+import { JSX } from 'react/jsx-runtime';
+
+
+
 
 const Color = (props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
@@ -32,50 +37,18 @@ const Color = (props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>): 
     );
 };
 
-
-
-import { clsx } from 'clsx';
-import { JSX } from 'react/jsx-runtime';
-
-const listCategory = [
-    { value: '1', content: 'Живопись' },
-    { value: '2', content: 'Графика' },
-    { value: '3', content: 'Фотография' },
-    { value: '4', content: 'Digital' },
-];
-
-const listStyle = [
-    { value: '1', content: 'Анималистика' },
-    { value: '2', content: 'Аллегорический' },
-    { value: '3', content: 'Батальный' },
-    { value: '4', content: 'Былинный' },
-    { value: '5', content: 'Бытовой' },
-    { value: '6', content: 'Ню' },
-    { value: '7', content: 'Религиозный' },
-];
-
-const listGenre = [
-    { value: '1', content: 'Абстракция' },
-    { value: '2', content: 'Минимализм' },
-    { value: '3', content: 'Экспрессионизм' },
-    { value: '4', content: 'Концептуальное искусство' },
-    { value: '5', content: 'Фигуративное искусство' },
-    { value: '6', content: 'Pop Art' },
-    { value: '7', content: 'Street Art' },
-    { value: '8', content: 'Интерьерное' },
-];
-
 const listGender = [
     { value: '1', content: 'Мужской' },
     { value: '2', content: 'Женский' },
 ];
 
-
 export const FormFieldsUploading: FC<FormUploadingProps> = ({
     serverErrorText = '',
+    setServerErrorText
 }) => {
 
     const [imagePreviewUrl, setImagePreviewUrl] = useState('');
+
 
     const {
         formState: { isValid, errors },
@@ -101,129 +74,120 @@ export const FormFieldsUploading: FC<FormUploadingProps> = ({
             <div className={styles.container}>
                 <div className={styles.input_list}>
                     <Input
-                        name="object_author_name"
+                        name="author_name"
                         labelName="ФИО художника/ Псевдоним"
                         placeholder="Введите имя художника"
-                        error={errors.object_author_name ? `${errors.object_author_name?.message}` : ''}
+                        error={errors.author_name ? `${errors.author_name?.message}` : ''}
                         style={{ backgroundColor: 'rgba(239,233,224,1)' }}
+                        onFocus={() => setServerErrorText('')}
                     />
                     <Input
-                        name="art_object_name"
+                        name="product_name"
                         labelName="Название картины"
                         placeholder="Введите название картины"
-                        error={errors.art_object_name ? `${errors.art_object_name?.message}` : ''}
+                        error={errors.product_name ? `${errors.product_name?.message}` : ''}
                         style={{ backgroundColor: 'rgba(239,233,224,1)' }}
+                        onFocus={() => setServerErrorText('')}
                     />
+
                     <Input
-                        name="object_author_city_live"
-                        labelName="Город проживания художника"
-                        placeholder="Укажите город проживания на момент создания объекта"
-                        error={errors.object_author_city_live ? `${errors.object_author_city_live?.message}` : ''}
+                        name='category'
+                        labelName='Категория'
+                        placeholder="Выберите категорию"
+                        error={errors.category ? `${errors.category?.message}` : ''}
                         style={{ backgroundColor: 'rgba(239,233,224,1)' }}
+                        onFocus={() => setServerErrorText('')}
+                    />
+
+                    <Input
+                        name="birth_country"
+                        labelName="Страна проживания художника"
+                        placeholder="Укажите страну проживания на момент создания объекта"
+                        error={errors.country_live ? `${errors.country_live?.message}` : ''}
+                        style={{ backgroundColor: 'rgba(239,233,224,1)' }}
+                        onFocus={() => setServerErrorText('')}
                     />
 
                     <div className={styles.input_sublist}>
                         <div className={styles.input_list} >
-                            <InputM
-                                name="object_author_age"
-                                labelName="Возраст художника"
-                                placeholder="Укажите возраст на момент создания объекта"
-                                error={errors.object_author_age ? `${errors.object_author_age?.message}` : ''}
-                                style={{ backgroundColor: 'rgba(239,233,224,1)' }}
-                                type="custom-mask"
-                                maska='9[99]'
-                                maskPlaceholder='*'
-                            />
                             <Select width='max'
                                 className={styles.input}
                                 popupClassName={styles.popup_list}
-                                name='object_author_gender'
+                                name='gender'
                                 labelName='Пол художника'
                                 placeholder="Выберите пол художника"
                                 options={listGender}
                                 error={errors.object_author_gender ? `${errors.object_author_gender?.message}` : ''}
                             />
-                            <Input
-                                name="art_object_city_sale"
-                                labelName="Город продажи"
-                                placeholder="Укажите город продажи"
-                                error={errors.art_object_city_sale ? `${errors.art_object_city_sale?.message}` : ''}
-                                style={{ backgroundColor: 'rgba(239,233,224,1)' }}
-                            />
                             <InputM
-                                name="art_object_year"
-                                labelName="Год создания"
-                                placeholder="Укажите год создания"
-                                error={errors.art_object_year ? `${errors.art_object_year?.message}` : ''}
+                                name="birth_year"
+                                labelName="Год рождения художника"
+                                placeholder="Укажите год на рождения художника"
+                                error={errors.birth_year ? `${errors.birth_year?.message}` : ''}
                                 style={{ backgroundColor: 'rgba(239,233,224,1)' }}
                                 type="custom-mask"
                                 maska='9999'
                                 maskPlaceholder='****'
+                                onFocus={() => setServerErrorText('')}
                             />
-                            <Select width='max'
-                                className={styles.input}
-                                popupClassName={styles.popup_list}
-                                name='art_object_category'
-                                labelName='Категория'
-                                placeholder="Выберите категорию"
-                                options={listCategory}
-                                error={errors.art_object_category ? `${errors.art_object_category?.message}` : ''}
-                            />
-
-                        </div>
-                        <div className={styles.input_list}>
                             <InputM
-                                name="art_object_size"
-                                labelName="Размер"
-                                placeholder="Укажите размер картины"
-                                error={errors.art_object_size ? `${errors.art_object_size?.message}` : ''}
+                                name="year"
+                                labelName="Год создания"
+                                placeholder="Укажите год создания"
+                                error={errors.creation_year ? `${errors.creation_year?.message}` : ''}
                                 style={{ backgroundColor: 'rgba(239,233,224,1)' }}
                                 type="custom-mask"
-                                maska='99.9x99.9см'
-                                maskPlaceholder='**.*-**.*см'
+                                maska='9999'
+                                maskPlaceholder='****'
+                                onFocus={() => setServerErrorText('')}
                             />
-                            <Select width='max'
-                                className={styles.input}
-                                popupClassName={styles.popup_list}
-                                name='art_object_genre'
-                                labelName='Жанр'
-                                placeholder="Выберите жанр"
-                                options={listGenre}
-                                error={errors.art_object_genre ? `${errors.art_object_genre?.message}` : ''}
+                            <InputM
+                                name="size"
+                                labelName="Размер"
+                                placeholder="Укажите размер картины"
+                                error={errors.size ? `${errors.size?.message}` : ''}
+                                style={{ backgroundColor: 'rgba(239,233,224,1)' }}
+                                type="custom-mask"
+                                maska='999.9x999.9см'
+                                maskPlaceholder='***.*-***.*см'
+                                onFocus={() => setServerErrorText('')}
                             />
-                            <Select width='max'
-                                className={styles.input}
-                                popupClassName={styles.popup_list}
-                                name='art_object_style'
-                                labelName='Стиль'
-                                placeholder="Выберите стиль"
-                                options={listStyle}
-                                error={errors.art_object_style ? `${errors.art_object_style?.message}` : ''}
+                        </div>
+                        <div className={styles.input_list}>
+                            <Input
+                                name="solo_show"
+                                labelName="Персональные выставки"
+                                placeholder="Укажите персональные выставки"
+                                error={errors.solo_show ? `${errors.solo_show?.message}` : ''}
+                                style={{ backgroundColor: 'rgba(239,233,224,1)' }}
+                                onFocus={() => setServerErrorText('')}
                             />
                             <Input
-                                name="art_object_tablet_material"
+                                name="group_show"
+                                labelName="Групповые выставки"
+                                placeholder="Укажите групповые выставки"
+                                error={errors.group_show ? `${errors.group_show?.message}` : ''}
+                                style={{ backgroundColor: 'rgba(239,233,224,1)' }}
+                                onFocus={() => setServerErrorText('')}
+                            />
+                            <Input
+                                name="tablet_material"
                                 labelName="Материал планшета"
                                 placeholder="Укажите материал планшета "
-                                error={errors.art_object_tablet_material ? `${errors.art_object_tablet_material?.message}` : ''}
+                                error={errors.tablet_material ? `${errors.tablet_material?.message}` : ''}
                                 style={{ backgroundColor: 'rgba(239,233,224,1)' }}
+                                onFocus={() => setServerErrorText('')}
                             />
                             <Input
-                                name="art_object_material"
+                                name="material"
                                 labelName="Материал работы"
                                 placeholder="Укажите материал которым нарисовано"
-                                error={errors.art_object_material ? `${errors.art_object_material?.message}` : ''}
+                                error={errors.material ? `${errors.material?.message}` : ''}
                                 style={{ backgroundColor: 'rgba(239,233,224,1)' }}
+                                onFocus={() => setServerErrorText('')}
                             />
                         </div>
                     </div>
-                    <InputDropzone
-                        onFileAccepted={onProfileImageDrop}
-                        imageUrl={imagePreviewUrl}
-                        imageAlt="Preview"
-                        labelName="Загрузить изображение"
-                        className={styles.dropzone}
-                        name="image"
-                    />
                 </div>
                 <Button
                     className={styles.button}

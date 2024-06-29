@@ -9,26 +9,32 @@ import Logo from '../logo';
 import SerachInput from '../search-input';
 import { SearchInputType } from '../search-input/types';
 import { NavLink } from 'react-router-dom';
+import { useAppSelector } from '../../shared/utils/hooks';
 
 const Header = () => {
+    const isLoggedIn = useAppSelector(state => state.user.isLoggedIn);
+
     return (
         <div className={style.main}>
             <div className={style.navigation}>
-                <Logo place='header'/>
+                <Logo place='header' />
                 <div className={style.main__buttons}>
-                    <button className={style.button}>
-                        <img className={style.button__image} src={mail} alt='mail'/>
-                    </button>
-                    <NavLink to='/signin'>
+                    <NavLink to='/feedback'>
                         <button className={style.button}>
-                            <img className={style.button__image} src={person} alt='person'/>
+                            <img className={style.button__image} src={mail} alt='mail' />
+                        </button>
+                    </NavLink>
+
+                    <NavLink to={isLoggedIn ? '/profile' : '/signin'}>
+                        <button className={style.button}>
+                            <img className={style.button__image} src={person} alt='person' />
                         </button>
                     </NavLink>
                     <button className={style.button}>
-                        <img className={style.button__image} src={heart} alt='heart'/>
+                        <img className={style.button__image} src={heart} alt='heart' />
                     </button>
                     <button className={style.button}>
-                        <img className={style.button__image} src={bag} alt='bag'/>
+                        <img className={style.button__image} src={bag} alt='bag' />
                     </button>
                 </div>
             </div>
@@ -45,7 +51,7 @@ const Header = () => {
                     </NavLink>
                     <NavLink to='/review' className={style.link} >
                         <button className={style.button}>
-                            <img className={style.button__image} src={color} alt='some'/>
+                            <img className={style.button__image} src={color} alt='some' />
                             Оценка стоимости
                         </button>
                     </NavLink>
