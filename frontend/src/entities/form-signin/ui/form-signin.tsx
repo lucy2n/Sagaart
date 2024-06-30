@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 
 export const FormFieldsSignin: FC<FormSigninProps> = ({
 	serverErrorText = '',
+	setServerErrorText
 }) => {
 
 	const {
@@ -24,14 +25,21 @@ export const FormFieldsSignin: FC<FormSigninProps> = ({
             <div className={styles.input_list}>
                 <Input
 						name="email"
-						labelName="E-mail"
+						labelName="Email"
 						error={errors.email ? `${errors.email?.message}` : ''}
+						style={{ backgroundColor: 'rgba(239,233,224,1)' }}
+						onFocus={() => setServerErrorText('')}
+						placeholder='Введите адрес вашей почты'
 					/>
                 <Input
 						name="password"
 						labelName="Пароль"
 						type={'password'}
 						error={errors.password ? `${errors.password?.message}` : ''}
+						style={{ backgroundColor: 'rgba(239,233,224,1)' }}
+						onFocus={() => setServerErrorText('')}
+						placeholder='Введите пароль'
+
 					/>
             </div>
             <Button
@@ -44,7 +52,8 @@ export const FormFieldsSignin: FC<FormSigninProps> = ({
 				> Дальше </Button>
             <span className={styles.server_error}>{serverErrorText}</span>
         </div>
-        <p className={styles.transition}>Забыли пароль? <Link className={styles.link} to="/reset-password'">Восстановление</Link></p>
+        <p className={styles.transition}>Забыли пароль? <Link className={styles.link} to="/reset-password">Восстановление</Link></p>
+        <Link className={styles.link_another} to="/signup">Еще нет аккаунта?</Link>
     </div>
 	);
 };

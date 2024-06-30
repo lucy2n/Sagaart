@@ -42,6 +42,12 @@ export interface Author {
   socials: string;
 }
 
+export interface Work {
+  id: number, 
+  image: string
+}
+
+
 export interface ArtworkDetails {
   id: number;
   name: string;
@@ -62,6 +68,6 @@ export interface ArtworkDetails {
   end_cost: number;
   fair_cost: number;
   author: Author;
-  similar_works: string;
-  author_works: string;
+  similar_works: Work[];
+  author_works: Work[];
 }

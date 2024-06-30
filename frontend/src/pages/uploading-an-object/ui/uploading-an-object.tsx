@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormUploadingFeature} from '../../../features/form-uploading/form-uploading';
+import { FormUploadingFeature } from '../../../features/form-uploading/form-uploading';
 import styles from './uploading-an-object.module.css';
 import uploading from '../../../assets/images/uploading.png';
 
@@ -9,9 +9,11 @@ const UploadingAnObject = (): JSX.Element => {
         <section className={styles.section}>
             <div className={styles.container}>
                 <img src={uploading} alt="art gallery" className={styles.image} />
-                <FormUploadingFeature />
+                <div className={styles.form}>
+                    <FormUploadingFeature />
+                </div>
             </div>
-        </section>    );
+        </section>);
 };
 export default UploadingAnObject;
 

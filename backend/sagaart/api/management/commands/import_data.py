@@ -5,8 +5,6 @@ from django.core.management.base import BaseCommand
 from django.apps import apps
 from django.db.utils import IntegrityError
 
-from artobjects.models import Category
-from sagaart.settings import CSV_FILES_DIR
 from api.constants import ARTOBJECTS_APP_LABEL
 
 

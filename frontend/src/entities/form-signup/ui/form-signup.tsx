@@ -8,14 +8,13 @@ import { Button } from '@gravity-ui/uikit';
 import { clsx } from 'clsx';
 import { Link } from 'react-router-dom';
 
-
-
 export const FormFieldsSignup: FC<FormSignupProps> = ({
 	serverErrorText='',
 	serverEmailError='',
 	serverPasswordError='',
 	setServerEmailError,
 	setServerPasswordError,
+	clearServerErrorText,
 }) => {
 
 	const {
@@ -46,6 +45,8 @@ export const FormFieldsSignup: FC<FormSignupProps> = ({
 						name="email"
 						labelName="E-mail"
 						error={errors.email ? `${errors.email?.message}` : serverEmailError}
+						style={{ backgroundColor: 'rgba(239,233,224,1)'}}
+						onFocus={clearServerErrorText}
 					/>
                 <Input
 						name="password"
@@ -56,6 +57,8 @@ export const FormFieldsSignup: FC<FormSignupProps> = ({
 								? `${errors.password?.message}`
 								: serverPasswordError
 						}
+						style={{ backgroundColor: 'rgba(239,233,224,1)'}}
+						onFocus={clearServerErrorText}
 					/>
             </div>
             <label className={styles.checkbox}>

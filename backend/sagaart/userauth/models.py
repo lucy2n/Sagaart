@@ -7,6 +7,7 @@ from api.constants import(
     MAX_LENGHT_USER_NAME, MIN_LENGHT_USER_NAME,
     MAX_LENGHT_TELEPHONE, MIN_LENGHT_TELEPHONE
 )
+from . import constants
 
 
 class UserManager(BaseUserManager):
@@ -50,7 +51,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     email = models.CharField(
-        max_length=MAX_LENGHT_EMAIL, unique=True,
+        max_length=constants.USER_EMAIL_MAX_LEN, unique=True,
         validators=[MinLengthValidator(MIN_LENGHT_EMAIL)],
     )
     user_name = models.CharField(
@@ -60,6 +61,6 @@ class User(AbstractUser):
     )
     telephone = models.CharField(
         "Телефон", unique=True, null=True, blank=True,
-        max_length=MAX_LENGHT_TELEPHONE,
+        max_length=constants.USER_NAME_MAX_LEN,
         validators=[MinLengthValidator(MIN_LENGHT_TELEPHONE)],
     )

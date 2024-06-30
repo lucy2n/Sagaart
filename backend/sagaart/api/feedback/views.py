@@ -1,12 +1,9 @@
-import django
 from django.core.mail import EmailMessage, get_connection
-from rest_framework import status, mixins, generics
+from rest_framework import status, generics
 from rest_framework.response import Response
-from rest_framework.views import APIView
 from django.conf import settings
 
 from .serializers import FeedbackSerializer
-from api.constants import FEEDBACK_EMAIL_ADRESS
 
 
 class FeedbackView(generics.CreateAPIView):

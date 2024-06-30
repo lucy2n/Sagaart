@@ -6,7 +6,10 @@ import type { FormFeedbackProps } from './types';
 import { Button } from '@gravity-ui/uikit';
 import { TextArea } from '@gravity-ui/uikit';
 
-export const FormFeedback: FC<FormFeedbackProps> = ({ serverErrorText = '' }) => {
+export const FormFeedback: FC<FormFeedbackProps> = ({ 
+    serverErrorText = '',
+    setServerErrorText
+}) => {
     const {
         formState: { isValid, errors },
         register,
@@ -21,12 +24,16 @@ export const FormFeedback: FC<FormFeedbackProps> = ({ serverErrorText = '' }) =>
                     labelName="Имя"
                     error={errors.name ? `${errors.name?.message}` : ''}
                     style={{ backgroundColor: 'rgba(239,233,224,1)'}}
+                    onFocus={() => setServerErrorText('')}
+
                 />
                 <Input
                     name="phone"
                     labelName="Телефон"
                     error={errors.phone ? `${errors.phone?.message}` : ''}
                     style={{ backgroundColor: 'rgba(239,233,224,1)'}}
+                    onFocus={() => setServerErrorText('')}
+
 
                 />
                 <Input
@@ -34,6 +41,8 @@ export const FormFeedback: FC<FormFeedbackProps> = ({ serverErrorText = '' }) =>
                     labelName="Email"
                     error={errors.email ? `${errors.email?.message}` : ''}
                     style={{ backgroundColor: 'rgba(239,233,224,1)'}}
+                    onFocus={() => setServerErrorText('')}
+
 
                 />
                 <label className={styles.label}>
@@ -45,6 +54,7 @@ export const FormFeedback: FC<FormFeedbackProps> = ({ serverErrorText = '' }) =>
                         pin="round-round"
                         errorMessage={errors.report ? `${errors.report?.message}` : ''}
                         rows={20}
+                        onFocus={() => setServerErrorText('')}
                     />
                 </label>
                 <Button

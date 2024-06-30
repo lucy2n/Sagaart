@@ -9,6 +9,7 @@ import { clsx } from 'clsx';
 
 export const FormFieldsResetPassword: FC<FormResetPasswordProps> = ({
 	serverErrorText,
+	setServerErrorText
 }) => {
 
 	const {
@@ -25,9 +26,10 @@ export const FormFieldsResetPassword: FC<FormResetPasswordProps> = ({
 						name="email"
 						labelName="E-mail"
 						error={errors.email ? `${errors.email?.message}` : ''}
+						style={{ backgroundColor: 'rgba(239,233,224,1)'}}
+						onFocus={() => setServerErrorText('')}
 					/>
             </div>
-
 
             <Button
 					className={styles.button}

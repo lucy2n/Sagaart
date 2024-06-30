@@ -16,7 +16,7 @@ import NoProducts from './no-products';
 
 const Catalog = (): JSX.Element => {
 
-    const [products, setProducts] = useState<Artwork[] | null>(null);
+    const [products, setProducts] = useState<Artwork[]>([]);
 
     const [filters, setFilters] = useState<FiltersValues>({
         price: '',
@@ -85,7 +85,7 @@ const Catalog = (): JSX.Element => {
                     ))}
                 </div>
             </div>
-            <Pagination page={state.page} pageSize={12} onUpdate={handleUpdate} />
+            <Pagination page={state.page} pageSize={12} total={products?.length / 12} onUpdate={handleUpdate} />
         </section>
     );
 };

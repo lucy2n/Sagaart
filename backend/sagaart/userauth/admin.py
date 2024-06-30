@@ -4,7 +4,6 @@ from userauth.models import User
 
 
 class UserAdmin(admin.ModelAdmin):
-
     list_display = (
         "id",
         "email",
@@ -20,17 +19,6 @@ class UserAdmin(admin.ModelAdmin):
     )
 
     empty_value_display = "Не задано"
-
-
-class UserSubscribeAdmin(admin.ModelAdmin):
-    list_display = (
-        "user",
-        "tariff",
-        "cost",
-        "status",
-        "date_start",
-        "date_end",
-    )
 
 
 admin.site.register(User, UserAdmin)

@@ -3,14 +3,13 @@
     background-color: #2C2E37;
     border-radius: 20px;
     display: flex;
-    flex-wrap: wrap;
     min-height: 800px;
     align-items: center;
     transition: 1s;
 }
 
 .info {
-    max-width: 464px;
+    width: 464px;
     height: 740px;
     margin: 10px;
     padding: 20px;
@@ -78,16 +77,8 @@
 }
 
 @media screen and (max-width: 1800px) {
-
-    .main {
-        justify-content: center;
+    .image_block {
+        width: 56%;
     }
-
-
-    .info {
-        min-width: 90%;
-        height: 10%;
-    }
-    
 }
 

@@ -1,40 +1,34 @@
 import * as yup from 'yup';
 
 const schema = yup.object().shape({
-    object_author_name: yup
+    author_name: yup
+        .string()
+        .required('Поле обязательно для заполнения')
+        .trim()
+        .min(2, 'Длина поля от 2 до 30 символов')
+        .max(100, 'Длина поля от 2 до 100 символов'),
+    product_name: yup
         .string()
         .required('Поле обязательно для заполнения')
         .trim()
         .min(2, 'Длина поля от 2 до 30 символов')
         .max(30, 'Длина поля от 2 до 30 символов'),
-    art_object_name: yup
+    category: yup
         .string()
         .required('Поле обязательно для заполнения')
         .trim()
         .min(2, 'Длина поля от 2 до 30 символов')
         .max(30, 'Длина поля от 2 до 30 символов'),
-    object_author_city_live: yup
+    birth_country: yup
         .string()
         .required('Поле обязательно для заполнения')
         .trim()
         .min(2, 'Длина поля от 2 до 30 символов')
         .max(30, 'Длина поля от 2 до 30 символов'),
-    object_author_age: yup
-        .string()
-        .required('Поле обязательно для заполнения')
-        .trim()
-        .min(1, 'Длина поля от 1 до 3 символов')
-        .max(3, 'Длина поля от 2 до 3 символов'),
-    object_author_gender: yup
+    gender: yup
         .string()
         .required('Поле обязательно для заполнения'),
-    art_object_city_sale: yup
-        .string()
-        .required('Поле обязательно для заполнения')
-        .trim()
-        .min(2, 'Длина поля от 2 до 30 символов')
-        .max(30, 'Длина поля от 2 до 30 символов'),
-    art_object_year: yup
+    birth_year: yup
         .string()
         .required('Поле обязательно для заполнения')
         .trim()
@@ -44,30 +38,44 @@ const schema = yup.object().shape({
             /^\d{4}$/,
             'Введите корректный год'
         ),
-    art_object_category: yup
+    year: yup
         .string()
-        .required('Поле обязательно для заполнения'),
-    art_object_size: yup
+        .required('Поле обязательно для заполнения')
+        .trim()
+        .min(4, 'Длина поля 4 символова')
+        .max(4, 'Длина поля 4 символа')
+        .matches(
+            /^\d{4}$/,
+            'Введите корректный год'
+        ),
+
+    size: yup
         .string()
         .required('Поле обязательно для заполнения')
         .trim()
         .matches(
-            /^\d\d\.\d\x\d\d\.\dсм$/,
+            /^\d\d\d\.\d\x\d\d\d\.\dсм$/,
             'Введите корректный рахмер'
         ),
-    art_object_genre: yup
+    solo_show: yup
         .string()
-        .required('Поле обязательно для заполнения'),
-    art_object_style: yup
+        .required('Поле обязательно для заполнения')
+        .trim()
+        .min(2, 'Длина поля от 2 символов')
+        .max(30, 'Длина поля до 100 сиволов'),
+    group_show: yup
         .string()
-        .required('Поле обязательно для заполнения'),
-    art_object_tablet_material: yup
+        .required('Поле обязательно для заполнения')
+        .trim()
+        .min(2, 'Длина поля от 2 символов')
+        .max(30, 'Длина поля до 100 сиволов'),
+    tablet_material: yup
         .string()
         .required('Поле обязательно для заполнения')
         .trim()
         .min(2, 'Длина поля от 2 до 30 символов')
         .max(30, 'Длина поля от 2 до 30 символов'),
-    art_object_material: yup
+    material: yup
         .string()
         .required('Поле обязательно для заполнения')
         .trim()

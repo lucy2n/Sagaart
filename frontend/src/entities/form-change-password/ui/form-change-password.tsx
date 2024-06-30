@@ -50,6 +50,7 @@ export const FormChangePasswordFields: FC<FormChangePasswordProps> = ({
 								? `${errors.newPassword?.message}`
 								: serverPasswordError
 						}
+						style={{ backgroundColor: 'rgba(239,233,224,1)' }}
 					/>
                 <Input
 						name="repeatNewPassword"
@@ -60,6 +61,7 @@ export const FormChangePasswordFields: FC<FormChangePasswordProps> = ({
 								? `${errors.repeatNewPassword?.message}`
 								: serverPasswordError
 						}
+						style={{ backgroundColor: 'rgba(239,233,224,1)' }}
 					/>
             </div>
 
