@@ -1,16 +1,6 @@
-import base64
-
 from rest_framework import serializers
-from django.core.files.base import ContentFile
-from django.db import transaction
 
 from analytics.models import Analytics
-from api.constants import GENDER_LIST, SIZE_CATEGORIES
-from api.artobjects.serializers import (
-    ArtObjectSerialzer,
-    ObjectAuthorSerializer,
-)
-from artobjects.models import ArtObject, ObjectAuthor
 
 
 class AnalyticsSerializerForWrite(serializers.ModelSerializer):

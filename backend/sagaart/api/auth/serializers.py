@@ -2,9 +2,8 @@ import re
 from rest_framework import serializers
 from djoser.serializers import (
     UserCreateSerializer,
-    PasswordResetConfirmRetypeSerializer,
 )
-from userauth.models import User, UserSubscribe
+from userauth.models import User
 
 
 MIN_NUMBER_USER_NAME = 2
@@ -23,7 +22,6 @@ class UserRegistrationSerializer(UserCreateSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    subcribe = serializers.SerializerMethodField(read_only=True)
     email = serializers.CharField(read_only=True)
 
     class Meta:
@@ -32,13 +30,7 @@ class UserSerializer(serializers.ModelSerializer):
             "email",
             "user_name",
             "telephone",
-            "subcribe",
         )
-
-    def get_subcribe(self, obj):
-        if UserSubscribe.objects.filter(user=obj).exists():
-            return SubscriptionSerializer(obj.subscribe).data
-        return None
 
     def validate(self, data):
         valdate_error = {}
@@ -60,20 +52,3 @@ class UserSerializer(serializers.ModelSerializer):
         if valdate_error:
             raise serializers.ValidationError(valdate_error)
         return data
-
-
-class SubscriptionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = UserSubscribe
-        fields = ("tariff", "cost", "status", "date_start", "date_end")
-
-
-class SetPassword(PasswordResetConfirmRetypeSerializer):
-    uid = serializers.CharField(read_only=True)
-    token = serializers.CharField(read_only=True)
-
-    class Meta:
-        fields = (
-            "new_password",
-            "re_new_password",
-        )

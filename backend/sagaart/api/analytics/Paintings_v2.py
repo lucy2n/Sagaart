@@ -18,10 +18,7 @@ age - возраст(int)
 is_alive - жив ли(пока будет np.NaN)(в будущем int)
 """
 
-import os
-
 import numpy as np
-from catboost import CatBoostRegressor
 
 
 def make_shows_authority_from_shows(shows: str) -> float:

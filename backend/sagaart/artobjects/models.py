@@ -1,15 +1,19 @@
 from django.db import models
 
 from api.constants import (
-    MAX_CHAR_LEN,
+    DEFAULT_CHARFIELD_LEN,
     SIZE_CATEGORIES,
     GENDER_LIST,
     PRICE_CATEGORIES,
 )
 
+from . import constants
+
 
 class NameModel(models.Model):
-    name = models.CharField(verbose_name="Название", max_length=MAX_CHAR_LEN)
+    name = models.CharField(
+        verbose_name="Название", max_length=constants.CATEGORY_NAME_MAX_LEN
+    )
 
     class Meta:
         abstract = True
@@ -48,7 +52,9 @@ class Genre(NameModel):
 class AuthorAward(models.Model):
     """Награды автора"""
 
-    name = models.CharField(max_length=MAX_CHAR_LEN, verbose_name="Название")
+    name = models.CharField(
+        max_length=constants.AUTHOR_NAME_MAX_LEN, verbose_name="Название"
+    )
 
     class Meta(NameModel.Meta):
         verbose_name = "Награда"
@@ -59,8 +65,12 @@ class AuthorAward(models.Model):
 
 
 class AuthorShow(models.Model):
-    name = models.CharField(max_length=MAX_CHAR_LEN, verbose_name="Название")
-    place = models.CharField(max_length=MAX_CHAR_LEN, verbose_name="Место")
+    name = models.CharField(
+        max_length=constants.SHOW_NAME_MAX_LEN, verbose_name="Название"
+    )
+    place = models.CharField(
+        max_length=DEFAULT_CHARFIELD_LEN, verbose_name="Место"
+    )
     cost = models.PositiveIntegerField(verbose_name="Цена товара")
     year = models.DateField(verbose_name="Дата проведения")
 
@@ -73,35 +83,41 @@ class AuthorShow(models.Model):
 
 
 class ObjectAuthor(models.Model):
-    name = models.CharField(max_length=MAX_CHAR_LEN, verbose_name="Имя автора")
+    name = models.CharField(
+        max_length=constants.AUTHOR_NAME_MAX_LEN, verbose_name="Имя автора"
+    )
     gender = models.CharField(
         choices=GENDER_LIST,
-        max_length=MAX_CHAR_LEN,
+        max_length=DEFAULT_CHARFIELD_LEN,
         blank=True,
         verbose_name="Пол",
     )
     age = models.PositiveIntegerField(blank=True, verbose_name="Возраст")
     birth_date = models.DateField(blank=True, verbose_name="Дата рождения")
     city_of_birth = models.CharField(
-        blank=True, max_length=MAX_CHAR_LEN, verbose_name="Город рождения"
+        blank=True,
+        max_length=DEFAULT_CHARFIELD_LEN,
+        verbose_name="Город рождения",
     )
     city_live = models.CharField(
         blank=True,
-        max_length=MAX_CHAR_LEN,
+        max_length=DEFAULT_CHARFIELD_LEN,
         verbose_name="Город проживания",
     )
     description = models.TextField(blank=True, verbose_name="Биография")
     education = models.CharField(
-        blank=True, max_length=MAX_CHAR_LEN, verbose_name="Образование"
+        blank=True,
+        max_length=DEFAULT_CHARFIELD_LEN,
+        verbose_name="Образование",
     )
     professional_education = models.CharField(
         blank=True,
-        max_length=MAX_CHAR_LEN,
+        max_length=DEFAULT_CHARFIELD_LEN,
         verbose_name="Художественное образование",
     )
     teaching_experience = models.CharField(
         blank=True,
-        max_length=MAX_CHAR_LEN,
+        max_length=DEFAULT_CHARFIELD_LEN,
         verbose_name="Опыт преподования",
     )
     personal_style = models.ForeignKey(
@@ -113,7 +129,7 @@ class ObjectAuthor(models.Model):
     )
     socials = models.CharField(
         blank=True,
-        max_length=MAX_CHAR_LEN,
+        max_length=DEFAULT_CHARFIELD_LEN,
         verbose_name="Социальные сети",
     )
     awards = models.ManyToManyField(
@@ -132,7 +148,9 @@ class ObjectAuthor(models.Model):
 
 
 class ArtObject(models.Model):
-    name = models.CharField(verbose_name="Название", max_length=MAX_CHAR_LEN)
+    name = models.CharField(
+        verbose_name="Название", max_length=constants.AUTHOR_NAME_MAX_LEN
+    )
     image = models.ImageField(verbose_name="Изображение")
     additional_image = models.ImageField(
         blank=True, verbose_name="Дополнительное изображение"
@@ -144,21 +162,27 @@ class ArtObject(models.Model):
     size_category = models.IntegerField(
         choices=SIZE_CATEGORIES, verbose_name="Категория размера"
     )
-    size = models.CharField(verbose_name="Размер", max_length=MAX_CHAR_LEN)
+    size = models.CharField(
+        verbose_name="Размер", max_length=constants.PRODUCT_SIZE_MAX_LEN
+    )
     country = models.CharField(
-        blank=True, verbose_name="Страна товара", max_length=MAX_CHAR_LEN
+        blank=True,
+        verbose_name="Страна товара",
+        max_length=DEFAULT_CHARFIELD_LEN,
     )
     city_sale = models.CharField(
-        verbose_name="Город продажи", max_length=MAX_CHAR_LEN
+        verbose_name="Город продажи", max_length=DEFAULT_CHARFIELD_LEN
     )
     year = models.PositiveIntegerField(verbose_name="Год создания")
     material = models.CharField(
-        blank=True, verbose_name="Материал работы", max_length=MAX_CHAR_LEN
+        blank=True,
+        verbose_name="Материал работы",
+        max_length=DEFAULT_CHARFIELD_LEN,
     )
     tablet_material = models.CharField(
         blank=True,
         verbose_name="Материал планшета",
-        max_length=MAX_CHAR_LEN,
+        max_length=DEFAULT_CHARFIELD_LEN,
     )
     collection = models.TextField(blank=True, verbose_name="Коллекция")
     media = models.TextField(blank=True, verbose_name="СМИ")

@@ -1,5 +1,6 @@
-from rest_framework import generics, viewsets, mixins, permissions
+from rest_framework import viewsets, mixins, permissions
 import numpy as np
+from catboost import CatBoostRegressor
 
 from analytics.models import Analytics, User
 from .serializers import (
@@ -7,7 +8,7 @@ from .serializers import (
     AnalyticsSerializerForWrite,
     AnalyticsListSerializer,
 )
-from .Paintings_v2 import CatBoostRegressor, preprocess
+from .Paintings_v2 import preprocess
 
 model = CatBoostRegressor()
 model.load_model("api/analytics/catboost_v1.json", format="json")
@@ -25,6 +26,7 @@ class AnalyticsViewSet(
 
     def get_queryset(self):
         queryset = Analytics.objects.filter(analytics_owner=self.request.user)
+        return queryset
 
     def get_serializer_class(self):
         if self.request.method not in permissions.SAFE_METHODS:
