@@ -1,0 +1,19 @@
+.main {
+    display: flex;
+    width: 95%;
+    flex-direction: column;
+    gap: 10px
+}
+
+.columns {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px
+}
+
+.column {
+    width: 270px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}

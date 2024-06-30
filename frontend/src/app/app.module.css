@@ -1,0 +1,100 @@
+.app {
+  display: flex;
+  flex-direction: column;
+}
+
+.dialog {
+  position: relative;
+  margin: 0;
+  background: var(--color-background-background-page);
+  padding: 20px;
+  border: 1px solid #dde1e6;
+  width: 380px;
+  height: 272px;
+  box-sizing: border-box;
+}
+
+.heading {
+  padding: 0 0 16px 0;
+  margin: 0;
+  font-family: 'TT Commons';
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 110%;
+  text-align: center;
+  color: var(--color-text-color-text-primary-heading-body-dark);
+}
+
+.description {
+  padding: 0;
+  margin: 0;
+  font-family: 'TT Commons';
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 140%;
+  text-align: center;
+  color: var(--color-text-color-text-primary-heading-body-dark);
+}
+
+.description__line {
+  padding: 0;
+  margin: 0;
+}
+
+.description__body {
+  padding: 0 0 20px 0;
+  margin: 0;
+}
+
+.close {
+  padding: 0;
+  margin: 0;
+  background: var(--color-background-background-page);
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  top: 23px;
+  right: 23px;
+  transition: opacity 0.5s ease;
+}
+
+.close:hover {
+  opacity: 0.5;
+}
+
+.buttons {
+  display: flex;
+  padding: 12px 0 0 0;
+}
+
+.button {
+  height: 48px;
+  font-family: 'TT Commons';
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  align-items: center;
+}
+
+.button__left {
+  --g-button-background-color: var(--color-text-color-text-primary-heading-body-dark);
+  --g-button-text-color: var(--color-background-background-page);
+  --g-button-border-color: var(--color-text-color-text-primary-heading-body-dark);
+  --g-button-border-radius: 4px;
+  --g-button-border-style: solid;
+  --g-button-border-width: 1px;
+  transition: opacity 0.5s ease;
+}
+
+.button__right {
+  --g-button-background-color: var(--color-background-background-page);
+  --g-button-text-color: var(--color-text-color-text-primary-heading-body-dark);
+  transition: opacity 0.5s ease;
+}
+
+.button__right:hover {
+  opacity: 0.5;
+}

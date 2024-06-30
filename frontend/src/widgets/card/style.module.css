@@ -1,0 +1,172 @@
+.main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 560px;
+    height: auto;
+    break-inside: avoid;
+}
+
+.img {
+    width: 100%;
+    height: auto;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.text {
+  margin: 0;
+  padding: 0;
+  font-family: 'TT Commons';
+  font-weight: 500;
+}
+
+.author {
+  margin: 12px 0 0;
+  padding: 0;
+  font-family: 'TT Commons';
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.name {
+    padding: 0;
+    margin: 0;
+    font-family: 'TT Commons';
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.more {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.button {
+    cursor: pointer;
+    padding: 10px 0;
+    height: 44px;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    display: flex;
+    width: 24px;
+    height: 24px;
+}
+
+.modal {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    bottom: 108px;
+    margin: auto;
+    flex-direction: column;
+    height: 258px;
+    background: linear-gradient(
+        to bottom,                      
+        rgba(239, 233, 224, 80%) 0%,   
+        rgba(239, 233, 224, 100%) 71%,
+        rgba(239, 233, 224, 100%) 100%
+    );
+}
+
+.modal__section { 
+    width: 520px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal__button {
+    width: 520px;
+    height: 48px;
+    padding: 10px;
+    margin: auto;
+    font-family: 'TT Commons';
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 500;
+    --g-button-text-color: #EFE9E0;
+    --g-button-background-color: #141722;
+    --g-button-border-radius: 3px
+}
+
+.modal__button:hover {
+    --g-button-border-color: #141722;
+}
+
+.modal__main {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tag {
+    border: 1px solid #141722;
+    border-radius: 2px;
+    font-family: 'TT Commons';
+    padding: 5px;
+    font-weight: 500;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.unit {
+    width: 225px;
+    display: flex;
+    flex-direction: column;
+}
+
+.li {
+    list-style-type: none;
+}
+
+.li_desc {
+    color: rgba(20, 23, 34, 40%);
+}
+
+.ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.ul:last-child {
+    align-items: end;
+}
+
+.like {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+@media screen and (max-width: 1870px) {
+    .main {
+        width: 460px;
+    }
+
+    .modal__section { 
+        width: 95%;
+    }
+
+    .modal__button {
+        width: 80%;
+    }
+
+    
+}
+
+@media screen and (max-width: 1560px) {
+    .main {
+        width: 360px;
+    }
+}

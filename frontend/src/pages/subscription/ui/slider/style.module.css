@@ -1,0 +1,84 @@
+.main {
+    width: 100%;
+    background-color: #2C2E37;
+    border-radius: 20px;
+    display: flex;
+    min-height: 800px;
+    align-items: center;
+    transition: 1s;
+}
+
+.info {
+    width: 464px;
+    height: 740px;
+    margin: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #EFE9E0;
+    border-radius: 14px;
+}
+
+.title {
+    margin: 0;
+    font-size: 58px;
+    font-family: 'TT Commons';
+    font-weight: 900;
+}
+
+.desc {
+    font-size: 18px;
+    font-family: 'TT Commons';
+    font-weight: 500;
+}
+
+.button {
+    font-family: 'TT Commons';
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 500;
+    --g-button-text-color: #EFE9E0;
+    --g-button-background-color: #141722;
+    --g-button-border-radius: 4px
+}
+
+.image_block {
+    margin-left: 2%;
+    width: 65%;
+    height: 664px;
+    background-color: #EFE9E0;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+}
+
+.image_2 {
+    margin: 30px;
+}
+
+
+.button_image {
+    margin: 30px 30px 0 auto ;
+    width: 400px;
+    font-family: 'TT Commons';
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 500;
+    --g-button-text-color: #141722;
+    --g-button-background-color: #EFE9E0;
+    border: 1px solid #141722;
+    --g-button-border-radius: 4px
+}
+
+@media screen and (max-width: 1800px) {
+    .image_block {
+        width: 56%;
+    }
+}
+

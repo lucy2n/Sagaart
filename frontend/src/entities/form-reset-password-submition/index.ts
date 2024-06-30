@@ -1,0 +1,1 @@
+export { FormResetPasswordSubmition } from './ui/form-reset-password-submition';

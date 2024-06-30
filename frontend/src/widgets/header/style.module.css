@@ -1,0 +1,66 @@
+.main {
+    margin-top: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: solid #141722 1px;
+    gap: 10px;
+    background-color: #EFE9E0;
+}
+
+.navigation {
+    width: 90vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.main__buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.button {
+    composes: text-style-menu-tabs from '../../index.css';
+    cursor: pointer;
+    padding: 10px 0;
+    height: 44px;
+    border: none;
+    color: var(--color-buttton-button-dark);
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    text-transform: uppercase;
+    align-items: center;
+}
+
+.link {
+    text-decoration:none;
+}
+
+
+.button:hover {
+    transition: 0.2s;
+    border-bottom: solid #141722 2px;
+}
+
+.button:disabled {
+    color: rgba(20, 23, 34, 30%);
+    cursor: auto;
+    border-bottom: none;
+}
+
+.button:disabled:hover {
+    border-bottom: none;
+}
+
+.container_input {
+    width: 460px;
+}
