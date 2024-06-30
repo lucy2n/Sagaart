@@ -1,10 +1,12 @@
-from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.core.validators import MinLengthValidator
 
-MAX_LENGHT_EMAIL = 250
-MAX_LENGHT_USER_NAME = 150
-MAX_LENGHT_TELEPHONE = 15
+from api.constants import(
+    MAX_LENGHT_EMAIL, MIN_LENGHT_EMAIL,
+    MAX_LENGHT_USER_NAME, MIN_LENGHT_USER_NAME,
+    MAX_LENGHT_TELEPHONE, MIN_LENGHT_TELEPHONE
+)
 
 
 class UserManager(BaseUserManager):
@@ -47,32 +49,17 @@ class User(AbstractUser):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
-    email = models.CharField(max_length=MAX_LENGHT_EMAIL, unique=True)
+    email = models.CharField(
+        max_length=MAX_LENGHT_EMAIL, unique=True,
+        validators=[MinLengthValidator(MIN_LENGHT_EMAIL)],
+    )
     user_name = models.CharField(
-        "ФИО", max_length=MAX_LENGHT_USER_NAME, null=True, blank=True
+        "ФИО", null=True, blank=True,
+        max_length=MAX_LENGHT_USER_NAME,
+        validators=[MinLengthValidator(MIN_LENGHT_USER_NAME)],
     )
     telephone = models.CharField(
-        "Телефон",
+        "Телефон", unique=True, null=True, blank=True,
         max_length=MAX_LENGHT_TELEPHONE,
-        unique=True,
-        null=True,
-        blank=True,
+        validators=[MinLengthValidator(MIN_LENGHT_TELEPHONE)],
     )
-
-
-class UserSubscribe(models.Model):
-    user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE,
-        primary_key=True,
-        related_name="subscribe",
-    )
-    tariff = models.PositiveSmallIntegerField("Тариф", default=0)
-    cost = models.PositiveSmallIntegerField("Цена", default=0)
-    status = models.PositiveSmallIntegerField("Статус", default=0)
-    date_start = models.DateField("Дата начала подписки", default=timezone.now)
-    date_end = models.DateField("Дата начала подписки", default=timezone.now)
-
-    class Meta:
-        verbose_name = "подписка"
-        verbose_name_plural = "Подписки"

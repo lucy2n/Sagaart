@@ -109,21 +109,22 @@ REST_FRAMEWORK = {
 
 LANGUAGE_CODE = "en-us"
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.mail.ru"
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'stopnek818@gmail.com'
+EMAIL_HOST_PASSWORD = 'gfpd yphn kwle hdgs'
+EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-EMAIL_PORT = 2525
-SERVER_EMAIL = os.getenv("EMAIL_HOST_USER")
-DEFAULT_FROM_EMAIL = os.getenv("EMAIL_HOST_USER")
+SERVER_EMAIL = 'stopnek818@gmail.com'
+DEFAULT_FROM_EMAIL = 'stopnek818@gmail.com'
 
 DJOSER = {
     "PASSWORD_RESET_CONFIRM_URL": "#/new-password-submition/{uid}/{token}",
-    "SEND_CONFIRMATION_EMAIL": True,
-    "SET_PASSWORD_RETYPE": True,
+    "SEND_CONFIRMATION_EMAIL": False,
+    "SET PASSWORD RETYPE": True,
     "HIDE_USERS": False,
+    "PASSWORD_RESET_CONFIRM_RETYPE": True,
     "SERIALIZERS": {
         "user_create": "api.auth.serializers.UserRegistrationSerializer",
         "current_user": "api.auth.serializers.UserSerializer",

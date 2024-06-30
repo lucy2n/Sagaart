@@ -1,15 +1,9 @@
 from django.contrib import admin
 
-from userauth.models import User, UserSubscribe
-
-
-class IngredientRecipeInline(admin.TabularInline):
-    model = UserSubscribe
-    extra = 0
+from userauth.models import User
 
 
 class UserAdmin(admin.ModelAdmin):
-    inlines = (IngredientRecipeInline,)
 
     list_display = (
         "id",
@@ -40,4 +34,3 @@ class UserSubscribeAdmin(admin.ModelAdmin):
 
 
 admin.site.register(User, UserAdmin)
-admin.site.register(UserSubscribe, UserSubscribeAdmin)

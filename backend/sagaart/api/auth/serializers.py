@@ -2,13 +2,12 @@ import re
 from rest_framework import serializers
 from djoser.serializers import (
     UserCreateSerializer,
-    PasswordResetConfirmRetypeSerializer,
 )
-from userauth.models import User, UserSubscribe
 
-
-MIN_NUMBER_USER_NAME = 2
-TELEPHONE_VALIDATE = "^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$"
+from userauth.models import User
+from api.constants import (
+    TELEPHONE_VALIDATE, PASSWORD_VALIDATE, USERNAME_VALIDATE
+)
 
 
 class UserRegistrationSerializer(UserCreateSerializer):
@@ -21,9 +20,21 @@ class UserRegistrationSerializer(UserCreateSerializer):
             "password",
         )
 
+    def validate(self, attrs):
+        super().validate(attrs)
+        password = attrs.get('password')
+        valdate_error = {}
+        if not re.match(PASSWORD_VALIDATE, password):
+            valdate_error["password"] = (
+                'Пароль может содержать заглавные и прописные буквы A-Z,'
+                'цифры 0-9, а также знак тире “-” и спец. символы'
+            )
+        if valdate_error:
+            raise serializers.ValidationError(valdate_error)
+        return attrs
+
 
 class UserSerializer(serializers.ModelSerializer):
-    subcribe = serializers.SerializerMethodField(read_only=True)
     email = serializers.CharField(read_only=True)
 
     class Meta:
@@ -32,27 +43,18 @@ class UserSerializer(serializers.ModelSerializer):
             "email",
             "user_name",
             "telephone",
-            "subcribe",
         )
-
-    def get_subcribe(self, obj):
-        if UserSubscribe.objects.filter(user=obj).exists():
-            return SubscriptionSerializer(obj.subscribe).data
-        return None
 
     def validate(self, data):
         valdate_error = {}
+        print(data['user_name'])
         if not data:
             raise serializers.ValidationError("Пустая форма")
-        if (
-            "user_name" in data
-            and len(data["user_name"]) < MIN_NUMBER_USER_NAME
-        ):
-            valdate_error["user_name"] = (
-                "Введённое имя слишком короткое."
-                "Он должен содержать как минимум"
-                f" {MIN_NUMBER_USER_NAME} символов."
-            )
+        if ("user_name" in data and not data['user_name']):
+            if not re.match(USERNAME_VALIDATE, data['user_name']):
+                valdate_error["user_name"] = ("введен некорректно")
+            elif data['user_name'][0] == ' ' and data['user_name'][-1] == ' ':
+                valdate_error["user_name"] = ("введен некорректно")
         if "telephone" in data and not re.match(
             TELEPHONE_VALIDATE, data["telephone"]
         ):
@@ -60,20 +62,3 @@ class UserSerializer(serializers.ModelSerializer):
         if valdate_error:
             raise serializers.ValidationError(valdate_error)
         return data
-
-
-class SubscriptionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = UserSubscribe
-        fields = ("tariff", "cost", "status", "date_start", "date_end")
-
-
-class SetPassword(PasswordResetConfirmRetypeSerializer):
-    uid = serializers.CharField(read_only=True)
-    token = serializers.CharField(read_only=True)
-
-    class Meta:
-        fields = (
-            "new_password",
-            "re_new_password",
-        )
