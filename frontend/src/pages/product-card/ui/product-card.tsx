@@ -10,10 +10,10 @@ import BreadcrumbsComponent from '../../catalog/ui/bread-crumbs';
 import { Item } from '../../../shared/entities/breadcrumbs';
 import { ArtworkDetails } from '../../../shared/entities/product-details';
 import { getProduct } from '../../../shared/api/products-api';
-import { useNavigate, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import PurchacingActivity from './purchacing-activity';
 import PriceRatio from './price-ratio';
-import OtherArtwork from '../../other-work';
+import OtherArtwork from './other-work';
 
 export interface Work {
     id: number, 
@@ -74,27 +74,32 @@ const DropdownBlock = ({ children }: {children: JSX.Element[]}) => (
     </div>
 );
 
-const ArtworkSection = ({ title, works }: { title: string, works: Work[] }) => (
-    <section className={style.section_author_works}>
-        <h3 className={style.title}>{title}</h3>
-        <div className={title.includes('Другие') ? style.works : style.works_author }>
-            {works.length === 0 ? 
-                (
-                    <p className={style.desc}>
-                        {title.includes('Другие') ? 'У художника пока нет других работ. Следите за обновлениями, чтобы не пропустить новинки.' : 'На данный момент похожих работ не нашлось. Следите за обновлениями, чтобы не пропустить новинки.'}
-                    </p>
-                )
-            : 
-                (
-                    works.map(work => (
-                        <div key={work.id} className={title.includes('Другие') ? style.work : style.work_author }>
-                            <OtherArtwork work={work} />
-                        </div>
-                    ))
-                )
-            }
-        </div>
-    </section>
-);
+const ArtworkSection = ({ title, works }: { title: string, works: Work[] }) => {
+
+    const navigate = useNavigate();
+
+    return (
+        <section className={style.section_author_works}>
+            <h3 className={style.title}>{title}</h3>
+            <div className={title.includes('Другие') ? style.works : style.works_author }>
+                {works.length === 0 ? 
+                    (
+                        <p className={style.desc}>
+                            {title.includes('Другие') ? 'У художника пока нет других работ. Следите за обновлениями, чтобы не пропустить новинки.' : 'На данный момент похожих работ не нашлось. Следите за обновлениями, чтобы не пропустить новинки.'}
+                        </p>
+                    )
+                : 
+                    (
+                        works.map(work => (
+                            <NavLink  to={`/products/${work.id}`} key={work.id} className={title.includes('Другие') ? style.work : style.work_author }>
+                                <OtherArtwork work={work} />
+                            </NavLink>
+                        ))
+                    )
+                }
+            </div>
+        </section>
+    );
+};
 
 export default ProductCard;
