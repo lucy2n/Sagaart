@@ -53,7 +53,7 @@ class AnalyticsViewSet(
             np.NaN,
         ]
         serializer.save(
-            analytics_owner=User.objects.get(id=1),
+            analytics_owner=self.request.user,
             calculated_price=np.clip(
                 model.predict(preprocess(data)), 1000, np.inf
             ),
