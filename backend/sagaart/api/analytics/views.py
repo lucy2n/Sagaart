@@ -2,7 +2,7 @@ from rest_framework import viewsets, mixins, permissions
 import numpy as np
 from catboost import CatBoostRegressor
 
-from analytics.models import Analytics, User
+from analytics.models import Analytics
 from .serializers import (
     AnalyticsSerializerForRead,
     AnalyticsSerializerForWrite,
