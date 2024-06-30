@@ -1,6 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.core.validators import MinLengthValidator
 
+from api.constants import(
+    MAX_LENGHT_EMAIL, MIN_LENGHT_EMAIL,
+    MAX_LENGHT_USER_NAME, MIN_LENGHT_USER_NAME,
+    MAX_LENGHT_TELEPHONE, MIN_LENGHT_TELEPHONE
+)
 from . import constants
 
 
@@ -45,19 +51,16 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     email = models.CharField(
-        max_length=constants.USER_EMAIL_MAX_LEN,
-        unique=True,
+        max_length=constants.USER_EMAIL_MAX_LEN, unique=True,
+        validators=[MinLengthValidator(MIN_LENGHT_EMAIL)],
     )
     user_name = models.CharField(
-        "ФИО",
-        max_length=constants.USER_NAME_MAX_LEN,
-        null=True,
-        blank=True,
+        "ФИО", null=True, blank=True,
+        max_length=MAX_LENGHT_USER_NAME,
+        validators=[MinLengthValidator(MIN_LENGHT_USER_NAME)],
     )
     telephone = models.CharField(
-        "Телефон",
-        max_length=constants.USER_PHONE_MAX_LEN,
-        unique=True,
-        null=True,
-        blank=True,
+        "Телефон", unique=True, null=True, blank=True,
+        max_length=constants.USER_NAME_MAX_LEN,
+        validators=[MinLengthValidator(MIN_LENGHT_TELEPHONE)],
     )
