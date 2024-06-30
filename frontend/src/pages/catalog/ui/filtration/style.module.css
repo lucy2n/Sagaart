@@ -10,6 +10,11 @@
     z-index: 4;
   }
 
+  .delete {
+    display: flex;
+    justify-content: space-between;
+  }
+
   .title {
     composes: text-style-menu-tabs from '../../../../index.css';
     margin-bottom: 20px;
