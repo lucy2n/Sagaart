@@ -23,7 +23,7 @@ PRICE_CATEGORIES = (
 )
 
 TELEPHONE_VALIDATE = "^(\+|\d)?[\d]{9,15}$"
-PASSWORD_VALIDATE = "^[A-Za-z0-9@#$%^&+=]{8,}$"
+PASSWORD_VALIDATE = "^[A-Za-z0-9@#$%^&+=]{8,25}$"
 USERNAME_VALIDATE = "^[^\s][A-z0-9А-я -]{2,150}$"
 
 MAX_LENGHT_EMAIL = 250
