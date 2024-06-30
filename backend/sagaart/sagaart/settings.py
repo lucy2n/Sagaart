@@ -1,4 +1,5 @@
 import os
+
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -15,6 +16,7 @@ AUTH_USER_MODEL = "userauth.User"
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1").split(" ")
 
 CSRF_TRUSTED_ORIGINS = ["https://*.sagaart.bounceme.net/"]
+
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -68,6 +70,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "sagaart.wsgi.application"
 
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
@@ -78,6 +81,7 @@ DATABASES = {
         "PORT": os.getenv("DB_PORT"),
     }
 }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -147,6 +151,7 @@ TIME_ZONE = "Europe/Moscow"
 USE_I18N = True
 
 USE_TZ = True
+
 
 STATIC_URL = "static/"
 
