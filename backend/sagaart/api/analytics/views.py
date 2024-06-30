@@ -52,5 +52,7 @@ class AnalyticsViewSet(
         ]
         serializer.save(
             analytics_owner=User.objects.get(id=1),
-            calculated_price=model.predict(preprocess(data)),
+            calculated_price=np.clip(
+                model.predict(preprocess(data)), 1000, np.inf
+            ),
         )
