@@ -14,12 +14,11 @@ class ArtObjectViewSet(viewsets.ReadOnlyModelViewSet):
     pagination_class = ArtObjectsPagination
     filter_backends = (
         DjangoFilterBackend,
-        filters.SearchFilter,
-        filters.OrderingFilter,
+        filters.SearchFilter
     )
     filterset_class = ArtObjFilter
-    search_fields = ("=name",)
-    ordering_fields = ("id",)
+    search_fields = ("^name", "^author")
+    ordering = ("id",)
 
     def get_serializer_class(self):
         if self.action == "list":
