@@ -38,6 +38,7 @@ class UserRegistrationSerializer(UserCreateSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     email = serializers.CharField(read_only=True)
+    telephone = serializers.CharField(allow_blank=True, allow_null=True)
 
     class Meta:
         model = User
@@ -71,4 +72,6 @@ class UserSerializer(serializers.ModelSerializer):
                 valdate_error["telephone"] = "Вы ввели телефон некорректно"
         if valdate_error:
             raise serializers.ValidationError(valdate_error)
+        if telephone == '':
+            data['telephone'] = None
         return data
