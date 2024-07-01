@@ -3,6 +3,7 @@ import AnalyticsItem from '../analytics-item';
 import { IAnalyticItem } from '../../../../shared/entities/analytic';
 import { getAnalytics } from '../../../../shared/api/analytic';
 import NoAnalytics from '../no-analytics';
+import style from './style.module.css';
 
 const AnalyticsHistory = () => {
 
@@ -11,38 +12,37 @@ const AnalyticsHistory = () => {
     useEffect(() => {
         getAnalytics()
         .then((res) => {
-            console.log(res);
             setAnalytics(res);
         });
     }, []);
 
     return (
-        <section>
-            { analytics.length === 0 ?
-                <NoAnalytics /> 
-                : 
+        <section className={style.main}>
+            { analytics.length !== 0 ?
                 <>
-                    <div>
-                        <h3>
+                    <div className={style.ul}>
+                        <h3 className={style.title}>
                             Последний запрос
                         </h3>
                         <div>
-                            <AnalyticsItem work={analytics[0]} />
+                            <AnalyticsItem analytic={analytics[0]} />
                         </div>
                     </div>
-                    <div>
-                        <h3>
+                    <div className={style.ul}>
+                        <h3 className={style.title}>
                             История запросов
                         </h3>
-                        <div>
+                        <div className={style.ul}>
                             {analytics.map(analytic => 
                                 <div key={analytic.id}>
-                                    <AnalyticsItem work={analytic} />
+                                    <AnalyticsItem analytic={analytic} />
                                 </div>
                     )}
                         </div>
                     </div>
                 </>
+                : 
+                <NoAnalytics /> 
             }
         </section>
     );

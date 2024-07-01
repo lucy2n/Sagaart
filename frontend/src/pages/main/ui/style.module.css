@@ -62,23 +62,13 @@
 }
 
 .button {
-    text-decoration: none;
-    cursor: pointer;
-    padding: 10px 0;
-    height: 44px;
-    border: none;
-    font: inherit;
-    color: inherit;
-    background-color: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    --g-button-border-radius: 4px
+    composes: text-style-button-l from '../../../index.css';
+    text-transform: uppercase;
+    --g-button-border-radius: 4px;
     
 }
 
 .button_dark {
-    padding: 10px 20px;
     display: flex;
     gap: 10px;
     color: #EFE9E0;
@@ -194,6 +184,7 @@
     border: 1px solid var(--color-buttton-button-dark);
     border-radius: 4px;
     width: 235px;
+    margin-left: 45%;
 }
 
 .section_design {

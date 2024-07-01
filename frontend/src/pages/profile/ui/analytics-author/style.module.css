@@ -1,0 +1,53 @@
+.section {
+    display: flex;
+    flex-direction: column;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black ;
+}
+
+.main {
+    display: flex;
+    width: 95%;
+    flex-direction: column;
+    gap: 10px
+}
+
+.columns {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px
+}
+
+.column {
+    width: 270px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+
+.title {
+    composes: text-style-caption from '../../../../index.css';
+}
+
+.price {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.cost {
+    margin: 0;
+    composes: text-style-caption from '../../../../index.css';
+    color: #DA1E28;
+}
+
+.desc {
+    margin: 0;
+    composes: text-style-small from '../../../../index.css';
+}

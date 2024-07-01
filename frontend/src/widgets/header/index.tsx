@@ -1,6 +1,5 @@
 import React from 'react';
 import style from './style.module.css';
-import color from '../../assets/icons/Color.svg';
 import person from '../../assets/icons/Person.svg';
 import mail from '../../assets/icons/Mail.svg';
 import bag from '../../assets/icons/Bag.svg';
@@ -10,6 +9,8 @@ import SerachInput from '../search-input';
 import { SearchInputType } from '../search-input/types';
 import { NavLink } from 'react-router-dom';
 import { useAppSelector } from '../../shared/utils/hooks';
+import { Icon } from '@gravity-ui/uikit';
+import {Database} from '@gravity-ui/icons';
 
 const Header = () => {
     const isLoggedIn = useAppSelector(state => state.user.isLoggedIn);
@@ -17,7 +18,7 @@ const Header = () => {
     return (
         <div className={style.main}>
             <div className={style.navigation}>
-                <Logo place='header' />
+                <Logo place='header'/>
                 <div className={style.main__buttons}>
                     <NavLink to='/feedback'>
                         <button className={style.button}>
@@ -51,7 +52,7 @@ const Header = () => {
                     </NavLink>
                     <NavLink to='/review' className={style.link} >
                         <button className={style.button}>
-                            <img className={style.button__image} src={color} alt='some' />
+                            <Icon className={style.button_img} data={Database} size='16' />
                             Оценка стоимости
                         </button>
                     </NavLink>
