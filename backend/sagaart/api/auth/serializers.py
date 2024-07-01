@@ -53,12 +53,22 @@ class UserSerializer(serializers.ModelSerializer):
         telephone = data.get('telephone')
         if not data:
             raise serializers.ValidationError("Ошибка формы")
-        if user_name is None or telephone is None:
-            raise serializers.ValidationError("Поле не может быть null")
-        if not user_name == '' and not re.match(USERNAME_VALIDATE, user_name):
-            valdate_error["user_name"] = "введен некорректно"
-        if not telephone == '' and not re.match(TELEPHONE_VALIDATE, telephone):
-            valdate_error["telephone"] = "Вы ввели телефон некорректно"
+        if 'user_name' in data:
+            if not isinstance(user_name, str):
+                raise serializers.ValidationError("Поле не может быть null")
+            elif (
+                not user_name == ''
+                and not re.match(USERNAME_VALIDATE, user_name)
+            ):
+                valdate_error["user_name"] = "введен некорректно"
+        if 'telephone' in data:
+            if not isinstance(telephone, str):
+                raise serializers.ValidationError("Поле не может быть null")
+            elif (
+                not telephone == ''
+                and not re.match(TELEPHONE_VALIDATE, telephone)
+            ):
+                valdate_error["telephone"] = "Вы ввели телефон некорректно"
         if valdate_error:
             raise serializers.ValidationError(valdate_error)
         return data
