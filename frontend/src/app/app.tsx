@@ -75,6 +75,7 @@ function App() {
                 <Route path='/profile' element={<Profile />} />
                 <Route path='/review' element={<UploadingAnObject />} />
                 <Route path='/reset-password' element={<ResetPassword />} />
+                <Route path='/reset-password/:email' element={<ResetPassword />} />
                 <Route path='/new-password-submition/:uid/:token' element={<NewPasswordSubmition />} />
                 <Route path='/feedback' element={<Feedback />} />
                 <Route path='/reset-password-submition' element={<ResetPasswordSubmition />} />

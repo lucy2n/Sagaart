@@ -1,7 +1,7 @@
 import { base_url } from '../utils/constants';
 import { checkResp, checkResponse } from './utils';
 
-import { IAnalytic, IAnalyticItem } from '../entities/analytic';
+import { IAnalytic, IAnalyticItem, IAnalyticItemDetails } from '../entities/analytic';
 
 export const analytic = async (obj:IAnalytic ) => {
     const res = await fetch(`${base_url}/analytics/`, {
@@ -27,5 +27,18 @@ export const getAnalytics = async () => {
     });
 
     return checkResponse<IAnalyticItem[]>(res);
+};
+
+export const getItemAnalytic = async (id: number) => {
+    const res = await fetch(`${base_url}analytics/${id}`, {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Token ${localStorage.getItem('token')}`
+        },
+    });
+
+    return checkResponse<IAnalyticItemDetails>(res);
 };
   

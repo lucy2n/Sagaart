@@ -93,7 +93,7 @@ export const FormFieldsUploading: FC<FormUploadingProps> = ({
                     <Input
                         name='category'
                         labelName='Категория'
-                        placeholder="Выберите категорию"
+                        placeholder="Укажите категорию (например, Живопись, Графика, Фотография, Digital)"
                         error={errors.category ? `${errors.category?.message}` : ''}
                         style={{ backgroundColor: 'rgba(239,233,224,1)' }}
                         onFocus={() => setServerErrorText('')}
@@ -144,7 +144,7 @@ export const FormFieldsUploading: FC<FormUploadingProps> = ({
                             <InputM
                                 name="size"
                                 labelName="Размер"
-                                placeholder="Укажите размер картины"
+                                placeholder="Укажите размер картины (например, 012.3x123.1см)"
                                 error={errors.size ? `${errors.size?.message}` : ''}
                                 style={{ backgroundColor: 'rgba(239,233,224,1)' }}
                                 type="custom-mask"

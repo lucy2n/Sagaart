@@ -4,7 +4,7 @@ import { Button, Icon } from '@gravity-ui/uikit';
 import {Database} from '@gravity-ui/icons';
 import Benefit from './benefit';
 import New from './new';
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Artwork } from '../../../shared/entities/products';
 import { getProducts } from '../../../shared/api/products-api';
 import Card from '../../../widgets/card/card';
@@ -13,6 +13,7 @@ import { BENEFITS, NEWS, GALLERY_IMAGES } from '../utils/constants';
 const Main = (): JSX.Element => {
 
     const [products, setProducts] = useState<Artwork[] | null>(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         getProducts()
@@ -33,15 +34,13 @@ const Main = (): JSX.Element => {
                             Наш алгоритм на основе огромной базы данных поможет определить справедливую цену  арт-объекта и оценит его инвестиционную привлекательность для вас
                         </p>
                         <div className={style.buttons}>
-                            <Button size='l' className={`${style.button} ${style.button_dark}`}>
+                            <Button size='xl' className={`${style.button} ${style.button_dark}`} onClick={() => navigate('/review')}>
                                 <Icon className={style.button_img} data={Database} size={16} />
                                 оценить объект
                             </Button>
-                            <NavLink to='/subscription' className={style.button}>
-                                <Button size='l' >
-                                    узнать подробнее
-                                </Button>
-                            </NavLink>
+                            <Button size='xl' onClick={() => navigate('/subscription')} className={style.button} >
+                                узнать подробнее
+                            </Button>
                         </div>
                     </div>
                     <div className={style.section_main__charts}>
@@ -88,7 +87,7 @@ const Main = (): JSX.Element => {
             <section className={style.section_gallery}>
                 <div className={style.section_gallery__main}>
                     <p className={style.section__desc}>
-                        галлерея
+                        галерея
                     </p>
                     <h2 className={style.section__title}>
                         вдохновитесь новинками нашей арт-галлереи                     
@@ -105,11 +104,9 @@ const Main = (): JSX.Element => {
                     </div>
                     : <></>
                 }
-                <NavLink to='/products'>
-                    <Button size='xl' className={style.section_gallery__button}>
-                        Перейти в каталог
-                    </Button>
-                </NavLink>
+                <Button size='xl' className={style.section_gallery__button} onClick={() => navigate('/products')}>
+                    Перейти в каталог
+                </Button>
             </section>
             <section className={style.section_design}>
                 <div className={style.section_design__main}>
@@ -132,7 +129,7 @@ const Main = (): JSX.Element => {
                         <p className={style.section__block__desc}> 
                             Мы создали большое количество важных для дизайнера фильтров поиска, а так же поиск по изображению,  чтобы помочь вам найти идеальное художественное произведение, которое дополнит ваш творческий проект и вдохнет в него новую жизнь
                         </p>
-                        <Button size='l' className={style.button}>
+                        <Button size='l' className={style.button}  onClick={() => navigate('/products')}>
                             перейти в каталог
                         </Button>
                     </div>
@@ -159,11 +156,11 @@ const Main = (): JSX.Element => {
                             Мы ценим каждого художника и его вклад в мир искусства. Позвольте нашей платформе стать вашим надежным партнером в путешествии от оценки до успешной продажи вашего искусства. Присоединяйтесь к нам, и вместе мы откроем новые горизонты для вашего творчества.
                         </p>
                         <div className={style.buttons}>
-                            <Button size='l' className={`${style.button} ${style.button_dark}`}>
+                            <Button size='xl' className={`${style.button} ${style.button_dark}`} onClick={() => navigate('/review')}>
                                 <Icon className={style.button_img} data={Database} size='16' />
                                 оценить объект
                             </Button>
-                            <Button size='l' className={style.button}>
+                            <Button size='xl' className={style.button} onClick={() => navigate('/products')}>
                                 перейти в каталог
                             </Button>
                         </div>

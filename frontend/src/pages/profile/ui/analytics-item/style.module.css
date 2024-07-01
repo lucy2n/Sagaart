@@ -1,10 +1,28 @@
 .main {
-    text-decoration: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: var(--color-text-color-text-primary-heading-body-dark-2);
+    margin: 20px 0;
+}
+
+.title {
+    display: flex;
+    align-items: center;
 }
 
 .text {
+    text-decoration: underline ;
     font-family: 'TT Commons';
     font-weight: 400;
     font-size: 18px;
-    color: var(--color-system-color-ghost);
+}
+
+.blocks {
+    width: 800px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px
 }

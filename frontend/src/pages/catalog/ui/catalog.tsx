@@ -11,12 +11,15 @@ import Categories from './categories';
 import BreadcrumbsComponent from './bread-crumbs';
 import { items, options } from '../constants';
 import { Artwork } from '../../../shared/entities/products';
-import { getProducts, getProductsWithFilters } from '../../../shared/api/products-api';
+import { getProductsWithFilters } from '../../../shared/api/products-api';
 import NoProducts from './no-products';
+import { useLocation } from 'react-router-dom';
 
 const Catalog = (): JSX.Element => {
 
     const [products, setProducts] = useState<Artwork[]>([]);
+    const location = useLocation();
+    const navigationState = location.state as { filters: FiltersValues } | undefined;
 
     const [filters, setFilters] = useState<FiltersValues>({
         price: '',
@@ -27,31 +30,44 @@ const Catalog = (): JSX.Element => {
         minYear: '',
         maxYear: '',
         country: ''
-      });
+    });
     
     const [isSidebarVisible, setIsSidebarVisible] = useState(false);
 
     const toggleSidebar = () => {
-    setIsSidebarVisible(!isSidebarVisible);
+        setIsSidebarVisible(!isSidebarVisible);
     };
 
     const [state, setState] = useState({page: 1, pageSize: products?.length});
+    const [total, setTotal] = useState<number>(0);
     const [emptyState, setEmptyState] = useState<boolean>(false);
 
     const handleUpdate: PaginationProps['onUpdate'] = (page, pageSize) =>
-    setState((prevState) => ({...prevState, page, pageSize}));
+        setState((prevState) => ({...prevState, page, pageSize}));
 
     useEffect(() => {
         fetchProducts();
     }, [filters, state.page]);
 
+    useEffect(() => {
+        if (navigationState?.filters) {
+            setFilters(prevFilters => ({
+                ...prevFilters,
+                ...navigationState.filters
+            }));
+        }
+    }, [navigationState]);
+
     const fetchProducts = () => {
+        console.log(filters);
         getProductsWithFilters(filters, state.page)
         .then((res) => {
+            console.log(res);
             if (res.results.length == 0) {
                 setEmptyState(true);
             } else {
                 setEmptyState(false);
+                setTotal(res.count);
                 setProducts(res.results);
             }
         });
@@ -85,7 +101,7 @@ const Catalog = (): JSX.Element => {
                     ))}
                 </div>
             </div>
-            <Pagination page={state.page} pageSize={12} total={products?.length / 12} onUpdate={handleUpdate} />
+            <Pagination page={state.page} pageSize={12} total={total} onUpdate={handleUpdate} />
         </section>
     );
 };

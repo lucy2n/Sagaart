@@ -1,4 +1,3 @@
-import { Artwork } from '../../shared/entities/products';
 import React, {FC, useState} from 'react';
 import style from './style.module.css';
 import { Button } from '@gravity-ui/uikit';
@@ -9,6 +8,7 @@ import heart from '../../assets/icons/heart-card.svg';
 import heartNotActive from '../../assets/icons/headrt-cart-not-active.svg';
 import CustomTooltip from '../../shared/ui/chart/custom-tooltip';
 import { NavLink } from 'react-router-dom';
+import { Artwork } from '../../shared/entities/products';
 
 interface Props {
     card: Artwork;
@@ -30,8 +30,8 @@ const Card: FC<Props> = ({ card }) => {
           price: 3000,
         },
         {
-            year: '2023',
-            price: 4000,
+          year: '2023',
+          price: 4000,
           },
         {
           year: '2024',
@@ -70,10 +70,10 @@ const Card: FC<Props> = ({ card }) => {
                                         {card.size}
                                     </li>
                                     <li className={`${style.li} ${style.li_desc}`}>
-                                        {card.genre.name}
+                                        {card.genre[0].name}
                                     </li>
                                     <li className={`${style.li} ${style.li_desc}`}>
-                                        {card.style.name}
+                                        {card.style[0].name}
                                     </li>
                                 </ul>
                             </div>
