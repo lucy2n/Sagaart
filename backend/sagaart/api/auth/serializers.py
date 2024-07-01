@@ -49,17 +49,15 @@ class UserSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         valdate_error = {}
-        print(data["user_name"])
+        user_name = data.get('user_name')
+        telephone = data.get('telephone')
         if not data:
-            raise serializers.ValidationError("Пустая форма")
-        if "user_name" in data and not data["user_name"]:
-            if not re.match(USERNAME_VALIDATE, data["user_name"]):
-                valdate_error["user_name"] = "введен некорректно"
-            elif data["user_name"][0] == " " and data["user_name"][-1] == " ":
-                valdate_error["user_name"] = "введен некорректно"
-        if "telephone" in data and not re.match(
-            TELEPHONE_VALIDATE, data["telephone"]
-        ):
+            raise serializers.ValidationError("Ошибка формы")
+        if user_name is None or telephone is None:
+            raise serializers.ValidationError("Поле не может быть null")
+        if not user_name == '' and not re.match(USERNAME_VALIDATE, user_name):
+            valdate_error["user_name"] = "введен некорректно"
+        if not telephone == '' and not re.match(TELEPHONE_VALIDATE, telephone):
             valdate_error["telephone"] = "Вы ввели телефон некорректно"
         if valdate_error:
             raise serializers.ValidationError(valdate_error)

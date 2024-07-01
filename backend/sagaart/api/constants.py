@@ -24,6 +24,6 @@ PRICE_CATEGORIES = (
     (5, "от 200 000 до 500 000 руб."),
 )
 
-TELEPHONE_VALIDATE = "^(\+|\d)?[\d]{9,15}$"
+TELEPHONE_VALIDATE = "^(\+)?[\d]{9,15}$"
 PASSWORD_VALIDATE = "^[A-Za-z0-9@#$%^&+=]{8,25}$"
-USERNAME_VALIDATE = "^[^\s][A-z0-9А-я -]{2,150}$"
+USERNAME_VALIDATE = "^[^\s][A-z0-9А-я -]{1,150}$"
