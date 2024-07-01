@@ -6,11 +6,16 @@ import styles from './form-reset-password.module.css';
 import { useFormContext } from 'react-hook-form';
 import { Button } from '@gravity-ui/uikit';
 import { clsx } from 'clsx';
+import { useParams } from 'react-router-dom';
+
 
 export const FormFieldsResetPassword: FC<FormResetPasswordProps> = ({
 	serverErrorText,
 	setServerErrorText
 }) => {
+
+	const { email } = useParams();
+
 
 	const {
 		formState: { isValid, errors },
@@ -28,6 +33,7 @@ export const FormFieldsResetPassword: FC<FormResetPasswordProps> = ({
 						error={errors.email ? `${errors.email?.message}` : ''}
 						style={{ backgroundColor: 'rgba(239,233,224,1)'}}
 						onFocus={() => setServerErrorText('')}
+						defaultValue={email??''}
 					/>
             </div>
 

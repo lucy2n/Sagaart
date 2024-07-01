@@ -16,14 +16,15 @@
     box-shadow: 0 2px 52px 0 rgba(0, 0, 0, 0.14);
     background: var(--color-background-background-page);
     box-sizing: border-box;
-    gap:40px;
+    gap: 40px;
 }
 
 .image {
     border-bottom: 10px solid black;
     margin: 0;
     padding: 0;
-    width: 100%;
+    width: 102%;
     height: 247px;
     box-sizing: border-box;
+    object-fit: cover;
 }

@@ -23,9 +23,9 @@ export interface Artwork {
     name: string;
     image: string;
     additional_image: string;
-    category: Category;
-    style: Style;
-    genre: Genre;
+    category: Category[];
+    style: Style[];
+    genre: Genre[];
     size_category: number;
     size: string;
     country: string;

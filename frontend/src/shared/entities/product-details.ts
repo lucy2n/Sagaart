@@ -13,7 +13,7 @@ interface Genre {
   name: string;
 }
 
-interface Show {
+export interface Show {
   id: number;
   name: string;
   year: number;
@@ -21,8 +21,10 @@ interface Show {
 }
 
 interface Award {
-  id: number;
-  name: string;
+  id: number,
+  name: string,
+  year: number,
+  place: string
 }
 
 export interface Author {
@@ -30,9 +32,9 @@ export interface Author {
   name: string;
   gender: number;
   age: number;
-  year_of_birth: number;
-  show: Show;
-  awards: Award;
+  birth_date: number;
+  show: Show[];
+  awards: Award[];
   city_of_birth: string;
   city_live: string;
   education: string;

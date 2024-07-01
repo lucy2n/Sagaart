@@ -16,3 +16,11 @@ export interface IUser {
     uid: string;
     token: string; 
   }
+
+  export interface IUserUpdate {
+    id?: number;
+    email?: string;
+    user_name?: string;
+    telephone?: string;
+    subcribe?: string;
+  }

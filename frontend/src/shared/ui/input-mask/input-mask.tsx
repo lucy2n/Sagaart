@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
-import {ArrowRight} from '@gravity-ui/icons';
 import { clsx } from 'clsx';
 import type { InputProps } from './types';
 import styles from './input-mask.module.css';
@@ -54,9 +53,6 @@ export const InputM = forwardRef<HTMLInputElement, InputProps>(
 						onBlur={handleBlur}
 						{...props}
 					/>
-            <div className={styles.icon}>
-                <ArrowRight color="rgba(20,23,34,0.400)" />
-            </div>
             {error && <p className={styles.inputError}>{error}</p>}
         </div>
     </label>

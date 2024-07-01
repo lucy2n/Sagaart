@@ -1,4 +1,4 @@
-import { IUser, IToken, IChangePassword } from '../entities/user';
+import { IUser, IToken, IChangePassword, IUserUpdate} from '../entities/user';
 import { base_url } from '../utils/constants';
 import { checkResp, checkResponse } from './utils';
 
@@ -55,7 +55,7 @@ export const resetPassword = async (email: string) => {
   return checkResp(res);
 };
 
-export const updateUser = async (data: any) => {
+export const updateUser = async (data: IUserUpdate) => {
   const res = await fetch(`${base_url}user/me/`, {
     method: 'PATCH',
     headers: {
@@ -66,7 +66,7 @@ export const updateUser = async (data: any) => {
     body: JSON.stringify(data)
   }
   );
-  return checkResp(res);
+  return checkResp<IUserUpdate>(res);
 };
 
 export const getUserInformation = async () => {

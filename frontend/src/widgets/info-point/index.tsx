@@ -6,14 +6,14 @@ interface InfoPointProps {
     desc: string
 }
 
-const InfoPoint = ({title, desc}: InfoPointProps) => {
+const InfoPoint = ({title, desc = '-'}: InfoPointProps) => {
     return (
         <div className={style.main}>
             <div className={style.title}>
                 {title}:
             </div>
             <div className={style.desc}>
-                {desc}
+                {desc === undefined || desc.length === 0 ? '-' : desc}
             </div>
         </div>
     );
