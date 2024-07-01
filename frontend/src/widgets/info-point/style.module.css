@@ -6,13 +6,13 @@
 }
 
 .title {
-    composes: text-style-subtitle-m from '../../../../index.css';
+    composes: text-style-subtitle-m from '../../index.css';
     margin: 0;
     padding: 0;
 }
 
 .desc {
-    composes: text-style-small from '../../../../index.css';
+    composes: text-style-small from '../../index.css';
     color: var(--color-background-background-block);
     margin: 0;
     padding: 0;

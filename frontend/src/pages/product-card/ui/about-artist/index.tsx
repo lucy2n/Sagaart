@@ -1,12 +1,12 @@
 import React from 'react';
-import InfoPoint from '../info-point';
+import InfoPoint from '../../../../widgets/info-point';
 import { Author } from '../../../../shared/entities/product-details';
 import style from './style.module.css';
 
 const AboutArtist = (props : {author: Author}) => {
 
     const gender = props.author.gender === 1 ? 'Мужской' : 'Женский';
-    const date = new Date(props.author.year_of_birth);
+    const date = new Date(props.author.birth_date);
     const age = date.getFullYear() +  ' ' + '(' + props.author.age + ')';
 
     return (

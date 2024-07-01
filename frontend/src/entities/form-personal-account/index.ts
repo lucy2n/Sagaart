@@ -1,0 +1,1 @@
+export { FormFieldsPA } from './ui/form-personal-accoutn';
