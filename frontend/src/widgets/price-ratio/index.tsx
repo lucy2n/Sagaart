@@ -1,6 +1,5 @@
 import React from 'react';
-import { Bar, BarChart, CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
-import CustomTooltip from '../../shared/ui/chart/custom-tooltip';
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
 
 const data = [
     {
@@ -38,8 +37,6 @@ const data = [
   ];
 
 const PriceRatio = () => {
-
-    const hideZero = (tick: number) => (tick === 0 ? '' : tick);
 
     return (
         <div>

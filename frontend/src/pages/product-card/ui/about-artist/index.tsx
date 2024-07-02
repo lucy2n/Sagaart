@@ -1,9 +1,9 @@
 import React from 'react';
 import InfoPoint from '../../../../widgets/info-point';
-import { Author } from '../../../../shared/entities/product-details';
+import { IAuthor } from '../../../../shared/entities/product-details';
 import style from './style.module.css';
 
-const AboutArtist = (props : {author: Author}) => {
+const AboutArtist = (props : {author: IAuthor}) => {
 
     const gender = props.author.gender === 1 ? 'Мужской' : 'Женский';
     const date = new Date(props.author.birth_date);

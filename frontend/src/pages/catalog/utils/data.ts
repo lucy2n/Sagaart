@@ -4,6 +4,15 @@ import img3 from '../../../assets/images/21.png';
 import img4 from '../../../assets/images/20.png';
 import img5 from '../../../assets/images/18.png';
 import img6 from '../../../assets/images/scale_1200 1.png';
+import { Item } from '../../../shared/entities/breadcrumbs';
+
+export const items: Item[] = [
+  {
+      text: 'Каталог',
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      action: () => {},
+  },
+];
 
 export const categoriesData = [
   { title: 'Живопись', image: img1 },

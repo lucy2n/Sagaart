@@ -13,9 +13,9 @@ const schema = yup.object().shape({
         .trim()
         .matches(
             /^\+7|8 \([1-9]{1}\d{2}\) \d{3}-\d{2}-\d{2}$/,
-            'Введите корректный телефон'
+            { message: 'Введите корректный телефон', excludeEmptyString: false }
         )
         .notRequired(),
 });
 
-export default schema;
+export default schema; 

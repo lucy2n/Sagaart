@@ -8,7 +8,7 @@ import Achievements from './achievements';
 import PriceHistory from './price-history';
 import BreadcrumbsComponent from '../../catalog/ui/bread-crumbs';
 import { Item } from '../../../shared/entities/breadcrumbs';
-import { ArtworkDetails } from '../../../shared/entities/product-details';
+import { IArtworkDetails } from '../../../shared/entities/product-details';
 import { getProduct } from '../../../shared/api/products-api';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import OtherArtwork from './other-work';
@@ -20,7 +20,7 @@ export interface Work {
 }
 
 const ProductCard = (): JSX.Element => {
-    const [product, setProduct] = useState<ArtworkDetails | null>(null);
+    const [product, setProduct] = useState<IArtworkDetails | null>(null);
     const navigate = useNavigate();
     const { productId } = useParams();
 

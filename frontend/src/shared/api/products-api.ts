@@ -1,6 +1,6 @@
 import { FiltersValues } from '../../pages/catalog/ui/filtration';
-import { ArtworkDetails } from '../entities/product-details';
-import { ArtworksResponse } from '../entities/products';
+import { IArtworkDetails } from '../entities/product-details';
+import { IArtworksResponse } from '../entities/products';
 import { base_url } from '../utils/constants';
 import { checkResponse } from './utils';
 
@@ -12,7 +12,7 @@ export const getProducts = async () => {
         }
     }
     );
-	return checkResponse<ArtworksResponse>(res);
+	return checkResponse<IArtworksResponse>(res);
 };
 
 export const getProductsWithFilters = async (filters: FiltersValues, page: number) => {
@@ -24,7 +24,7 @@ export const getProductsWithFilters = async (filters: FiltersValues, page: numbe
     }
   }
   );
-  return checkResponse<ArtworksResponse>(res);
+  return checkResponse<IArtworksResponse>(res);
 };
 
 const generateUrlWithQueryParams = (originUrl: string, filters: FiltersValues, page: number): string => {
@@ -37,7 +37,7 @@ const generateUrlWithQueryParams = (originUrl: string, filters: FiltersValues, p
   if (filters.style) queryParams.append('style', filters.style);
   if (filters.minYear) queryParams.append('min_year', filters.minYear);
   if (filters.maxYear) queryParams.append('max_year', filters.maxYear);
-  if (filters.country) queryParams.append('country', filters.country);
+  if (filters.country) queryParams.append('country', encodeURIComponent(filters.country));
   if (filters.searchText) queryParams.append('search', filters.searchText);
   queryParams.append('page', page + '');
   console.log(originUrl);
@@ -53,5 +53,5 @@ export const getProduct = async (id : string) => {
         }
     }
     );
-	return checkResponse<ArtworkDetails>(res);
+	return checkResponse<IArtworkDetails>(res);
 };

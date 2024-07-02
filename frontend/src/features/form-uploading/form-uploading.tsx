@@ -6,11 +6,6 @@ import { useAppDispatch } from '../../shared/utils/hooks';
 import { openModal } from '../../store/slices/modalSlice';
 import { analytic } from '../../shared/api/analytic';
 
-type FormProp = {
-	productAuthor_name: string;
-	product: string;
-	category: string;
-}
 
 export const FormUploadingFeature: FC = () => {
 
