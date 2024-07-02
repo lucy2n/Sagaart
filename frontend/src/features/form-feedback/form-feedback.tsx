@@ -6,6 +6,7 @@ import { FormFeedback } from '../../entities/form-feedback';
 import FormFeedbackSchema from '../../shared/utils/validation-schemas/form-feedback-schema';
 import { feedback } from '../../shared/api/feedback';
 import { useNavigate } from 'react-router-dom';
+import { RoutePathname } from '../../shared/utils/constants';
 
 
 
@@ -23,7 +24,7 @@ export const FormFeedbackFeature: FC = () => {
 			feedback_message: String(data.report),
 		})
 			.then(() => {
-				navigate('/');
+				navigate(RoutePathname.mainPage);
 			})
 			.catch((error) => {
 				console.log(error);

@@ -6,6 +6,7 @@ import { clsx } from 'clsx';
 import { useAppSelector } from '../../../shared/utils/hooks';
 import { UserState } from '../../../store/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
+import { RoutePathname } from '../../../shared/utils/constants';
 
 
 export const FormResetPasswordSubmition: FC = () => {
@@ -23,7 +24,7 @@ export const FormResetPasswordSubmition: FC = () => {
 					size='xl'
 					view='normal'
 					width='max'
-					onClick={()=>navigate('/signin')}
+					onClick={()=>navigate(RoutePathname.loginPage)}
 				> Назад на страницу входа
             </Button>
             <Button
@@ -31,7 +32,7 @@ export const FormResetPasswordSubmition: FC = () => {
 					size='xl'
 					view='flat'
 					width='max'
-					onClick={()=>navigate('/reset-password')}
+					onClick={()=>navigate(RoutePathname.resetPassPage)}
 				> Повторить попытку
             </Button>
         </div>

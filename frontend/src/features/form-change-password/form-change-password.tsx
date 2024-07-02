@@ -6,6 +6,7 @@ import { FormChangePasswordFields } from '../../entities/form-change-password/in
 import FormChangePasswordSchema from '../../shared/utils/validation-schemas/form-change-password-schema';
 import { useNavigate, useParams } from 'react-router-dom';
 import { changePassword } from '../../shared/api/user';
+import { RoutePathname } from '../../shared/utils/constants';
 
 
 export const FormChangePasswordFeature: FC = () => {
@@ -27,7 +28,7 @@ export const FormChangePasswordFeature: FC = () => {
 			token: token??''
 		})
 		.then(()=>{
-			navigate('/signin');
+			navigate(RoutePathname.loginPage);
 		})
 		.catch((error)=>{
 			console.log(error);

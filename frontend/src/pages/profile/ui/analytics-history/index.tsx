@@ -25,7 +25,7 @@ const AnalyticsHistory = () => {
                             Последний запрос
                         </h3>
                         <div>
-                            <AnalyticsItem analytic={analytics[0]} />
+                            <AnalyticsItem analytic={analytics.reverse()[0]} />
                         </div>
                     </div>
                     <div className={style.ul}>

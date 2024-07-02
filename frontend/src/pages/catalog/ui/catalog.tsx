@@ -16,7 +16,7 @@ const Catalog = (): JSX.Element => {
 
     const [products, setProducts] = useState<IArtwork[]>([]);
     const location = useLocation();
-    const navigationState = location.state as { filters: FiltersValues } | undefined;
+    const navigationState = location.state as { filters: FiltersValues, clear: boolean } | undefined;
 
     const [filters, setFilters] = useState<FiltersValues>({
         price: '',
@@ -42,7 +42,19 @@ const Catalog = (): JSX.Element => {
     }, [filters, state.page]);
 
     useEffect(() => {
-        console.log(navigationState?.filters);
+        if (navigationState?.clear) {
+            setFilters({
+                price: '',
+                size: '',
+                category: '',
+                genre: '',
+                style: '',
+                minYear: '',
+                maxYear: '',
+                country: ''
+            });
+            return;
+        }
         if (navigationState?.filters) {
             setFilters(prevFilters => ({
                 ...prevFilters,

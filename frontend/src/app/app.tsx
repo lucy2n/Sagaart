@@ -34,6 +34,8 @@ import {
     DialogHeading,
     DialogClose
 } from '../shared/ui/dialog/dialog';
+import { RoutePathname } from '../shared/utils/constants';
+import { OnlyAuth, OnlyUnAuth } from '../shared/ui/protected-route';
 
 function App() {
     const isOpen = useAppSelector(state => state.modal.isOpen);
@@ -65,20 +67,20 @@ function App() {
             <Header />
             <ScrollToTop />
             <Routes>
-                <Route path='/products' element={<Catalog />} />
-                <Route path='/products/:productId' element={<ProductCard />} />
-                <Route path='/' element={<Main />} />
-                <Route path='/subscription' element={<Subscription />} />
-                <Route path='/signup' element={<SignUp />} />
-                <Route path='/signin' element={<SignIn />} />
-                <Route path='/profile/:productId' element={<ProductCard />} />
-                <Route path='/profile' element={<Profile />} />
-                <Route path='/review' element={<UploadingAnObject />} />
-                <Route path='/reset-password' element={<ResetPassword />} />
-                <Route path='/reset-password/:email' element={<ResetPassword />} />
-                <Route path='/new-password-submition/:uid/:token' element={<NewPasswordSubmition />} />
-                <Route path='/feedback' element={<Feedback />} />
-                <Route path='/reset-password-submition' element={<ResetPasswordSubmition />} />
+                <Route path={RoutePathname.catalogPage} element={<Catalog />} />
+                <Route path={RoutePathname.productCardPage} element={<ProductCard />} />
+                <Route path={RoutePathname.mainPage} element={<Main />} />
+                <Route path={RoutePathname.subscriptionPage} element={<Subscription />} />
+                <Route path={RoutePathname.registerPage} element={<OnlyUnAuth component={<SignUp />}/>} />
+                <Route path={RoutePathname.loginPage} element={<OnlyUnAuth component={<SignIn />}/>} />
+                <Route path={RoutePathname.profileProductCardPage} element={<OnlyAuth component={<ProductCard />} />}  />
+                <Route path={RoutePathname.profilePage} element={<OnlyAuth component={<Profile />} />} /> 
+                <Route path={RoutePathname.reviewPage} element={<OnlyAuth component={<UploadingAnObject />} />} />
+                <Route path={RoutePathname.resetPassPage} element={<OnlyUnAuth component={<ResetPassword />}/>}/>
+                <Route path={RoutePathname.resetPassEmailPage} element={<OnlyUnAuth component={<ResetPassword />}/>}/>
+                <Route path={RoutePathname.newPasswordSubmitionPage} element={<OnlyUnAuth component={<NewPasswordSubmition />}/>}/>
+                <Route path={RoutePathname.resetPassSubmissionPage}  element={<OnlyUnAuth component={<ResetPasswordSubmition />}/>}/>
+                <Route path={RoutePathname.feedbackPage} element={<Feedback />} />
             </Routes>
             <Footer />
             <Dialog open={isOpen} onOpenChange={handleClose}>
@@ -98,7 +100,7 @@ function App() {
                                 width='max'
                                 className={clsx(style.button, style.button__left)}
                                 onClick={() => {
-                                    navigate('/review');
+                                    navigate(RoutePathname.reviewPage);
                                     handleClose();
                                 }}
                             >
@@ -110,7 +112,7 @@ function App() {
                                 width='max'
                                 className={clsx(style.button, style.button__right)}
                                 onClick={() => {
-                                    navigate('/profile');
+                                    navigate(RoutePathname.profilePage);
                                     handleClose();
                                 }}
                             >

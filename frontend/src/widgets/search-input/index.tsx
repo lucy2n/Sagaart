@@ -7,6 +7,7 @@ import mailImage from '../../assets/icons/Mail-outline.svg';
 import style from './search-input.module.css';
 import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
+import { RoutePathname } from '../../shared/utils/constants';
 
 const SerachInput: FC<SearchInputProps> = ({ place }) => {
 
@@ -16,9 +17,14 @@ const SerachInput: FC<SearchInputProps> = ({ place }) => {
     const navigate = useNavigate();
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') {
-            navigate('/products', { state: { filters: { searchText: value } } });
-            setValue('');
+        if (event.key === 'Enter' && place === 'header') {
+            navigate(RoutePathname.catalogPage, { state: { filters: { searchText: value } } });
+        }
+    };
+
+    const navigateWithoutFilters = (value: string) => {
+        if (value == '' && place === 'header') {
+            navigate(RoutePathname.catalogPage, { state: { clear: true } });
         }
     };
 
@@ -34,6 +40,8 @@ const SerachInput: FC<SearchInputProps> = ({ place }) => {
             onChange={(e) => setValue(e.target.value)}
             startContent={<img src={image} alt='write' />}
             onKeyDown={handleKeyDown}
+            hasClear={place === 'header'}
+            onUpdate={navigateWithoutFilters}
         />
     );
 };
