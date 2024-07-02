@@ -26,4 +26,4 @@ PRICE_CATEGORIES = (
 
 TELEPHONE_VALIDATE = "^(\+)?[\d]{9,15}$"
 PASSWORD_VALIDATE = "^[A-z0-9!#$%&'()*+,-./:;<=>?@[\]^_`{|}~]{8,25}$"
-USERNAME_VALIDATE = "^[^\s][A-z0-9А-я -]{1,150}$"
+USERNAME_VALIDATE = "^[^\W\_][A-zА-я -]{1,150}$"

@@ -10,6 +10,7 @@ from api.constants import (
     PASSWORD_VALIDATE,
     USERNAME_VALIDATE,
 )
+from userauth.constants import USER_EMAIL_MAX_LEN, USER_EMAIL_MIN_LEN
 
 
 class UserRegistrationSerializer(UserCreateSerializer):
@@ -25,11 +26,18 @@ class UserRegistrationSerializer(UserCreateSerializer):
     def validate(self, attrs):
         super().validate(attrs)
         password = attrs.get("password")
+        email = attrs.get('email')
         valdate_error = {}
         if not re.match(PASSWORD_VALIDATE, password):
             valdate_error["password"] = (
                 "Пароль может содержать заглавные и прописные буквы A-Z,"
                 "цифры 0-9, а также знак тире “-” и спец. символы"
+            )
+        print(len(email))
+        if USER_EMAIL_MIN_LEN > len(email) < USER_EMAIL_MAX_LEN:
+            valdate_error["email"] = (
+                f'Email должен быть от {USER_EMAIL_MIN_LEN} '
+                f'до {USER_EMAIL_MAX_LEN} симвалов.'
             )
         if valdate_error:
             raise serializers.ValidationError(valdate_error)
@@ -38,7 +46,6 @@ class UserRegistrationSerializer(UserCreateSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     email = serializers.CharField(read_only=True)
-    telephone = serializers.CharField(allow_blank=True, allow_null=True)
 
     class Meta:
         model = User
