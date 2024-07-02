@@ -68,7 +68,7 @@ const Footer = (): JSX.Element => {
             </div>
             <div className={style.navigation}>
                 <h2 className={style.copyright}>
-                    © 2024 ООО «Sagaart»
+                    © 2024 Sagaart
                 </h2>
                 <div className={style.main__links}>
                     <a className={style.main__link} href='#'>

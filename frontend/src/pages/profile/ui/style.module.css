@@ -1,4 +1,5 @@
 .section {
+    position: relative;
     padding: 48px 0 139px 0;
     background: var(--color-background-background-page);
 }
