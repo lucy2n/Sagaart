@@ -1,14 +1,15 @@
 import React, {FC, useState} from 'react';
 import style from './style.module.css';
 import { Button } from '@gravity-ui/uikit';
-import arrowup from '../../assets/icons/Arrow-up-outline.svg';
-import arrowdown from '../../assets/icons/Arrow-down-outline.svg';
 import { LineChart, Line, XAxis, Tooltip } from 'recharts';
 import heart from '../../assets/icons/heart-card.svg';
 import heartNotActive from '../../assets/icons/headrt-cart-not-active.svg';
 import CustomTooltip from '../../shared/ui/chart/custom-tooltip';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { IArtwork } from '../../shared/entities/products';
+import ArrowUpFromLineIcon from '@gravity-ui/icons/svgs/arrow-up-from-line.svg';
+import ArrowDownToLineIcon from '@gravity-ui/icons/svgs/arrow-down-to-line.svg';
+import { RoutePathname } from '../../shared/utils/constants';
 
 interface Props {
     card: IArtwork;
@@ -19,6 +20,7 @@ const Card: FC<Props> = ({ card }) => {
 
     const [isLiked, setIsLiked] = useState(false);
     const [isExpanded, setIsExpanded] = useState(false); 
+    const navigate = useNavigate();
 
     const toggleExpand = (value: boolean, setValue: (value: boolean) => void) => {
         setValue(!value);
@@ -93,8 +95,9 @@ const Card: FC<Props> = ({ card }) => {
                             </LineChart>
                         </div>
                     </div>
-                    <Button className={style.modal__button} > Добавить </Button>
-
+                    <Button className={style.modal__button} onClick={() => navigate(RoutePathname.profilePage)}> 
+                        Добавить 
+                    </Button>
                 </div>
             )}
             <h2 className={style.author}>
@@ -109,7 +112,7 @@ const Card: FC<Props> = ({ card }) => {
                         {card.end_cost} ₽
                     </p>
                 </div>
-                <img src={isExpanded ? arrowdown : arrowup} onClick={() => toggleExpand(isExpanded, setIsExpanded)} className={style.button} />
+                <img src={isExpanded ? ArrowDownToLineIcon : ArrowUpFromLineIcon} onClick={() => toggleExpand(isExpanded, setIsExpanded)} className={style.button} />
             </div>
         </div>
     );
