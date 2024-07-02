@@ -1,5 +1,4 @@
 export const checkResponse = <T>(res: Response): Promise<T> => {
-    console.log(res);
     return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 

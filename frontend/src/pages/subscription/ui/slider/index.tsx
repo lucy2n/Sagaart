@@ -4,6 +4,7 @@ import { Button } from '@gravity-ui/uikit';
 import media from '../../../../assets/images/Media.png';
 import analytics from '../../../../assets/images/Analytics.png';
 import { useNavigate } from 'react-router-dom';
+import { RoutePathname } from '../../../../shared/utils/constants';
 
 const slides = [
   {
@@ -53,7 +54,7 @@ const Slider = () => {
           <div className={style.image_block}>
               <img src={currentSlide.img} className={count === 0 ? style.image : style.image_2} />
               {count === 1 && (
-                  <Button size='xl' className={style.button_image} onClick={() => navigate('/review')}>получить аналитику</Button>
+                  <Button size='xl' className={style.button_image} onClick={() => navigate(RoutePathname.reviewPage)}>получить аналитику</Button>
               )}
           </div>
       </div>

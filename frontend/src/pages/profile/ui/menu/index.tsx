@@ -13,6 +13,7 @@ import { logout } from '../../../../shared/api/user';
 import { useAppDispatch } from '../../../../shared/utils/hooks';
 import { resetUser } from '../../../../store/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
+import { RoutePathname } from '../../../../shared/utils/constants';
 
 interface MenuProps {
     onSelectTab: (tab: string) => void;
@@ -27,7 +28,7 @@ const Menu: React.FC<MenuProps> = ({ onSelectTab }) => {
             .then(() => {
                 localStorage.removeItem('token');
                 dispatch(resetUser());
-                navigate('/');
+                navigate(RoutePathname.mainPage);
             })
             .catch((error) => {
                 console.log(error);

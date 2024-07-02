@@ -13,6 +13,7 @@ import { getProduct } from '../../../shared/api/products-api';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import OtherArtwork from './other-work';
 import Charts from '../../../widgets/charts';
+import { RoutePathname } from '../../../shared/utils/constants';
 
 export interface Work {
     id: number, 
@@ -37,7 +38,7 @@ const ProductCard = (): JSX.Element => {
     const breadItem = product.author.name ?? '';
     const items: Item[] = [
         { text: 'Каталог', action: () => {
-            navigate('/products');
+            navigate(RoutePathname.catalogPage);
         } },
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         { text: breadItem, action: () => {} },
