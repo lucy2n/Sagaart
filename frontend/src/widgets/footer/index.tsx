@@ -11,6 +11,7 @@ import appStore from '../../assets/images/button.png';
 import googlePlay from '../../assets/images/button2.png';
 import grid from '../../assets/icons/Grid.svg';
 import { useNavigate } from 'react-router-dom';
+import { RoutePathname } from '../../shared/utils/constants';
 
 
 const Footer = (): JSX.Element => {
@@ -23,7 +24,7 @@ const Footer = (): JSX.Element => {
                 <Logo place='footer' />
                 <div className={style.navigation__main}>
                     <SerachInput place={SearchInputType.footer} />
-                    <Button className={style.button} size='l' onClick={() => navigate('/subscription')} >Подписаться</Button>
+                    <Button className={style.button} size='l' onClick={() => navigate(RoutePathname.subscriptionPage)} >Подписаться</Button>
                 </div>
             </div>
             <div className={style.navigation__links}>

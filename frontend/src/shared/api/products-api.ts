@@ -40,7 +40,6 @@ const generateUrlWithQueryParams = (originUrl: string, filters: FiltersValues, p
   if (filters.country) queryParams.append('country', encodeURIComponent(filters.country));
   if (filters.searchText) queryParams.append('search', filters.searchText);
   queryParams.append('page', page + '');
-  console.log(originUrl);
 
   return `${originUrl}?${queryParams.toString()}`;
 };

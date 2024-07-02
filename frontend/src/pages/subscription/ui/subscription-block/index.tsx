@@ -3,6 +3,7 @@ import style from './style.module.css';
 import { Button } from '@gravity-ui/uikit';
 import { useAppSelector } from '../../../../shared/utils/hooks';
 import { NavLink } from 'react-router-dom';
+import { RoutePathname } from '../../../../shared/utils/constants';
 
 
 const SubscriptionBlock = ({image, price, month}: {image: string, price: string, month: string}): JSX.Element => {
@@ -36,7 +37,7 @@ const SubscriptionBlock = ({image, price, month}: {image: string, price: string,
                     Неограниченное количество запросов на аналитику
                 </li>
             </ul>
-            <NavLink to={!isLoggedIn ? '/signin' : ''} className={style.button}>
+            <NavLink to={!isLoggedIn ? RoutePathname.loginPage : ''} className={style.button}>
                 <Button className={style.button} size='xl'>
                     оформить
                 </Button>

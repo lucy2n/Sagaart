@@ -2,6 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import style from './logo.module.css';
 import { useNavigate } from 'react-router-dom';
+import { RoutePathname } from '../../shared/utils/constants';
 
 const Logo = ({place}: {place: string}): JSX.Element => {
 
@@ -13,7 +14,7 @@ const Logo = ({place}: {place: string}): JSX.Element => {
             style.title,
             style[`title_${place}`]
             )}
-            onClick={() => navigate('/')}
+            onClick={() => navigate(RoutePathname.mainPage)}
         >şagaart</h1>
     );
 };

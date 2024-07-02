@@ -8,6 +8,7 @@ import { resetPassword } from '../../shared/api/user';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../shared/utils/hooks';
 import { setPasswordResetMail } from '../../store/slices/userSlice';
+import { RoutePathname } from '../../shared/utils/constants';
 
 
 export const FormResetPasswordFeature: FC = () => {
@@ -22,7 +23,7 @@ export const FormResetPasswordFeature: FC = () => {
 		resetPassword({ ...data })
 			.then(() => {
 				dispatch(setPasswordResetMail(data.email));
-				navigate('/reset-password-submition');
+				navigate(RoutePathname.resetPassSubmissionPage);
 			})
 			.catch((error) => {
 				console.log(error);

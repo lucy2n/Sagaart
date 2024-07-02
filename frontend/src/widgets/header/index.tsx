@@ -8,25 +8,22 @@ import Logo from '../logo';
 import SerachInput from '../search-input';
 import { SearchInputType } from '../search-input/types';
 import { NavLink } from 'react-router-dom';
-import { useAppSelector } from '../../shared/utils/hooks';
 import { Icon } from '@gravity-ui/uikit';
 import {Database} from '@gravity-ui/icons';
+import { RoutePathname } from '../../shared/utils/constants';
 
 const Header = () => {
-    const isLoggedIn = useAppSelector(state => state.user.isLoggedIn);
-
     return (
         <div className={style.main}>
             <div className={style.navigation}>
                 <Logo place='header'/>
                 <div className={style.main__buttons}>
-                    <NavLink to='/feedback'>
+                    <NavLink to={RoutePathname.feedbackPage}>
                         <button className={style.button}>
                             <img className={style.button__image} src={mail} alt='mail' />
                         </button>
                     </NavLink>
-
-                    <NavLink to={isLoggedIn ? '/profile' : '/signin'}>
+                    <NavLink to={RoutePathname.profilePage}>
                         <button className={style.button}>
                             <img className={style.button__image} src={person} alt='person' />
                         </button>
@@ -41,16 +38,16 @@ const Header = () => {
             </div>
             <div className={style.navigation}>
                 <div className={style.buttons}>
-                    <NavLink to='/' className={style.link} >
+                    <NavLink to={RoutePathname.mainPage} className={style.link} >
                         <button className={style.button}>Главная</button>
                     </NavLink>
-                    <NavLink to='/products' className={style.link} >
+                    <NavLink to={RoutePathname.catalogPage} state={{ clear: true }} className={style.link} >
                         <button className={style.button}>Каталог</button>
                     </NavLink>
-                    <NavLink to='/subscription' className={style.link} >
+                    <NavLink to={RoutePathname.subscriptionPage} className={style.link} >
                         <button className={style.button}>Подписка на аналитику</button>
                     </NavLink>
-                    <NavLink to={isLoggedIn ? '/review' : '/signin'} className={style.link} >
+                    <NavLink to={RoutePathname.reviewPage} className={style.link} >
                         <button className={style.button}>
                             <Icon className={style.button_img} data={Database} size='16' />
                             Оценка стоимости

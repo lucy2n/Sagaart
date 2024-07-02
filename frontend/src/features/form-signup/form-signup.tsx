@@ -6,6 +6,7 @@ import { FormFieldsSignup } from '../../entities/form-signup/ui/form-signup';
 import FormSignupSchema from '../../shared/utils/validation-schemas/form-signup-schema';
 import { createUser } from '../../shared/api/user';
 import { useNavigate } from 'react-router-dom';
+import { RoutePathname } from '../../shared/utils/constants';
 
 
 export const FormSignupFeature: FC = () => {
@@ -25,7 +26,7 @@ export const FormSignupFeature: FC = () => {
 		setServerPasswordError('');
 		createUser({ ...data })
 			.then(() => {
-				navigate('/signin');
+				navigate(RoutePathname.loginPage);
 			})
 			.catch((error) => {
 				console.log(error);

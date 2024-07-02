@@ -1,11 +1,13 @@
+import { RoutePathname } from '../../../shared/utils/constants';
+
 export const footerContent = [
 	{
 		columnTitle: 'О нас',
 		column: [
-			{ linkTitle: 'О проекте', url: '#' },
-			{ linkTitle: 'Подключиться', url: '#' },
-			{ linkTitle: 'Каталог', url: '/products' },
-			{ linkTitle: 'Оценка стоимости', url: '/review' },
+			{ linkTitle: 'О проекте', url: RoutePathname.mainPage },
+			{ linkTitle: 'Подключиться', url: RoutePathname.subscriptionPage },
+			{ linkTitle: 'Каталог', url: RoutePathname.catalogPage },
+			{ linkTitle: 'Оценка стоимости', url: RoutePathname.reviewPage },
 		],
 	},
 	{
