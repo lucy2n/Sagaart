@@ -74,4 +74,6 @@ class UserSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(valdate_error)
         if telephone == '':
             data['telephone'] = None
+        if user_name == '':
+            data['user_name'] = None
         return data
