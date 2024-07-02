@@ -3,6 +3,7 @@ __Sagaart__ - сайта онлайн-галереи.
 <img width="958" alt="image" src="https://github.com/vvkon13/Sagaart/assets/117926370/ff1c2a4c-5440-4a97-be03-1f794cc9bc42">
 <img width="958" alt="image" src="https://github.com/vvkon13/Sagaart/assets/117926370/262e96d0-8758-4632-839d-3e8bcc56523e">
 
+
 ## Сведения о команде
 Наша команда состоит из следующих участников:
 - [Василий Коновалов](https://github.com/vvkon13) (Frontend Developer)
