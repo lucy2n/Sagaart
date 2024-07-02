@@ -33,11 +33,10 @@ class UserRegistrationSerializer(UserCreateSerializer):
                 "Пароль может содержать заглавные и прописные буквы A-Z,"
                 "цифры 0-9, а также знак тире “-” и спец. символы"
             )
-        print(len(email))
-        if USER_EMAIL_MIN_LEN > len(email) < USER_EMAIL_MAX_LEN:
+        if not USER_EMAIL_MIN_LEN <= len(email) <= USER_EMAIL_MAX_LEN:
             valdate_error["email"] = (
                 f'Email должен быть от {USER_EMAIL_MIN_LEN} '
-                f'до {USER_EMAIL_MAX_LEN} симвалов.'
+                f'до {USER_EMAIL_MAX_LEN} символов.'
             )
         if valdate_error:
             raise serializers.ValidationError(valdate_error)
