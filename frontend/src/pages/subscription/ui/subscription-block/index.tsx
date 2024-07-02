@@ -25,7 +25,7 @@ const SubscriptionBlock = ({image, price, month}: {image: string, price: string,
                     Доступ к базе данных из более  900 тысяч работ
                 </li>
                 <li className={style.li}>
-                    Аналитика сгенерированная по 33 критериям
+                    Аналитика сгенерированная по 35 критериям
                 </li>
                 <li className={style.li}>
                     Ежемесячная корректировка цен
