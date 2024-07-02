@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import style from './style.module.css';
 import { Icon } from '@gravity-ui/uikit';
 import {SquareChartBar} from '@gravity-ui/icons';

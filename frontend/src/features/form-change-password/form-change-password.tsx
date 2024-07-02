@@ -19,7 +19,7 @@ export const FormChangePasswordFeature: FC = () => {
 
 
 	const handleSubmit = (data:any) => {
-		console.log('change password',uid,token);
+		setIsSubmitDisabled(true);
 		changePassword ({
 			new_password: data?.newPassword,
 			re_new_password: data?.repeatNewPassword,
@@ -32,7 +32,11 @@ export const FormChangePasswordFeature: FC = () => {
 		.catch((error)=>{
 			console.log(error);
 			setServerPasswordError('Произошла ошибка смены пароля');
-		});
+		})
+		.finally(()=>{
+			setIsSubmitDisabled(false);
+		})
+		;
 	};
 
 	return (

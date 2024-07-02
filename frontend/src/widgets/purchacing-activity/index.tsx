@@ -1,6 +1,5 @@
 import React from 'react';
-import { Area, AreaChart, CartesianGrid, Line, Tooltip, XAxis, YAxis } from 'recharts';
-import CustomTooltip from '../../shared/ui/chart/custom-tooltip';
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts';
 
 const data = [
     {
@@ -34,8 +33,6 @@ const data = [
   ];
 
 const PurchacingActivity = () => {
-
-    const hideZero = (tick: number) => (tick === 0 ? '' : tick);
 
     return (
         <div>

@@ -4,7 +4,6 @@ import React, { FC, useState } from 'react';
 import { Form } from '../../shared/ui';
 import { FormFieldsPA } from '../../entities/form-personal-account';
 import FormProfileSchema from '../../shared/utils/validation-schemas/form-profile-schema';
-import { IUserUpdate } from '../../shared/entities/user';
 import { setName, setTelephone } from '../../store/slices/userSlice';
 import { updateUser } from '../../shared/api/user';
 import { useAppDispatch, useAppSelector } from '../../shared/utils/hooks';
@@ -36,7 +35,7 @@ export const FormPersonalAccountFeature: FC = () => {
 			}
 
 			updateUser(update)
-				.then((res: IUserUpdate | void) => {
+				.then(() => {
 					dispatch(setName(data.user_name ?? ''));
 					dispatch(setTelephone(data.telephone ?? ''));
 				})

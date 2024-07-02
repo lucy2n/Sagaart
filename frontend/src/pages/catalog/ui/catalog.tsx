@@ -2,22 +2,19 @@ import { Button,  Icon,  Pagination, PaginationProps } from '@gravity-ui/uikit';
 import React, { useEffect, useState } from 'react';
 import style from './style.module.css';
 import Card from '../../../widgets/card/card';
-import {Funnel} from '@gravity-ui/icons';
-import {ChevronLeft} from '@gravity-ui/icons';
-import {ChevronRight} from '@gravity-ui/icons';
 import Sort from './sort';
 import Filters, { FiltersValues } from './filtration';
 import Categories from './categories';
 import BreadcrumbsComponent from './bread-crumbs';
-import { items, options } from '../constants';
-import { Artwork } from '../../../shared/entities/products';
+import { IArtwork } from '../../../shared/entities/products';
 import { getProductsWithFilters } from '../../../shared/api/products-api';
 import NoProducts from './no-products';
 import { useLocation } from 'react-router-dom';
+import { filterOptions, items } from '../utils/data';
 
 const Catalog = (): JSX.Element => {
 
-    const [products, setProducts] = useState<Artwork[]>([]);
+    const [products, setProducts] = useState<IArtwork[]>([]);
     const location = useLocation();
     const navigationState = location.state as { filters: FiltersValues } | undefined;
 
@@ -31,12 +28,7 @@ const Catalog = (): JSX.Element => {
         maxYear: '',
         country: ''
     });
-    
-    const [isSidebarVisible, setIsSidebarVisible] = useState(false);
 
-    const toggleSidebar = () => {
-        setIsSidebarVisible(!isSidebarVisible);
-    };
 
     const [state, setState] = useState({page: 1, pageSize: products?.length});
     const [total, setTotal] = useState<number>(0);
@@ -50,6 +42,7 @@ const Catalog = (): JSX.Element => {
     }, [filters, state.page]);
 
     useEffect(() => {
+        console.log(navigationState?.filters);
         if (navigationState?.filters) {
             setFilters(prevFilters => ({
                 ...prevFilters,
@@ -59,10 +52,8 @@ const Catalog = (): JSX.Element => {
     }, [navigationState]);
 
     const fetchProducts = () => {
-        console.log(filters);
         getProductsWithFilters(filters, state.page)
         .then((res) => {
-            console.log(res);
             if (res.results.length == 0) {
                 setEmptyState(true);
             } else {
@@ -74,7 +65,10 @@ const Catalog = (): JSX.Element => {
     };
 
     const updateProducts = (newFilters: FiltersValues) => {
-        setFilters(newFilters);
+        setFilters(prevFilters => ({
+            ...prevFilters,
+            ...newFilters
+        }));
         setState((prevState) => ({ ...prevState, page: 1 }));
       };
 
@@ -86,16 +80,11 @@ const Catalog = (): JSX.Element => {
             </div>
             <div className={style.container}>
                 <div className={style.filters}>
-                    <Button size='s' className={style.button} onClick={toggleSidebar}>
-                        <Icon data={Funnel} size={18}/>
-                        Показать фильтры
-                        {isSidebarVisible ? <Icon data={ChevronLeft} size={20}/> :  <Icon data={ChevronRight} size={20}/>}
-                    </Button>
-                    <Sort options={options}/>
+                    <Filters updateProducts={updateProducts}/>
+                    <Sort options={filterOptions}/>
                 </div>
                 {emptyState && <NoProducts /> }
                 <div className={style.gallery}>
-                    <Filters isVisible={isSidebarVisible} updateProducts={updateProducts} />
                     {products && products.map(product => (
                         <Card card={product} key={product.id}/>
                     ))}

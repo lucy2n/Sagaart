@@ -1,1 +1,0 @@
-import ResetPassword from './ui/reset-password';

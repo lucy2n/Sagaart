@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
 import styles from './form-feedback.module.css';
 import { Input } from '../../../shared/ui/';

@@ -50,7 +50,7 @@ const Header = () => {
                     <NavLink to='/subscription' className={style.link} >
                         <button className={style.button}>Подписка на аналитику</button>
                     </NavLink>
-                    <NavLink to='/review' className={style.link} >
+                    <NavLink to={isLoggedIn ? '/review' : '/signin'} className={style.link} >
                         <button className={style.button}>
                             <Icon className={style.button_img} data={Database} size='16' />
                             Оценка стоимости

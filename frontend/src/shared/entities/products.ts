@@ -1,31 +1,31 @@
-interface Category {
+interface ICategory {
     id: number;
     name: string;
 }
 
-interface Style {
+interface IStyle {
     id: number;
     name: string;
 }
 
-interface Genre {
+interface IGenre {
     id: number;
     name: string;
 }
 
-interface Author {
+interface IAuthor {
     id: number;
     name: string;
 }
 
-export interface Artwork {
+export interface IArtwork {
     id: number;
     name: string;
     image: string;
     additional_image: string;
-    category: Category[];
-    style: Style[];
-    genre: Genre[];
+    category: ICategory[];
+    style: IStyle[];
+    genre: IGenre[];
     size_category: number;
     size: string;
     country: string;
@@ -33,12 +33,12 @@ export interface Artwork {
     year: number;
     cost_category: number;
     end_cost: number;
-    author: Author;
+    author: IAuthor;
 }
 
-export interface ArtworksResponse {
+export interface IArtworksResponse {
     count: number, 
     next: null,
     previous: null,
-    results: Artwork[]
+    results: IArtwork[]
 }
