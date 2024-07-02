@@ -1,13 +1,27 @@
 .sidebar {
-    width: 530px;
+  width: 530px;
+  position: relative;
+  display: inline-block;
+}
+
+  .sidebar__menu {
+    width: 100%;
     padding: 20px;
     background: var(--color-background-background-gradient);
     position: absolute;
-    top: -50px;
+    top: 60px;
     left: 0;
-    min-height: 100%;
+    min-height: 100vh;
     transition: left 0.3s ease;
     z-index: 4;
+  }
+
+  .button {
+    composes: text-style-menu-tabs from '../../../../index.css';
+    width: 243px;
+    margin: 20px 0 30px;
+    display: flex;
+    justify-content: space-between;
   }
 
   .delete {
@@ -51,3 +65,4 @@
   .input {
     width: 288px;
   }
+

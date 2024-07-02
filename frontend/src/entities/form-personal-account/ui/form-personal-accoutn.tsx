@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import avatar from '../../../assets/images/pa.png';
 
 
-const Pencil = (props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>): JSX.Element => {
+const Pencil = (): JSX.Element => {
 	return (
     <svg
 			width={24}
@@ -38,7 +38,7 @@ export const FormFieldsPA: FC<FormPersonalAccountProps> = ({
 
 	const {
 		watch,
-		formState: { isValid, errors },
+		formState: { errors },
 	} = useFormContext();
 
 	const [formChanged, setFormChanged] = useState(false);

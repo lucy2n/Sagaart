@@ -2,21 +2,6 @@ import { IUser, IToken, IChangePassword, IUserUpdate} from '../entities/user';
 import { base_url } from '../utils/constants';
 import { checkResp, checkResponse } from './utils';
 
-export const errorParser = (err: any) => {
-  const key = '';
-  let resultServerError = 'Ошибка на сервере. ';
-  for (const currentKey in err) {
-    if (Object.prototype.hasOwnProperty.call(err, currentKey)) {
-      let currentKeyResultError = '';
-      currentKeyResultError += err[currentKey].reduce((res: string, item: string) => {
-        res += item;
-      }, '');
-      resultServerError += `${currentKey}, значение: ${err[currentKey]} `;
-    }
-  }
-  return resultServerError;
-};
-
 export const createUser = async (user: IUser) => {
   const res = await fetch(`${base_url}user/`, {
     method: 'POST',

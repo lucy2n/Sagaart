@@ -1,12 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import style from './style.module.css';
 import { Button, Icon, RadioGroup, TextInput } from '@gravity-ui/uikit';
 import { product_category, product_cost_category, product_genre, product_size_category, product_style } from './constants';
 import search from '../../../../assets/icons/Loupe.svg';
 import debounce from 'lodash/debounce';
-import {ChevronDown, ChevronUp} from '@gravity-ui/icons';
-import { useLocation } from 'react-router-dom';
-
+import {ChevronDown, ChevronUp, Funnel, ChevronLeft, ChevronRight} from '@gravity-ui/icons';
 interface FiltersState {
     price: boolean;
     size: boolean;
@@ -30,10 +28,7 @@ export interface FiltersValues {
 }
   
 
-const Filters = ({ isVisible, updateProducts }: { isVisible : boolean, updateProducts: (newFilters: FiltersValues) => void }) => {
-
-    const location = useLocation();
-    const navigationState = location.state as { filters: FiltersValues } | undefined;
+const Filters = ({updateProducts }: {updateProducts: (newFilters: FiltersValues) => void }) => {
     
     const [isOpen, setIsOpen] = useState<FiltersState>({
         price: false,
@@ -44,6 +39,8 @@ const Filters = ({ isVisible, updateProducts }: { isVisible : boolean, updatePro
         year: false,
         country: false,
     });
+
+    const [isSidebarVisible, setIsSidebarVisible] = useState(false);
 
     const [filters, setFilters] = useState<FiltersValues>({
         price: '',
@@ -56,30 +53,18 @@ const Filters = ({ isVisible, updateProducts }: { isVisible : boolean, updatePro
         country: ''
     });
 
-    const applyFilters = () => {
-        updateProducts(filters);
+    const toggleSidebar = () => {
+        setIsSidebarVisible(!isSidebarVisible);
     };
 
-    const debouncedApplyFilters = useRef(debounce(applyFilters, 1000)).current;
+    const debouncedUpdateProducts = useCallback(
+        debounce((filters) => updateProducts(filters), 1000),
+        []
+    );
 
     useEffect(() => {
-       // console.log(filters);
-    //    debouncedApplyFilters();
-    //    applyFilters();
-      setTimeout(() => {
-        updateProducts(filters);
-      }, 500);
+        debouncedUpdateProducts(filters);
     }, [filters]);
-
-    useEffect(() => {
-        if (navigationState?.filters) {
-            setFilters(prevFilters => ({
-                ...prevFilters,
-                ...navigationState.filters
-            }));
-        }
-    }, [navigationState]);
-
  
     const updateFilter = (key: string, value: string) => {
         setFilters((prevFilters) => ({
@@ -106,9 +91,14 @@ const Filters = ({ isVisible, updateProducts }: { isVisible : boolean, updatePro
     };
 
     return (
-        <div>
-            { isVisible && (
-                <div className={style.sidebar}>
+        <div className={style.sidebar}>
+            <Button size='s' className={style.button} onClick={toggleSidebar}>
+                <Icon data={Funnel} size={18}/>
+                Показать фильтры
+                {isSidebarVisible ? <Icon data={ChevronLeft} size={20}/> :  <Icon data={ChevronRight} size={20}/>}
+            </Button>
+            { isSidebarVisible && (
+                <div className={style.sidebar__menu}>
                     <div className={style.filters__section}>
                         <div className={style.delete}>
                             <h3 className={style.title}>ФИЛЬТРОВАТЬ ПО:</h3>

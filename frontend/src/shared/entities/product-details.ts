@@ -1,40 +1,40 @@
-interface Category {
+interface ICategory {
   id: number;
   name: string;
 }
 
-interface Style {
+interface IStyle {
   id: number;
   name: string;
 }
 
-interface Genre {
+interface IGenre {
   id: number;
   name: string;
 }
 
-export interface Show {
+export interface IShow {
   id: number;
   name: string;
   year: number;
   place: string;
 }
 
-interface Award {
+interface IAward {
   id: number,
   name: string,
   year: number,
   place: string
 }
 
-export interface Author {
+export interface IAuthor {
   id: number;
   name: string;
   gender: number;
   age: number;
   birth_date: number;
-  show: Show[];
-  awards: Award[];
+  show: IShow[];
+  awards: IAward[];
   city_of_birth: string;
   city_live: string;
   education: string;
@@ -44,20 +44,20 @@ export interface Author {
   socials: string;
 }
 
-export interface Work {
+export interface IWork {
   id: number, 
   image: string
 }
 
 
-export interface ArtworkDetails {
+export interface IArtworkDetails {
   id: number;
   name: string;
   image: string;
   additional_image: string;
-  category: Category[];
-  style: Style[];
-  genre: Genre[];
+  category: ICategory[];
+  style: IStyle[];
+  genre: IGenre[];
   size_category: number;
   size: string;
   country: string;
@@ -69,7 +69,7 @@ export interface ArtworkDetails {
   cost_category: number;
   end_cost: number;
   fair_cost: number;
-  author: Author;
-  similar_works: Work[];
-  author_works: Work[];
+  author: IAuthor;
+  similar_works: IWork[];
+  author_works: IWork[];
 }

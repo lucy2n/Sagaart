@@ -35,8 +35,6 @@ const data = [
 
 const PriceHistory = () => {
 
-    const hideZero = (tick: number) => (tick === 0 ? '' : tick);
-
     return (
         <LineChart
             width={800}

@@ -18,6 +18,7 @@ const SerachInput: FC<SearchInputProps> = ({ place }) => {
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
             navigate('/products', { state: { filters: { searchText: value } } });
+            setValue('');
         }
     };
 
