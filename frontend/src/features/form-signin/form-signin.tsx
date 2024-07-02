@@ -4,7 +4,7 @@ import React, { FC, useState } from 'react';
 import { Form } from '../../shared/ui';
 import { FormFieldsSignin } from '../../entities/form-signin/index';
 import FormSignupSchema from '../../shared/utils/validation-schemas/form-signup-schema';
-import { signIn, errorParser } from '../../shared/api/user';
+import { signIn } from '../../shared/api/user';
 import { IToken } from '../../shared/entities/user';
 import { useNavigate } from 'react-router-dom';
 import { loggedIn, setName, setEmail, setTelephone, resetUser } from '../../store/slices/userSlice';

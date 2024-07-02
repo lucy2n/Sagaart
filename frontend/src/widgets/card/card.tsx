@@ -8,10 +8,10 @@ import heart from '../../assets/icons/heart-card.svg';
 import heartNotActive from '../../assets/icons/headrt-cart-not-active.svg';
 import CustomTooltip from '../../shared/ui/chart/custom-tooltip';
 import { NavLink } from 'react-router-dom';
-import { Artwork } from '../../shared/entities/products';
+import { IArtwork } from '../../shared/entities/products';
 
 interface Props {
-    card: Artwork;
+    card: IArtwork;
     key: string | number;
   }
 

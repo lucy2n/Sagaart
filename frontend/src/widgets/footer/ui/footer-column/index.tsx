@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import style from './style.module.css';
 import { Link, FooterColumnProps } from './types';
+import { NavLink } from 'react-router-dom';
 
 const FooterColumn: FC<FooterColumnProps> = ({
 	columns: { columnTitle, column: links },
@@ -13,9 +14,9 @@ const FooterColumn: FC<FooterColumnProps> = ({
         <ul className={style.sectionLink}>
             {links.map((item: Link, index: number) => (
                 <li key={index}>
-                    <a className={style.link} href={item.url}>
+                    <NavLink className={style.link} to={item.url}>
                         {item.linkTitle}
-                    </a>
+                    </NavLink>
                 </li>
 			))}
         </ul>

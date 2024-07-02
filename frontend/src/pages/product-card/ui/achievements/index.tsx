@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import InfoPoint from '../../../../widgets/info-point';
-import { Show } from '../../../../shared/entities/product-details';
+import { IShow } from '../../../../shared/entities/product-details';
 import style from './style.module.css';
 
-const Achievements = (props : {shows: Show[], collection: string}) => {
+const Achievements = (props : {shows: IShow[], collection: string}) => {
 
     const show = props.shows.length != 0 ? props.shows[0].name + ',' +  ' ' + props.shows[0].place + ' ' + props.shows[0].year : '';
 

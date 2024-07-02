@@ -20,14 +20,6 @@
     columns: 3;
 }
 
-.button {
-    composes: text-style-menu-tabs from '../../../index.css';
-    width: 243px;
-    margin: 20px 0 30px;
-    display: flex;
-    justify-content: space-between;
-}
-
 .filters {
     width: 100%;
     display: flex;

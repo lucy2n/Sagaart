@@ -1,1 +1,0 @@
-import Catalog from './ui/catalog';

@@ -1,1 +1,0 @@
-import Feedback from './ui/feedback';

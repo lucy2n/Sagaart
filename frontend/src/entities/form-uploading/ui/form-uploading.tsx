@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, FC } from 'react';
+import React, { FC } from 'react';
 import type { FormUploadingProps } from './types';
 import { Input, InputM } from '../../../shared/ui';
 import styles from './form-uploading.module.css';
@@ -47,26 +47,9 @@ export const FormFieldsUploading: FC<FormUploadingProps> = ({
     setServerErrorText
 }) => {
 
-    const [imagePreviewUrl, setImagePreviewUrl] = useState('');
-
-
     const {
         formState: { isValid, errors },
     } = useFormContext();
-
-    const onProfileImageDrop = (file: File) => {
-        const imageUrl = URL.createObjectURL(file);
-        setImagePreviewUrl(imageUrl);
-        console.log(file.name);
-    };
-
-    useEffect(() => {
-        return () => {
-            if (imagePreviewUrl) {
-                URL.revokeObjectURL(imagePreviewUrl);
-            }
-        };
-    }, [imagePreviewUrl]);
 
     return (
         <div className={styles.section}>
@@ -181,7 +164,7 @@ export const FormFieldsUploading: FC<FormUploadingProps> = ({
                             <Input
                                 name="material"
                                 labelName="Материал работы"
-                                placeholder="Укажите материал которым нарисовано"
+                                placeholder="Укажите материал, которым нарисовано"
                                 error={errors.material ? `${errors.material?.message}` : ''}
                                 style={{ backgroundColor: 'rgba(239,233,224,1)' }}
                                 onFocus={() => setServerErrorText('')}

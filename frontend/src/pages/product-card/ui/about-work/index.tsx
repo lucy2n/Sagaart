@@ -1,9 +1,9 @@
 import React from 'react';
 import InfoPoint from '../../../../widgets/info-point';
-import { ArtworkDetails } from '../../../../shared/entities/product-details';
+import { IArtworkDetails } from '../../../../shared/entities/product-details';
 import style from './style.module.css';
 
-const AboutWork = (props : {product: ArtworkDetails}) => {
+const AboutWork = (props : {product: IArtworkDetails}) => {
     return (
         <div className={style.main}>
             <p className={style.desc}>

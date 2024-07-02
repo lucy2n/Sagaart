@@ -1,5 +1,4 @@
-import { Button } from '@gravity-ui/uikit';
-import React, { ReactNode, useState } from 'react';
+import React, { useState } from 'react';
 import style from './style.module.css';
 import arrowdown from '../../../../assets/icons/Arrow-down-outline.svg';
 import arrowup from '../../../../assets/icons/Arrow-up-outline.svg';
