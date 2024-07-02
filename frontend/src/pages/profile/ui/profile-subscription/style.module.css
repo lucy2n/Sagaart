@@ -1,0 +1,25 @@
+.main {
+    position: absolute;
+    padding: 20px 20px;
+    top: 7%;
+    left: 10%;
+    display: flex;
+    background: var(--color-background-background-subscription-card);
+    flex-direction: column;
+    border-radius: 12px;
+    align-items: center;
+    width: 449px;
+    gap: 10px
+}
+
+.text {
+    composes: text-style-menu-tabs from '../../../../index.css';
+    color: var(--color-text-color-text-button-light);
+    margin: 0;
+    padding: 0;
+}
+
+.text_date {
+    color: var(--color-text-color-text-button-org);
+}
+

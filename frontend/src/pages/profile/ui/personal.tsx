@@ -6,6 +6,8 @@ import AnalyticsHistory from './analytics-history';
 import { FormPersonalAccountFeature } from '../../../features/form-personal-account/form-personal-account';
 import { useNavigate } from 'react-router-dom';
 import { RoutePathname } from '../../../shared/utils/constants';
+import ProfileSubscription from './profile-subscription';
+import { date } from './profile-subscription/utils/constants';
 
 
 const Profile = (): JSX.Element => {
@@ -21,6 +23,7 @@ const Profile = (): JSX.Element => {
 
     return (
         <section className={styles.section}>
+            <ProfileSubscription date={date}/>
             <div className={styles.container}>
                 <img src={background} alt="art gallery" className={styles.image} />
                 <div className={styles.main}>
